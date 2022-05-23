@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./Fitbit/python-fitbit-master/python-fitbit-master"
+    ]
+}
