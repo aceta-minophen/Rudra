@@ -5,7 +5,7 @@
 5    android:versionName="1.0.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="16"
+8        android:minSdkVersion="19"
 9        android:targetSdkVersion="31" />
 10    <!--
 11         Flutter needs it to communicate with the running application
@@ -14,59 +14,101 @@
 14    <uses-permission android:name="android.permission.INTERNET" />
 14-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml:6:5-66
 14-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml:6:22-64
-15
-16    <application
-17        android:name="android.app.Application"
-18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-18-->[androidx.core:core:1.6.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:24:18-86
-19        android:debuggable="true"
-20        android:icon="@mipmap/ic_launcher"
-21        android:label="rudra_app" >
-22        <activity
-23            android:name="com.example.rudra_app.MainActivity"
-24            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-25            android:exported="true"
-26            android:hardwareAccelerated="true"
-27            android:launchMode="singleTop"
-28            android:theme="@style/LaunchTheme"
-29            android:windowSoftInputMode="adjustResize" >
-30
-31            <!--
-32                 Specifies an Android theme to apply to this Activity as soon as
-33                 the Android process has started. This theme is visible to the user
-34                 while the Flutter UI initializes. After that, this theme continues
-35                 to determine the Window background behind the Flutter UI.
-36            -->
-37            <meta-data
-38                android:name="io.flutter.embedding.android.NormalTheme"
-39                android:resource="@style/NormalTheme" />
-40
-41            <intent-filter>
-42                <action android:name="android.intent.action.MAIN" />
-43
-44                <category android:name="android.intent.category.LAUNCHER" />
-45            </intent-filter>
-46        </activity>
-47        <!--
-48             Don't delete the meta-data below.
-49             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-50        -->
-51        <meta-data
-52            android:name="flutterEmbedding"
-53            android:value="2" />
-54
-55        <uses-library
-55-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
-56            android:name="androidx.window.extensions"
-56-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
-57            android:required="false" />
-57-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
-58        <uses-library
-58-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
-59            android:name="androidx.window.sidecar"
-59-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
-60            android:required="false" />
-60-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
-61    </application>
-62
-63</manifest>
+15    <!-- Request legacy Bluetooth permissions on older devices. -->
+16    <uses-permission
+16-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:4:5-5:38
+17        android:name="android.permission.BLUETOOTH"
+17-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:4:22-65
+18        android:maxSdkVersion="30" />
+18-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:5:9-35
+19    <uses-permission
+19-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:6:5-7:38
+20        android:name="android.permission.BLUETOOTH_ADMIN"
+20-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:6:22-71
+21        android:maxSdkVersion="30" />
+21-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:7:9-35
+22    <!--
+23 Needed only if your app looks for Bluetooth devices.
+24         If your app doesn't use Bluetooth scan results to derive physical
+25         location information, you can strongly assert that your app
+26         doesn't derive physical location.
+27    -->
+28    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+28-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:13:5-73
+28-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:13:22-70
+29    <!--
+30 Needed only if your app makes the device discoverable to Bluetooth
+31         devices.
+32    -->
+33    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+33-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:17:5-78
+33-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:17:22-75
+34    <!--
+35 Needed only if your app communicates with already-paired Bluetooth
+36         devices.
+37    -->
+38    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /> <!-- Needed only if your app uses Bluetooth scan results to derive physical location. -->
+38-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:21:5-76
+38-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:21:22-73
+39    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+39-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:24:5-79
+39-->C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:24:22-76
+40    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+40-->[:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-81
+40-->[:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:9:22-78
+41
+42    <application
+43        android:name="android.app.Application"
+44        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+44-->[androidx.core:core:1.6.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:24:18-86
+45        android:debuggable="true"
+46        android:icon="@mipmap/ic_launcher"
+47        android:label="rudra_app" >
+48        <activity
+49            android:name="com.example.rudra_app.MainActivity"
+50            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+51            android:exported="true"
+52            android:hardwareAccelerated="true"
+53            android:launchMode="singleTop"
+54            android:theme="@style/LaunchTheme"
+55            android:windowSoftInputMode="adjustResize" >
+56
+57            <!--
+58                 Specifies an Android theme to apply to this Activity as soon as
+59                 the Android process has started. This theme is visible to the user
+60                 while the Flutter UI initializes. After that, this theme continues
+61                 to determine the Window background behind the Flutter UI.
+62            -->
+63            <meta-data
+64                android:name="io.flutter.embedding.android.NormalTheme"
+65                android:resource="@style/NormalTheme" />
+66
+67            <intent-filter>
+68                <action android:name="android.intent.action.MAIN" />
+69
+70                <category android:name="android.intent.category.LAUNCHER" />
+71            </intent-filter>
+72        </activity>
+73        <!--
+74             Don't delete the meta-data below.
+75             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+76        -->
+77        <meta-data
+78            android:name="flutterEmbedding"
+79            android:value="2" />
+80
+81        <uses-library
+81-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+82            android:name="androidx.window.extensions"
+82-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+83            android:required="false" />
+83-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+84        <uses-library
+84-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+85            android:name="androidx.window.sidecar"
+85-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+86            android:required="false" />
+86-->[androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+87    </application>
+88
+89</manifest>

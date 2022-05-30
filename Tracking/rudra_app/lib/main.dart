@@ -1,5 +1,11 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+//import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 void main() {
   runApp(const MyApp());
@@ -63,10 +69,44 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+  String address = '0021:07:34ddc1';
+  void scan() async{
+    //setState(() async {
+      // Some simplest connection :F
+      try {
+        BluetoothConnection connection = await BluetoothConnection.toAddress(address);
+        print('Connected to the device');
 
-  String print(){
-    return 'hello';
+        connection.input?.listen((Uint8List data) {
+          print('Data incoming: ${ascii.decode(data)}');
+          connection.output.add(data); // Sending data
+
+          if (ascii.decode(data).contains('!')) {
+            connection.finish(); // Closing connection
+            print('Disconnecting by local host');
+          }
+        }).onDone(() {
+          print('Disconnected by remote request');
+        });
+      }
+      catch (exception) {
+        print('Cannot connect, exception occured');
+      }
+      /*// Start scanning
+      flutterBlue.startScan(timeout: Duration(seconds: 4));
+      // Listen to scan results
+      var subscription = flutterBlue.scanResults.listen((results) {
+        // do something with scan results
+        for (ScanResult r in results) {
+          print('${r.device.name} found! rssi: ${r.rssi}');
+        }
+      });
+      // Stop scanning
+      flutterBlue.stopScan();*/
+    //});
   }
+
+  //FlutterBlue flutterBlue = FlutterBlue.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +155,8 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'hello',
             ),
+            TextButton(onPressed: scan, child: const Text("Scan")),
+            Image.asset('assets/photo.jpg'),
           ],
           /*button: FloatingActionButton(
             onPressed: print,
