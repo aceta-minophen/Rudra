@@ -28,5 +28,13 @@ A smart healthcare assistant robot intended for home and hospital use.
   - Calling features in case of want or emergencies
 
 ### Human Following and Tracking
+> Rudra is intended to follow the designated human around in-toe to take care of them and always be en garde for obstacles that the human might run into. This also gives Rudra the ability to assist the visually impaired and help them navigate their surroundings safely without the need for anyone else's help. 
+
+Following the human is one of the key features of Rudra and requires implementation of **Indoor Positioning System (IPS)**. While **GPS** is a sound option when walking outside, it is not possible to utilize it in the house or a hospital floor. To solve this issue, we have the following options:
+
+1. **BLE beacons**
+2. **Pairing Rudra (using bluetooth) with wearable smartwatch**
+3. **Triangulating mobile hotspot signal using NodeMCU**
+
 GPS, IPS (indoor positioning system), RTLS (real time location system)
 #### TODO
