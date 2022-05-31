@@ -33,7 +33,10 @@ A smart healthcare assistant robot intended for home and hospital use.
 Following the human is one of the key features of Rudra and requires implementation of **Indoor Positioning System (IPS)**. While **GPS** is a sound option when walking outside, it is not possible to utilize it in the house or a hospital floor.
 
 #### Problem
-To access fitness tracker (FitBit in our case) and use it as a BLE beacon.
+To access wearable having BLE (FitBit in our case, or earphones can even be used) and use it as a beacon and use the RSSI values to calculate distance between the tracker and Rudra.
+
+#### Solution Paths
+1. Gain access to FitBit via the companion app https://github.com/Polidea/RxBluetoothKit/tree/master/ExampleApp
 
 1. **BLE beacons**
 
