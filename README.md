@@ -37,6 +37,7 @@ To access wearable having BLE (FitBit in our case, or earphones can even be used
 
 #### Solution Paths
 1. Gain access to FitBit via the companion app https://github.com/Polidea/RxBluetoothKit/tree/master/ExampleApp
+2. Using ESP32: https://community.appinventor.mit.edu/t/arduino-distance-meassuring-through-bluetooth-classic-signal-strength-rssi-project/21175/2 , https://circuitdigest.com/microcontroller-projects/esp32-ble-client-connecting-to-fitness-band-to-trigger-light
 
 1. **BLE beacons**
 
