@@ -4,8 +4,8 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:flutter_blue/flutter_blue.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+//import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 void main() {
   runApp(const MyApp());
@@ -71,9 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   String address = '0021:07:34ddc1';
   void scan() async{
-    //setState(() async {
+    setState(() async {
       // Some simplest connection :F
-      try {
+      /*try {
         BluetoothConnection connection = await BluetoothConnection.toAddress(address);
         print('Connected to the device');
 
@@ -91,8 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
       }
       catch (exception) {
         print('Cannot connect, exception occured');
-      }
-      /*// Start scanning
+      }*/
+      // Start scanning
       flutterBlue.startScan(timeout: Duration(seconds: 4));
       // Listen to scan results
       var subscription = flutterBlue.scanResults.listen((results) {
@@ -102,11 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       });
       // Stop scanning
-      flutterBlue.stopScan();*/
-    //});
+      flutterBlue.stopScan();
+    });
   }
 
-  //FlutterBlue flutterBlue = FlutterBlue.instance;
+  FlutterBlue flutterBlue = FlutterBlue.instance;
 
   @override
   Widget build(BuildContext context) {
