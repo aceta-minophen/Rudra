@@ -34,7 +34,14 @@ Following the human is one of the key features of Rudra and requires implementat
 
 #### Solution integration
 1. **If no crowd or obstruction in robot visual range are there (<1m):** Camera used for realtime video tracking human using deep learning algorithm
-2. **In case of crowd or obstructions (<3m):** Rudra needs to first be trained to recognize a said room using Wi-Fi RSSI values (implemented using ML; [tutorial]( https://www.hackster.io/news/indoor-positioning-using-arduino-and-machine-learning-in-4-easy-steps-295d39e5e7c9)).
+2. **Indoor Positioning System:** Rudra needs to first be trained to recognize a said room using Wi-Fi RSSI values (implemented using ML; [tutorial]( https://www.hackster.io/news/indoor-positioning-using-arduino-and-machine-learning-in-4-easy-steps-295d39e5e7c9)). 
+3. **In case of crowd or obstructions (<3m):** We can consider the following scenarios where Rudra loses the human:
+    1. **Obstacle encountered while walking in a particular direction:** Rudra will save the direction it was previosly going at, then do the following:
+        1. Turn left wrt the saved direction, go forward for 1m while looking right and turn right if obstacle passed
+        2. If obstacle not passed after 1m, take clockwise 180deg turn and continue forward. Turn left if obstacle passed
+        3. If obstacle not passed, repeat steps 1 and 2 for 1.5m and simultaneosly send message to phone app or bluetooth device with room location where Rudra is stuck.
+        4. After obstacle has been passed, measure BLE RSSI values (and ensure that they are decreasing) to stay on the right coarse until human is spotted again.
+    2. **Standing still and obstacle encountered:** Make 360deg turn and go straight as soon as obstacle ends and following the LSRB algorithm while measuring the BLE RSSI values to ensure correct path 
 
 #### Problem
 To access wearable having BLE (FitBit in our case, or earphones can even be used) and use it as a beacon and use the RSSI values to calculate distance between the tracker and Rudra.
