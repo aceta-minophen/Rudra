@@ -18,6 +18,10 @@
 ## Implementation
 To access wearable having BLE (FitBit in our case, or earphones can even be used) and use it as a beacon and use the RSSI values to calculate distance between the tracker and Rudra.
 
+### Pre-requisites in Rudra Configuration
+1. Indoor floor plan should be available - Rudra needs to be trained first and store the locations in the system.
+2. RSSI values need to be pre-configured to measure distance accurately.
+
 ### Solution Paths
 1. Gain access to FitBit via the companion app https://github.com/Polidea/RxBluetoothKit/tree/master/ExampleApp
 2. Using ESP32: https://community.appinventor.mit.edu/t/arduino-distance-meassuring-through-bluetooth-classic-signal-strength-rssi-project/21175/2 , https://circuitdigest.com/microcontroller-projects/esp32-ble-client-connecting-to-fitness-band-to-trigger-light, https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/BLEClient.cpp#L366-L384
@@ -28,7 +32,11 @@ To access wearable having BLE (FitBit in our case, or earphones can even be used
 4. **Triangulating mobile hotspot signal using NodeMCU**
 
 GPS, IPS (indoor positioning system), RTLS (real time location system)
-#### TODO
+#### Training Rudra
+Setup using phone app: 
+1. Move Rudra around one room to allow it to record the access points (using Wi-Fi RSSI values) and then name the room to save it in Rudra's map
+2. Allow Rudra to designate key features of the room as reference flags to recognize its position in case similar RSSI values encountered in separate rooms.
+3. Pair Rudra with a bluetooth wearable (watch/earphones) for Rudra to callibrate the distance with the BLE RSSI values
 
 https://community.appinventor.mit.edu/t/arduino-distance-meassuring-through-bluetooth-classic-signal-strength-rssi-project/21175
 
