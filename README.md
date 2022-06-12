@@ -1,7 +1,7 @@
 <img src="https://github.com/aceta-minophen/Rudra/blob/website/Website/public/Rudra.svg" align="right" width="200">
 
 # Rudra
-A smart healthcare assistant robot intended for home and hospital use. 
+A smart healthcare assistant robot intended for home and hospital use.
 
 ## 🖲️ Human Following and Tracking
 > Rudra is intended to follow the designated human around in-toe to take care of them and always be en garde for obstacles that the human might run into. This also gives Rudra the ability to assist the visually impaired and helps them navigate their surroundings safely without the need for anyone else. 
