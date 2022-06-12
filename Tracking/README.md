@@ -2,7 +2,8 @@
 
 ## 👩‍💻 Technologies Required
 1. Camera - Computer Vision for detecting human and objects
-3. ESP32 - Measuring Wi-Fi and BLE RSSI values
+2. ESP32 - Measuring Wi-Fi and BLE RSSI values
+3. Phone app for training Rudra
 
 ## 🧮 Solution integration
 1. **If no crowd or obstruction in robot visual range are there (<1m):** Camera used for realtime video tracking human using deep learning algorithm
