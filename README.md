@@ -3,36 +3,12 @@
 # Rudra
 A smart healthcare assistant robot intended for home and hospital use. 
 
-## Features of Rudra
-
-- Human following (small range and wide range)
-  - Indoor Mapping (very important)
-  - Tracking using bluetooth RSSI values from phone + close range computer vision OR
-  - Tracking using triangulation by NodeMCU wifi modules OR
-  - Tracking using BLE in wearables
-- Fitness tracking with compatibility to existing wearables
-  - Obtaining data directly from the tracker 
-  - Obtaining data from tracker companion app using 3rd party
-- Voice Assistant
-  - Scheduling
-  - Reminders (for food, water, medicines, etc.)
-  - Friendly chatting features
-- Computer Vision
-  - Face recognition
-  - Obstacle detection with warning system for the visually impaired
-  - Age detection + distinguishing abilities for different people
-  - Proximity detection for precisely following the assigned person
-- Remote Control
-  - Remote camera access for relatives and medical professionals if needed
-  - Remote control for Rudra in app 
-  - Calling features in case of want or emergencies
-
-### 🖲️ Human Following and Tracking
+## 🖲️ Human Following and Tracking
 > Rudra is intended to follow the designated human around in-toe to take care of them and always be en garde for obstacles that the human might run into. This also gives Rudra the ability to assist the visually impaired and helps them navigate their surroundings safely without the need for anyone else. 
 
 Following the human is one of the key features of Rudra and requires implementation of **Indoor Positioning System (IPS)**. While **GPS** is a sound option when walking outside, it is not possible to utilize it in the house or a hospital floor.
 
-#### Solution integration
+### Solution integration
 1. **If no crowd or obstruction in robot visual range are there (<1m):** Camera used for realtime video tracking human using deep learning algorithm
 2. **Indoor Positioning System:** Rudra needs to first be trained to recognize a said room using Wi-Fi RSSI values (implemented using ML; [tutorial]( https://www.hackster.io/news/indoor-positioning-using-arduino-and-machine-learning-in-4-easy-steps-295d39e5e7c9)). 
 3. **In case of crowd or obstructions (<3m):** We can consider the following scenarios where Rudra loses the human:
@@ -45,12 +21,12 @@ Following the human is one of the key features of Rudra and requires implementat
 
 > Implementation here: https://github.com/aceta-minophen/Rudra/blob/tracking/Tracking/README.md
 
-### 🏋️‍♀️ Fitness Tracking
+## 🏋️‍♀️ Fitness Tracking
 > Rudra will be able to access data the fitness data from smartwatch and also be able to remind the human about drinking water on regular intervals (ensure that water is being drunk by logging in activity using camera). Reminders for specific medicine timings and food timings can also be set. Rudra will also be able to track the amount of calories being consumed with the specific food and compare it with the ideal amount to give suggestions on what to consume next to maintain good health.
 
 Speech recognition and processing needs to be done for implementing this.
 
-#### Solution Integration
+### Solution Integration
 1. Setting up reminders for medicines and water in the app 
 2. Setting up age and health specifications to allow algorithm to calculate how much water is required and at what intervals.
     1. Recording the amount of water being drunk (computer vision - noticing when human is drinking water and logging it in: **action detection**)
@@ -59,12 +35,12 @@ Speech recognition and processing needs to be done for implementing this.
 3. Fall detection using computer vision to send alert if fatal fall is detected
 4. Obtaining heart rate,etc data from trackers -- _redundant and difficult to implement_
 
-### 🗣️ Voice Assistant
+## 🗣️ Voice Assistant
 > A key feature of Rudra is to be a constant companion in sickness and in health. Talking and cheering up humans is what Rudra is built for.
 
 Smart AI is required to implement this feature so that Rudra can detect facial expressions and understand emotions, then decide what to say accordingly.
 
-#### Solution Integration
+### Solution Integration
 1. Ask Rudra questions (like Alexa)
 2. Rudra Intents:
     1. How are you? Do you want to talk? etc
@@ -75,12 +51,12 @@ Smart AI is required to implement this feature so that Rudra can detect facial e
 5. Ask Rudra to send messages to or video/voice call people (integration with Rudra companion app, or maybe some other wide-use app like Whatsapp if possible)
 6. Ask Rudra to send urgent alerts in case feeling unwell
 
-### 📱 Companion App
+## 📱 Companion App
 > One app to rule them all.
 
 Rudra Companion App will be extremely crucial in the initial setup of the robot. Then, most of the data transfer will also be accomplished using this app.
 
-#### Solution Integration
+### Solution Integration
 1. Remote Control
 2. Setting up proximity detection and indoor positioning system
 3. Configuring health settings
