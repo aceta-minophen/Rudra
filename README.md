@@ -27,7 +27,7 @@ A smart healthcare assistant robot intended for home and hospital use.
   - Remote control for Rudra in app 
   - Calling features in case of want or emergencies
 
-### Human Following and Tracking
+### 🖲️ Human Following and Tracking
 > Rudra is intended to follow the designated human around in-toe to take care of them and always be en garde for obstacles that the human might run into. This also gives Rudra the ability to assist the visually impaired and helps them navigate their surroundings safely without the need for anyone else. 
 
 Following the human is one of the key features of Rudra and requires implementation of **Indoor Positioning System (IPS)**. While **GPS** is a sound option when walking outside, it is not possible to utilize it in the house or a hospital floor.
@@ -43,17 +43,45 @@ Following the human is one of the key features of Rudra and requires implementat
         4. After obstacle has been passed, measure BLE RSSI values (and ensure that they are decreasing) to stay on the right coarse until human is spotted again.
     2. **Standing still and obstacle encountered:** Make 360deg turn and go straight as soon as obstacle ends and following the LSRB algorithm while measuring the BLE RSSI values to ensure correct path 
 
-#### Problem
-To access wearable having BLE (FitBit in our case, or earphones can even be used) and use it as a beacon and use the RSSI values to calculate distance between the tracker and Rudra.
+> Implementation here: https://github.com/aceta-minophen/Rudra/blob/tracking/Tracking/README.md
 
-#### Solution Paths
-1. Gain access to FitBit via the companion app https://github.com/Polidea/RxBluetoothKit/tree/master/ExampleApp
-2. Using ESP32: https://community.appinventor.mit.edu/t/arduino-distance-meassuring-through-bluetooth-classic-signal-strength-rssi-project/21175/2 , https://circuitdigest.com/microcontroller-projects/esp32-ble-client-connecting-to-fitness-band-to-trigger-light, https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/BLEClient.cpp#L366-L384
+### 🏋️‍♀️ Fitness Tracking
+> Rudra will be able to access data the fitness data from smartwatch and also be able to remind the human about drinking water on regular intervals (ensure that water is being drunk by logging in activity using camera). Reminders for specific medicine timings and food timings can also be set. Rudra will also be able to track the amount of calories being consumed with the specific food and compare it with the ideal amount to give suggestions on what to consume next to maintain good health.
 
-1. **BLE beacons**
+Speech recognition and processing needs to be done for implementing this.
 
-3. **Pairing Rudra (using bluetooth) with wearable smartwatch**
-4. **Triangulating mobile hotspot signal using NodeMCU**
+#### Solution Integration
+1. Setting up reminders for medicines and water in the app 
+2. Setting up age and health specifications to allow algorithm to calculate how much water is required and at what intervals.
+    1. Recording the amount of water being drunk (computer vision - noticing when human is drinking water and logging it in: **action detection**)
+    2. Logging in what food is being consumed and track calories (Ex: https://play.google.com/store/apps/details?id=ai.bite.biteapp&hl=en&gl=US) 
+    3. Plan next meal accordingly 
+3. Fall detection using computer vision to send alert if fatal fall is detected
+4. Obtaining heart rate,etc data from trackers -- _redundant and difficult to implement_
 
-GPS, IPS (indoor positioning system), RTLS (real time location system)
-#### TODO
+### 🗣️ Voice Assistant
+> A key feature of Rudra is to be a constant companion in sickness and in health. Talking and cheering up humans is what Rudra is built for.
+
+Smart AI is required to implement this feature so that Rudra can detect facial expressions and understand emotions, then decide what to say accordingly.
+
+#### Solution Integration
+1. Ask Rudra questions (like Alexa)
+2. Rudra Intents:
+    1. How are you? Do you want to talk? etc
+    2. Sympathetic replies to answers for the above
+    3. Cracking follow up jokes or telling elaborate stories with human-like speech modulation
+3. Ask Rudra to set reminders for meetings or events (like birthdays, etc)
+4. Ask Rudra to make shopping lists and send said list to family member, etc.
+5. Ask Rudra to send messages to or video/voice call people (integration with Rudra companion app, or maybe some other wide-use app like Whatsapp if possible)
+6. Ask Rudra to send urgent alerts in case feeling unwell
+
+### 📱 Companion App
+> One app to rule them all.
+
+Rudra Companion App will be extremely crucial in the initial setup of the robot. Then, most of the data transfer will also be accomplished using this app.
+
+#### Solution Integration
+1. Remote Control
+2. Setting up proximity detection and indoor positioning system
+3. Configuring health settings
+4. Communication features
