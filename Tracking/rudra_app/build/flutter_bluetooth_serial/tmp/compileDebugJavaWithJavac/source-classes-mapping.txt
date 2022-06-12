@@ -1,0 +1,19 @@
+io/github/edufolly/flutterbluetoothserial/BluetoothConnection.java
+ io.github.edufolly.flutterbluetoothserial.BluetoothConnection
+ io.github.edufolly.flutterbluetoothserial.BluetoothConnection$ConnectionThread
+io/github/edufolly/flutterbluetoothserial/BuildConfig.java
+ io.github.edufolly.flutterbluetoothserial.BuildConfig
+io/github/edufolly/flutterbluetoothserial/FlutterBluetoothSerialPlugin.java
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$1
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$2
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$2$1
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$2$2
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$3
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$4
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$5
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$BluetoothConnectionWrapper
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$BluetoothConnectionWrapper$1
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$EnsurePermissionsCallback
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$FlutterBluetoothSerialMethodCallHandler
+ io.github.edufolly.flutterbluetoothserial.FlutterBluetoothSerialPlugin$FlutterBluetoothSerialMethodCallHandler$1

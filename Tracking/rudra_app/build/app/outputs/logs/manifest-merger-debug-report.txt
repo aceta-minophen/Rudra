@@ -1,0 +1,189 @@
+-- Merging decision tree log ---
+application
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:25:4-55:19
+MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.core:core:1.6.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.6.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\884708a9396f81808c0ac10f4b98ea32\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\884708a9396f81808c0ac10f4b98ea32\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.6.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:24:18-86
+	android:name
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml
+manifest
+ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:1:1-56:12
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:1:1-56:12
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:1:1-56:12
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:1:1-56:12
+MERGED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:1:1-56:12
+MERGED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-12:12
+MERGED from [:flutter_blue] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_blue\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\ad201fac15a88598107ec645f351f5b4\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.appcompat:appcompat:1.3.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\536a0e6924fd14451ea0f47abf81ff76\appcompat-1.3.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.3.4] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8d9ac4f576feffd2558f0cc20fbb942d\fragment-1.3.4\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.2.3] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\eeafb259c81cec61cfc15dcc1f30d062\jetified-activity-1.2.3\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.3.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\2efc05e976be65ba7f6f40769896581c\jetified-appcompat-resources-1.3.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\09c1773ed3597f8bec6064dc26d157be\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\ae39e38aa58f5c391f29a4bfad4a41a4\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\92d1f830d8a4f76d15ea1f849fb6f29f\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\61fd575f974e3d768efc2f6a143e0eae\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\986216458f3c0df423ee68e7f1177976\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\9ccab238727e236e8aff01a0f95cebe4\customview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.6.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8578375fbf5df5bbe65cca21a6cd6acf\lifecycle-runtime-2.3.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\ac36d2f5b16183d06412574790e770da\jetified-lifecycle-viewmodel-savedstate-2.3.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\1f318d44f7cc290e64a3a0110f6d1b61\jetified-savedstate-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8108bc8c5f35a568f919dbab3be0e175\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8d73be0136932816dbee106487237cd9\lifecycle-livedata-core-2.3.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\6c6575c923e75933616af1a602db32e0\jetified-tracing-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\69ba5a98805d81d755806668ff70d04f\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\42acb13871cd74f812098a2f4b7b2625\lifecycle-viewmodel-2.3.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\884708a9396f81808c0ac10f4b98ea32\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\16e110bf603f94cf61f970a18f3907e3\core-runtime-2.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\9ed314abc3df537a2d48c1cb6d65998e\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\5bfc0955e244073bdc8cc139cda5e092\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:2:5-36
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:1:1-56:12
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:1:1-56:12
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.BLUETOOTH
+ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:4:5-5:38
+MERGED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-68
+MERGED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-68
+MERGED from [:flutter_blue] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_blue\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-68
+MERGED from [:flutter_blue] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_blue\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-68
+	android:maxSdkVersion
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:5:9-35
+	android:name
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:4:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:6:5-7:38
+MERGED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-74
+MERGED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-74
+MERGED from [:flutter_blue] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_blue\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-74
+MERGED from [:flutter_blue] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_blue\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-74
+	android:maxSdkVersion
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:7:9-35
+	android:name
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:6:22-71
+uses-permission#android.permission.BLUETOOTH_SCAN
+ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:13:5-73
+	android:name
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:13:22-70
+uses-permission#android.permission.BLUETOOTH_ADVERTISE
+ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:17:5-78
+	android:name
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:17:22-75
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:21:5-76
+	android:name
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:21:22-73
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:24:5-79
+MERGED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-79
+MERGED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-79
+MERGED from [:flutter_blue] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_blue\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-79
+MERGED from [:flutter_blue] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_blue\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-79
+	android:name
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml:24:22-76
+uses-sdk
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml
+MERGED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_blue] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_blue\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_blue] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_blue\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\ad201fac15a88598107ec645f351f5b4\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\ad201fac15a88598107ec645f351f5b4\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\536a0e6924fd14451ea0f47abf81ff76\appcompat-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\536a0e6924fd14451ea0f47abf81ff76\appcompat-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.4] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8d9ac4f576feffd2558f0cc20fbb942d\fragment-1.3.4\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.4] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8d9ac4f576feffd2558f0cc20fbb942d\fragment-1.3.4\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.3] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\eeafb259c81cec61cfc15dcc1f30d062\jetified-activity-1.2.3\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.3] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\eeafb259c81cec61cfc15dcc1f30d062\jetified-activity-1.2.3\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\2efc05e976be65ba7f6f40769896581c\jetified-appcompat-resources-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\2efc05e976be65ba7f6f40769896581c\jetified-appcompat-resources-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\09c1773ed3597f8bec6064dc26d157be\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\09c1773ed3597f8bec6064dc26d157be\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\ae39e38aa58f5c391f29a4bfad4a41a4\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\ae39e38aa58f5c391f29a4bfad4a41a4\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\92d1f830d8a4f76d15ea1f849fb6f29f\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\92d1f830d8a4f76d15ea1f849fb6f29f\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\61fd575f974e3d768efc2f6a143e0eae\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\61fd575f974e3d768efc2f6a143e0eae\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\986216458f3c0df423ee68e7f1177976\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\986216458f3c0df423ee68e7f1177976\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\9ccab238727e236e8aff01a0f95cebe4\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\9ccab238727e236e8aff01a0f95cebe4\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.6.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8578375fbf5df5bbe65cca21a6cd6acf\lifecycle-runtime-2.3.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8578375fbf5df5bbe65cca21a6cd6acf\lifecycle-runtime-2.3.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\ac36d2f5b16183d06412574790e770da\jetified-lifecycle-viewmodel-savedstate-2.3.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\ac36d2f5b16183d06412574790e770da\jetified-lifecycle-viewmodel-savedstate-2.3.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\1f318d44f7cc290e64a3a0110f6d1b61\jetified-savedstate-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\1f318d44f7cc290e64a3a0110f6d1b61\jetified-savedstate-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8108bc8c5f35a568f919dbab3be0e175\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8108bc8c5f35a568f919dbab3be0e175\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8d73be0136932816dbee106487237cd9\lifecycle-livedata-core-2.3.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\8d73be0136932816dbee106487237cd9\lifecycle-livedata-core-2.3.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\6c6575c923e75933616af1a602db32e0\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\6c6575c923e75933616af1a602db32e0\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\69ba5a98805d81d755806668ff70d04f\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\69ba5a98805d81d755806668ff70d04f\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\42acb13871cd74f812098a2f4b7b2625\lifecycle-viewmodel-2.3.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\42acb13871cd74f812098a2f4b7b2625\lifecycle-viewmodel-2.3.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\884708a9396f81808c0ac10f4b98ea32\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\884708a9396f81808c0ac10f4b98ea32\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\16e110bf603f94cf61f970a18f3907e3\core-runtime-2.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\16e110bf603f94cf61f970a18f3907e3\core-runtime-2.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\9ed314abc3df537a2d48c1cb6d65998e\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\9ed314abc3df537a2d48c1cb6d65998e\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\5bfc0955e244073bdc8cc139cda5e092\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\5bfc0955e244073bdc8cc139cda5e092\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml
+INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml:6:5-66
+	android:name
+		ADDED from C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\android\app\src\debug\AndroidManifest.xml:6:22-64
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-81
+	android:name
+		ADDED from [:flutter_bluetooth_serial] C:\Computer\Git Repositories\Rudra\Tracking\rudra_app\build\flutter_bluetooth_serial\intermediates\library_manifest\debug\AndroidManifest.xml:9:22-78
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\sukri\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
