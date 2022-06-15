@@ -41,3 +41,5 @@ Rudra Companion App will be extremely crucial in the initial setup of the robot.
     5. Medicine reminder (if any) - editable
 5. Reminders/Calendar
     1. Simple calendar with upcoming events, etc (can be integrated with google calendar)
+
+### Assigned To - Manvika Gupta
