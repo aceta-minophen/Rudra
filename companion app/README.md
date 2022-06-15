@@ -20,9 +20,9 @@ Rudra Companion App will be extremely crucial in the initial setup of the robot.
 5 tabs at the bottom for remote control, settings, chat/call, health, reminders+calendar
 ### UI
 1. Settings
-    2. Configuration for pairing Rudra with Bluetooth wearable (earphone/smartwatch)
-    3. Health configurations for age, weight, height and gender
-    4. Account info and details about relationship with Rudra owner (family member/medical official, along with control permisions for each account): if remote control not permissed, then not visible, etc.
+    1. Configuration for pairing Rudra with Bluetooth wearable (earphone/smartwatch)
+    2. Health configurations for age, weight, height and gender
+    3. Account info and details about relationship with Rudra owner (family member/medical official, along with control permisions for each account): if remote control not permissed, then not visible, etc.
 2. Remote Control - Landscape orientation
     1. Full page camera live feed (like vid games) including audio
     2. Joystick controls in rightmost and leftmost corners (righmost for direction control, leftmost for speed control); data values visible above the control knobs
