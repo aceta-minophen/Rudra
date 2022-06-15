@@ -20,14 +20,13 @@ Rudra Companion App will be extremely crucial in the initial setup of the robot.
 5 tabs at the bottom for remote control, settings, chat/call, health, reminders+calendar
 ### UI
 1. Settings
-    1. Configuration for indoor positioning system (Wi-Fi RSSI values)
     2. Configuration for pairing Rudra with Bluetooth wearable (earphone/smartwatch)
     3. Health configurations for age, weight, height and gender
     4. Account info and details about relationship with Rudra owner (family member/medical official, along with control permisions for each account): if remote control not permissed, then not visible, etc.
 2. Remote Control - Landscape orientation
     1. Full page camera live feed (like vid games) including audio
     2. Joystick controls in rightmost and leftmost corners (righmost for direction control, leftmost for speed control); data values visible above the control knobs
-    3. Name of the room (editable) visible on bottom centre
+    3. Name of the room (editable) visible on bottom centre & Configuration for indoor positioning system (Wi-Fi RSSI values alongside room name)
     4. Live object and obstacle recognition visible with markings for estimated aspect ratio, distance and label (editable label)
     5. Flag marking option for training Rudra in recognizing room in case RSSI values glitch
     6. Mute/unmute button on topright corner to talk remotely
