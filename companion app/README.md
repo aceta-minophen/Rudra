@@ -20,6 +20,7 @@ Rudra Companion App will be extremely crucial in the initial setup of the robot.
 5 tabs at the bottom for remote control, settings, chat/call, health, reminders+calendar
 ### UI
 > [Figma UI](https://www.figma.com/file/ZvJIbCrDRH8H0hNnAknnMW/Rudra?node-id=0%3A1)
+> - Manvika Gupta
 
 1. Settings
     1. Configuration for pairing Rudra with Bluetooth wearable (earphone/smartwatch)
