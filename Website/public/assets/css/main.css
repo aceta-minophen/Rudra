@@ -7,6 +7,7 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+
 html,
 body,
 div,
@@ -2138,7 +2139,7 @@ header.major:after {
 }
 
 header.major:before {
-	top: 10px;
+	top: 00px;
 }
 
 header.major:after {
@@ -2860,7 +2861,7 @@ input[type="button"].small,
 	background-repeat: repeat-x, repeat, no-repeat;
 	background-size: 3200px 460px, auto, cover;
 	color: rgba(255, 255, 255, 0.8);
-	padding: 10em 0 20em 0;
+	padding: 0em 0 20em 0;
 	position: relative;
 	text-align: center;
 }
@@ -2893,7 +2894,7 @@ input[type="button"].small,
 
 #header a:hover {
 	border-bottom-color: transparent;
-	color: #4eb980;
+	/* color: #4eb980; */
 }
 
 #header strong,
