@@ -1,3 +1,5 @@
+https://onedrive.live.com/redir?resid=83CF8A3A689B2810%21550&authkey=%21AkV45quH2w-O34o&page=View&wd=target%28Drishti%20Rani.one%7C3c7e552d-4085-48ea-a956-60b27c3b4df0%2FUntitled%20Page%7C2e985ff9-3ee4-4c96-9275-557162b06369%2F%29&wdorigin=NavigationUrl
+
 Notes on ANN:
 - has 1-D Features 
 - so not that accurate as compared to CNN 
