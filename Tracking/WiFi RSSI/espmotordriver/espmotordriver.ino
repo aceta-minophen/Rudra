@@ -1,9 +1,9 @@
-// Motor A
+// Motor A -- RIGHT
 int motor1Pin1 = 27;
 int motor1Pin2 = 26;
 int enable1Pin = 14;
 
-// Motor B
+// Motor B -- LEFT
 int motor2Pin1 = 25;
 int motor2Pin2 = 33;
 int enable2Pin = 32;
