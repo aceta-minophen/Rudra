@@ -5,8 +5,8 @@ void main() {
   runApp(const JoystickExampleApp());
 }
 
-const ballSize = 20.0;
-const step = 10.0;
+const ballSize = 30.0;
+const step = 30.0;
 
 class JoystickExampleApp extends StatelessWidget {
   const JoystickExampleApp({Key? key}) : super(key: key);
@@ -44,26 +44,6 @@ class MainPage extends StatelessWidget {
             },
             child: const Text('Joystick'),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const JoystickAreaExample()),
-              );
-            },
-            child: const Text('Joystick Area'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const SquareJoystickExample()),
-              );
-            },
-            child: const Text('Square Joystick'),
-          ),
         ],
       ),
     );
@@ -78,8 +58,8 @@ class JoystickExample extends StatefulWidget {
 }
 
 class _JoystickExampleState extends State<JoystickExample> {
-  double _x = 100;
-  double _y = 100;
+  double _x = 300;
+  double _y = 300;
   JoystickMode _joystickMode = JoystickMode.all;
 
   @override
@@ -91,7 +71,7 @@ class _JoystickExampleState extends State<JoystickExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text('Joystick'),
         actions: [
@@ -109,7 +89,8 @@ class _JoystickExampleState extends State<JoystickExample> {
         child: Stack(
           children: [
             Container(
-              color: Colors.green,
+              color: Colors.grey,
+              child: Text('x: $_x, y:$_y'),
             ),
             Ball(_x, _y),
             Align(
@@ -118,8 +99,8 @@ class _JoystickExampleState extends State<JoystickExample> {
                 mode: _joystickMode,
                 listener: (details) {
                   setState(() {
-                    _x = _x + step * details.x;
-                    _y = _y + step * details.y;
+                    _x = 300 + step * details.x;
+                    _y = 300 + step * details.y;
                   });
                 },
               ),
@@ -131,127 +112,7 @@ class _JoystickExampleState extends State<JoystickExample> {
   }
 }
 
-class JoystickAreaExample extends StatefulWidget {
-  const JoystickAreaExample({Key? key}) : super(key: key);
 
-  @override
-  _JoystickAreaExampleState createState() => _JoystickAreaExampleState();
-}
-
-class _JoystickAreaExampleState extends State<JoystickAreaExample> {
-  double _x = 100;
-  double _y = 100;
-  JoystickMode _joystickMode = JoystickMode.all;
-
-  @override
-  void didChangeDependencies() {
-    _x = MediaQuery.of(context).size.width / 2 - ballSize / 2;
-    super.didChangeDependencies();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.green,
-      appBar: AppBar(
-        title: const Text('Joystick Area'),
-        actions: [
-          JoystickModeDropdown(
-            mode: _joystickMode,
-            onChanged: (JoystickMode value) {
-              setState(() {
-                _joystickMode = value;
-              });
-            },
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: JoystickArea(
-          mode: _joystickMode,
-          initialJoystickAlignment: const Alignment(0, 0.8),
-          listener: (details) {
-            setState(() {
-              _x = _x + step * details.x;
-              _y = _y + step * details.y;
-            });
-          },
-          child: Stack(
-            children: [
-              Container(
-                color: Colors.green,
-              ),
-              Ball(_x, _y),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SquareJoystickExample extends StatefulWidget {
-  const SquareJoystickExample({Key? key}) : super(key: key);
-
-  @override
-  _SquareJoystickExampleState createState() => _SquareJoystickExampleState();
-}
-
-class _SquareJoystickExampleState extends State<SquareJoystickExample> {
-  double _x = 100;
-  double _y = 100;
-  JoystickMode _joystickMode = JoystickMode.all;
-
-  @override
-  void didChangeDependencies() {
-    _x = MediaQuery.of(context).size.width / 2 - ballSize / 2;
-    super.didChangeDependencies();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.green,
-      appBar: AppBar(
-        title: const Text('Square Joystick'),
-        actions: [
-          JoystickModeDropdown(
-            mode: _joystickMode,
-            onChanged: (JoystickMode value) {
-              setState(() {
-                _joystickMode = value;
-              });
-            },
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              color: Colors.green,
-            ),
-            Ball(_x, _y),
-            Align(
-              alignment: const Alignment(0, 0.8),
-              child: Joystick(
-                mode: _joystickMode,
-                base: JoystickSquareBase(mode: _joystickMode),
-                stickOffsetCalculator: const RectangleStickOffsetCalculator(),
-                listener: (details) {
-                  setState(() {
-                    _x = _x + step * details.x;
-                    _y = _y + step * details.y;
-                  });
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class JoystickModeDropdown extends StatelessWidget {
   final JoystickMode mode;
@@ -307,7 +168,7 @@ class Ball extends StatelessWidget {
         height: ballSize,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.redAccent,
+          color: Colors.white60,
           boxShadow: [
             BoxShadow(
               color: Colors.black12,
