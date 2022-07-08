@@ -1,3 +1,6 @@
+import 'dart:ui';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_joystick/flutter_joystick.dart';
 
@@ -62,6 +65,8 @@ class _JoystickExampleState extends State<JoystickExample> {
   double _y = 300;
   JoystickMode _joystickMode = JoystickMode.all;
 
+  double a = 0, b=0, c=0, d=0;
+
   @override
   void didChangeDependencies() {
     _x = MediaQuery.of(context).size.width / 2 - ballSize / 2;
@@ -90,17 +95,37 @@ class _JoystickExampleState extends State<JoystickExample> {
           children: [
             Container(
               color: Colors.grey,
-              child: Text('x: $_x, y:$_y'),
+              child: Text('x:$c, y:$d'),
             ),
             Ball(_x, _y),
             Align(
-              alignment: const Alignment(0, 0.8),
+              alignment: const Alignment(0, 0),
               child: Joystick(
                 mode: _joystickMode,
                 listener: (details) {
-                  setState(() {
+                  setState((){
                     _x = 300 + step * details.x;
                     _y = 300 + step * details.y;
+                    Future.delayed(const Duration(milliseconds: 300), (){
+                      a= 300 + step * details.x;
+                      b= 300 + step * details.y;
+                      if(a!=_x && b!=_y){
+
+                        c=(a-300)/step;
+                        d=(b-300)/step;
+                        if(c!=0 && d!=0){
+                          print('c:$c, d:$d');
+                        }
+                      }
+                      else if(a==_x && b==_y){
+                        c=0;
+                        d=0;
+                        _x=300;
+                        _y=300;
+                        print('c:$c, d:$d');
+                      }
+                    });
+
                   });
                 },
               ),
