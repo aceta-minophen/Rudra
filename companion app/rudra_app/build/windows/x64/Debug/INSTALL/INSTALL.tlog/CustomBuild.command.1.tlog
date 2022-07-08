@@ -1,0 +1,10 @@
+^C:\COMPUTER\GIT REPOSITORIES\RUDRA\COMPANION APP\RUDRA_APP\BUILD\WINDOWS\CMAKEFILES\589DEB74B3A780964A53DD40449C1451\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

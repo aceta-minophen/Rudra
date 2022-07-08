@@ -4,6 +4,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_joystick/flutter_joystick.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_database/firebase_database.dart';
+// ...
+
+
+
 void main() {
   runApp(const JoystickExampleApp());
 }
@@ -66,6 +73,18 @@ class _JoystickExampleState extends State<JoystickExample> {
   JoystickMode _joystickMode = JoystickMode.all;
 
   double a = 0, b=0, c=0, d=0;
+
+  void initFirebase(){
+    setState(() async {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    });
+  }
+
+  FirebaseDatabase database = FirebaseDatabase.instance;
+
+  
 
   @override
   void didChangeDependencies() {

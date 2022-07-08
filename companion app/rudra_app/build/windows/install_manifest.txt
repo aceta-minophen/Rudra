@@ -1,0 +1,9 @@
+C:/Computer/Git Repositories/Rudra/companion app/rudra_app/build/windows/runner/Debug/data/icudtl.dat
+C:/Computer/Git Repositories/Rudra/companion app/rudra_app/build/windows/runner/Debug/flutter_windows.dll
+C:/Computer/Git Repositories/Rudra/companion app/rudra_app/build/windows/runner/Debug/data/flutter_assets/AssetManifest.json
+C:/Computer/Git Repositories/Rudra/companion app/rudra_app/build/windows/runner/Debug/data/flutter_assets/FontManifest.json
+C:/Computer/Git Repositories/Rudra/companion app/rudra_app/build/windows/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+C:/Computer/Git Repositories/Rudra/companion app/rudra_app/build/windows/runner/Debug/data/flutter_assets/kernel_blob.bin
+C:/Computer/Git Repositories/Rudra/companion app/rudra_app/build/windows/runner/Debug/data/flutter_assets/NOTICES
+C:/Computer/Git Repositories/Rudra/companion app/rudra_app/build/windows/runner/Debug/data/flutter_assets/NOTICES.Z
+C:/Computer/Git Repositories/Rudra/companion app/rudra_app/build/windows/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
