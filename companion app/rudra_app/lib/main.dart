@@ -82,7 +82,7 @@ class _JoystickExampleState extends State<JoystickExample> {
     });
   }
 
-  FirebaseDatabase database = FirebaseDatabase.instance;
+  //FirebaseDatabase database = FirebaseDatabase.instance;
 
   
 
