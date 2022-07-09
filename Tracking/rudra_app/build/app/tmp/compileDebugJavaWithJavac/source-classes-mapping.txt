@@ -1,6 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-com/example/rudra_app/BuildConfig.java
- com.example.rudra_app.BuildConfig
-com/example/rudra_app/MainActivity.java
- com.example.rudra_app.MainActivity
