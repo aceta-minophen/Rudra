@@ -70,6 +70,8 @@ class JoystickExample extends StatefulWidget {
 class _JoystickExampleState extends State<JoystickExample> {
   double _x = 300;
   double _y = 300;
+  double p =300;
+  double q=300;
   JoystickMode _joystickMode = JoystickMode.all;
 
   double a = 0, b=0, c=0, d=0;
@@ -116,13 +118,15 @@ class _JoystickExampleState extends State<JoystickExample> {
               color: Colors.grey,
               child: Text('x:$c, y:$d'),
             ),
-            Ball(_x, _y),
+            Ball(p, q),
             Align(
               alignment: const Alignment(0, 0),
               child: Joystick(
                 mode: _joystickMode,
                 listener: (details) {
                   setState((){
+                    p=p+step * details.x;
+                    q=q+step * details.y;
                     _x = 300 + step * details.x;
                     _y = 300 + step * details.y;
                     Future.delayed(const Duration(milliseconds: 300), (){
