@@ -27,26 +27,27 @@ def load_darknet_weights(model, weights_file):
             if i+1 < len(sub_model.layers) and sub_model.layers[i+1].name.startswith('batch_norm'):
                 batch_norm = sub_model.layers[i+1]
 
-    filters = layer.filters
-    size = layer.kernel_size[0]
-    in_dim = layer.input_shape[-1]
+            filters = layer.filters
+            size = layer.kernel_size[0]
+            in_dim = layer.input_shape[-1]
 
-    if batch_norm is None:
-        conv_bias = np.fromfile(wf, dtype=np.float32, count=filters)
-    else:
-        bn_weights = np.fromfile(wf, dtype=np.float32, count=4*filters)
-        bn_weights = bn_weights.reshape((4, filters))[[1, 0, 2, 3]]
+            if batch_norm is None:
+                conv_bias = np.fromfile(wf, dtype=np.float32, count=filters)
+            else:
+                bn_weights = np.fromfile(wf, dtype=np.float32, count=4*filters)
+                bn_weights = bn_weights.reshape((4, filters))[[1, 0, 2, 3]]
 
-    conv_shape = (filters, in_dim, size, size)
-    conv_weights = np.fromfile(
-        wf, dtype=np.float32, count=np.product(conv_shape))
-    conv_weights = conv_weights.reshape(conv_shape).transpose([2, 3, 1, 0])
+            conv_shape = (filters, in_dim, size, size)
+            conv_weights = np.fromfile(
+                wf, dtype=np.float32, count=np.product(conv_shape))
+            conv_weights = conv_weights.reshape(
+                conv_shape).transpose([2, 3, 1, 0])
 
-    if batch_norm is None:
-        layer.set_weights([conv_weights, conv_bias])
-    else:
-        layer.set_weights([conv_weights])
-        batch_norm.set_weights(bn_weights)
+            if batch_norm is None:
+                layer.set_weights([conv_weights, conv_bias])
+            else:
+                layer.set_weights([conv_weights])
+                batch_norm.set_weights(bn_weights)
 
     assert len(wf.read()) == 0, 'failed to read all data'
     wf.close()
