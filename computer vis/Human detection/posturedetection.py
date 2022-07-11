@@ -11,16 +11,16 @@ pose = mp_pose.Pose()
 
 # take video input for pose detection
 # you can put here video of your choice
-cap = cv2.VideoCapture("sampleVideo.mp4")
+#cap = cv2.VideoCapture("sampleVideo.mp4")
 
 # take live camera  input for pose detection
-# cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)
 
 # read each frame/image from capture object
 while True:
     ret, img = cap.read()
     # resize image/frame so we can accommodate it on our screen
-    img = cv2.resize(img, (600, 400))
+    img = cv2.resize(img, (600, 600))
 
     # do Pose detection
     results = pose.process(img)
