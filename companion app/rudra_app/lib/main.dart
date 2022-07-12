@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_joystick/flutter_joystick.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -76,13 +77,53 @@ class _JoystickExampleState extends State<JoystickExample> {
 
   double a = 0, b=0, c=0, d=0;
 
-  void initFirebase(){
+  /*void initFirebase(){
     setState(() async {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
     });
+  }*/
+
+  late double x_val, y_val;
+
+  Future<void> writeData() async{
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    DatabaseReference ref = FirebaseDatabase.instance.ref();
+
+    await ref.set({
+      "x":x_val,
+      "y":y_val
+    });
   }
+
+
+
+
+
+  /*final _form = GlobalKey<FormState>();
+  late double title;
+  void writeData() async {
+    _form.currentState?.save();
+
+    // Please replace the Database URL
+    // which we will get in “Add Realtime
+    // Database” step with DatabaseURL
+    var url = "https://rudra-x-default-rtdb.firebaseio.com/"+"data.json";
+
+    // (Do not remove “data.json”,keep it as it is)
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: json.encode({"title": title}),
+      );
+    } catch (error) {
+      throw error;
+    }
+  }*/
 
   //FirebaseDatabase database = FirebaseDatabase.instance;
 
@@ -138,6 +179,9 @@ class _JoystickExampleState extends State<JoystickExample> {
                         d=(b-300)/step;
                         if(c!=0 && d!=0){
                           print('c:$c, d:$d');
+                          x_val = c;
+                          y_val=d;
+                          writeData();
                         }
                       }
                       else if(a==_x && b==_y){
@@ -146,6 +190,9 @@ class _JoystickExampleState extends State<JoystickExample> {
                         _x=300;
                         _y=300;
                         print('c:$c, d:$d');
+                        x_val = c;
+                        y_val = d;
+                        writeData();
                       }
                     });
 

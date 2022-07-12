@@ -37,6 +37,7 @@ dependencies:
   flutter_joystick: ^0.0.2
   firebase_core: ^1.19.1
   firebase_database: ^9.0.18
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:
