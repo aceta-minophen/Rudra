@@ -46,3 +46,6 @@ https://www.researchgate.net/publication/322877438_Estimate_distance_measurement
 https://www.ijert.org/research/accurate-estimation-of-bluetooth-rssi-and-distance-IJERTV5IS030130.pdf
 
 https://nothans.com/measure-wi-fi-signal-levels-with-the-esp8266-and-thingspeak
+
+## Measuring distance using Ultrasonic Proximity Sensors - Triangulation
+- [Dist. between 2 HC-SR04](https://circuitdigest.com/microcontroller-projects/measuring-distance-between-two-ultrasonic-sensors-using-arduino)
