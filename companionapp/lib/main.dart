@@ -28,19 +28,26 @@ class Health extends StatelessWidget {
             ],
           ),
           actions: [
-            IconButton(
-                onPressed: (){},
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.white,
-                )
+            PopupMenuButton<String>(
+              color: Colors.black,
+              onSelected: menuClick,
+              icon: Icon(
+                Icons.menu,
+              ),
+              itemBuilder: (BuildContext context) {
+                return {'Notification', 'Privacy', 'Security', 'Account'}.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice, style: TextStyle(color: Colors.white),),
+                  );
+                }).toList();
+              },
             ),
           ],
         ),
-
         bottomNavigationBar: Container(
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
+            margin: EdgeInsets.symmetric(vertical: 15),
             child: Row(
               children: [
                 Expanded(
@@ -48,7 +55,7 @@ class Health extends StatelessWidget {
                       onPressed: (){},
                       icon: Icon(
                         CustomIcon.gym_dumbbell,
-                        size: 40,
+                        size: 35,
                         color: Colors.white,
                       ),
                   ),
@@ -58,7 +65,7 @@ class Health extends StatelessWidget {
                     onPressed: (){},
                     icon: Icon(
                       CustomIcon.remote_control_line,
-                      size: 30,
+                      size: 25,
                       color: Colors.white,
                     ),
                   ),
@@ -68,7 +75,7 @@ class Health extends StatelessWidget {
                     onPressed: (){},
                     icon: Icon(
                       CustomIcon.daily_schedule,
-                      size: 40,
+                      size: 35,
                       color: Colors.white,
                     ),
                   ),
@@ -78,7 +85,7 @@ class Health extends StatelessWidget {
                     onPressed: (){},
                     icon: Icon(
                       CustomIcon.message_phone_chat,
-                      size: 40,
+                      size: 35,
                       color: Colors.white,
                     ),
                   ),
@@ -89,5 +96,18 @@ class Health extends StatelessWidget {
         ),
       )
     );
+  }
+}
+
+void menuClick(String value) {
+  switch (value) {
+    case 'Notification':
+      break;
+    case 'Privacy':
+      break;
+    case 'Security':
+      break;
+    case 'Account':
+      break;
   }
 }
