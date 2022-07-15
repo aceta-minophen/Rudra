@@ -1,4 +1,5 @@
 import cv2
+import os
 import numpy as np
 import tensorflow as tf
 from keras import Model
@@ -8,7 +9,7 @@ from keras.regularizers import l2
 
 
 def load_darknet_weights(model, weights_file):
-    wf = open(weights_file, 'rb')
+    wf = open(os.path.join(os.getcwd(), weights_file), 'rb')
     major, minor, revision, seen, _ = np.fromfile(wf, dtype=np.int32, count=5)
     layers = ['yolo_darknet',
               'yolo_conv_0',
@@ -24,7 +25,7 @@ def load_darknet_weights(model, weights_file):
             if not layer.name.startswith('conv2d'):
                 continue
             batch_norm = None
-            if i+1 < len(sub_model.layers) and sub_model.layers[i+1].name.startswith('batch_norm'):
+            if i + 1 < len(sub_model.layers) and sub_model.layers[i+1].name.startswith('batch_norm'):
                 batch_norm = sub_model.layers[i+1]
 
             filters = layer.filters
