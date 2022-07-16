@@ -13,3 +13,6 @@
     2. Logging in what food is being consumed and track calories (Ex: https://play.google.com/store/apps/details?id=ai.bite.biteapp&hl=en&gl=US) 
     3. Plan next meal accordingly 
 3. Fall detection using computer vision to send alert if fatal fall is detected
+
+### Calories tracking:
+- Dataset[https://1drv.ms/x/s!AnDu-U4MsQkrg3VJmrpoxE28eA2r?e=rCpYNE]
