@@ -15,4 +15,4 @@
 3. Fall detection using computer vision to send alert if fatal fall is detected
 
 ### Calories tracking:
-- Dataset[https://1drv.ms/x/s!AnDu-U4MsQkrg3VJmrpoxE28eA2r?e=rCpYNE]
+- [Dataset](https://1drv.ms/x/s!AnDu-U4MsQkrg3VJmrpoxE28eA2r?e=rCpYNE)
