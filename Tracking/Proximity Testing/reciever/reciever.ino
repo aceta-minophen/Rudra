@@ -17,6 +17,8 @@ if (Pdistance==distance || Pdistance==distance+1 || Pdistance==distance-1  )
 Serial.print("Measured Distance: ");
 Serial.println(distance/2);
 }
+Serial.print("Distance: ");
+Serial.println(distance/2);
 //Serial.print("Distance: ");
 //Serial.println(distance/2);
 delay(500);
