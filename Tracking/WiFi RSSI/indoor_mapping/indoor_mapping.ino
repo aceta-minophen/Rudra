@@ -1,36 +1,52 @@
-
+#include "model.h"
 #include "WiFi.h"
+//#include "hello.h"
 
 //#include "eloquent.h"
+using namespace Eloquent;
 
-//using namespace Eloquent::DataStructures;
+Eloquent::ML::Port::SVM classifier;
 
 #define MAX_NETWORKS 21
 
-double features[MAX_NETWORKS];
+float features[MAX_NETWORKS];
 char *knownNetworks[MAX_NETWORKS] = {"paya1", "Airtel", "FTTH", "Jaishree", "www.excitel.com", "pwd555307", "TP-Link_B65C", "88Medha", "151*", "TanuAbhi136", "JioFiber-Dinesh_4G", "Sunny", "DoozyPixie", "MALHOTRA", "ladoobala", "Rahul Iyer _ 2g", "BatCave", "157medha", "Sagar 1", "airtel171", "pranav4g"};
 
-void setup() {
+void setup()
+{
     Serial.begin(115200);
     WiFi.mode(WIFI_STA);
     WiFi.disconnect();
+    // sayhello();
 }
 
-void loop() {
+void loop()
+{
     scan();
     printFeatures();
-    delay(3000);
+    classify();
+
+    delay(500);
 }
 
-void scan() {
+void classify()
+{
+    Serial.print("You are in ");
+
+    Serial.println(classifier.predictLabel(features));
+}
+
+void scan()
+{
     int numNetworks = WiFi.scanNetworks();
 
     resetFeatures();
 
     // assign RSSIs to feature vector
-    for (int i = 0; i < numNetworks; i++) {
+    for (int i = 0; i < numNetworks; i++)
+    {
         String ssid = WiFi.SSID(i);
-        //Serial.println(ssid);
+        // Serial.println(ssid);
         int networkIndex = getIndexByKey(ssid.c_str());
 
         // only create feature if the current SSID is a known one
@@ -40,27 +56,30 @@ void scan() {
 }
 
 // reset all features to 0
-void resetFeatures() {
+void resetFeatures()
+{
     int numFeatures = sizeof(features) / sizeof(double);
 
     for (int i = 0; i < numFeatures; i++)
         features[i] = 0;
 }
-void printFeatures() {
+void printFeatures()
+{
     int numFeatures = sizeof(features) / sizeof(double);
 
-    for (int i = 0; i < numFeatures; i++) {
+    for (int i = 0; i < numFeatures; i++)
+    {
         Serial.print(features[i]);
         Serial.print(i == numFeatures - 1 ? 'n' : ',');
     }
     Serial.println("");
 }
 
-int getIndexByKey( const char *key )
+int getIndexByKey(const char *key)
 {
-  for ( int i = 0; i < sizeof( knownNetworks ) / sizeof( char * ); i++ )
-    if ( !strcmp( key, knownNetworks[i] ) )
-      return i;
-      
-  return -1;
+    for (int i = 0; i < sizeof(knownNetworks) / sizeof(char *); i++)
+        if (!strcmp(key, knownNetworks[i]))
+            return i;
+
+    return -1;
 }
