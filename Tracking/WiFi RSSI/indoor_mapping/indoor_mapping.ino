@@ -5,10 +5,10 @@
 
 //using namespace Eloquent::DataStructures;
 
-#define MAX_NETWORKS 10
+#define MAX_NETWORKS 21
 
 double features[MAX_NETWORKS];
-char *knownNetworks[MAX_NETWORKS] = {"paya1", "Airtel", "FTTH", "Jaishree", "www.excitel.com", "pwd555307", "TP-Link_B65C", "88Medha", "151*", "TanuAbhi136"};
+char *knownNetworks[MAX_NETWORKS] = {"paya1", "Airtel", "FTTH", "Jaishree", "www.excitel.com", "pwd555307", "TP-Link_B65C", "88Medha", "151*", "TanuAbhi136", "JioFiber-Dinesh_4G", "Sunny", "DoozyPixie", "MALHOTRA", "ladoobala", "Rahul Iyer _ 2g", "BatCave", "157medha", "Sagar 1", "airtel171", "pranav4g"};
 
 void setup() {
     Serial.begin(115200);
@@ -30,6 +30,7 @@ void scan() {
     // assign RSSIs to feature vector
     for (int i = 0; i < numNetworks; i++) {
         String ssid = WiFi.SSID(i);
+        //Serial.println(ssid);
         int networkIndex = getIndexByKey(ssid.c_str());
 
         // only create feature if the current SSID is a known one
