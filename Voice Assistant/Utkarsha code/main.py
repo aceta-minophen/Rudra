@@ -122,6 +122,7 @@ while True:
             audio = recognizer.listen(mic)
 
             message = recognizer.listen(mic)
+            print(message)
             message = message.lower()
 
         assistant.request(message)
