@@ -26,6 +26,17 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  flutter_hooks: ^0.18.5+1
+  flutter_mjpeg: ^2.0.1
+  remote_ui: ">=0.1.0 <1.0.0"
+  remote_ip_camera: ^2.0.0
+  web_socket_channel: ^2.2.0
+
+  #flutter_mjpeg: ">=2.0.0 <3.0.0"
+    #path: '../../../flutter_mjpeg'
+    #flutter_hooks: ">=0.18.0 <1.0.0"
+    #remote_ui: ">=0.1.0 <1.0.0"
+    #path: '../remote_ui'
 
 dev_dependencies:
   flutter_test:

@@ -33,14 +33,14 @@ app.get('/', (req, res) => {
 })
 
 /*Running the server on port 8080*/
-/* app.listen("8080", () => {
+app.listen("8080", () => {
     console.log('listening.....');
-}) */
+})
 
-app.listen(3000, '192.168.29.45' || 'localhost', function () {
+/* app.listen(3000, '192.168.29.45' || 'localhost', function () {
     console.log('Application worker ' + process.pid + ' started...');
 }
-);
+); */
 
 // Broadcast to all.
 
