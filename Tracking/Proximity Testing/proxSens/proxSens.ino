@@ -1,87 +1,40 @@
-// ---------------------------------------------------------------- //
-// Arduino Ultrasoninc Sensor HC-SR04
-// Re-writed by Arbi Abdul Jabbaar
-// Using Arduino IDE 1.8.7
-// Using HC-SR04 Module
-// Tested on 17 September 2019
-// ---------------------------------------------------------------- //
+const int trigPin1 = 15;
+const int echoPin1 = 2;
 
-#define echoPin 10 // attach pin D2 Arduino to pin Echo of HC-SR04
-#define trigPin 9 //attach pin D3 Arduino to pin Trig of HC-SR04
+//define sound speed in cm/uS
+#define SOUND_SPEED 0.034
+#define CM_TO_INCH 0.393701
 
-// defines variables
-long duration; // variable for the duration of sound wave travel
-int distance1, distance2,distance3,i=0,totaldistance; // variable for the distance measurement
+long duration1;
+float distanceCm1;
+float distanceInch;
 
 void setup() {
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
-  pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
-  Serial.begin(9600); // // Serial Communication is starting with 9600 of baudrate speed
-  Serial.println("Ultrasonic Sensor HC-SR04 Test"); // print some text in Serial Monitor
-  Serial.println("with Arduino UNO R3");
+  Serial.begin(115200); // Starts the serial communication
+  pinMode(trigPin1, OUTPUT); // Sets the trigPin as an Output
+  pinMode(echoPin1, INPUT); // Sets the echoPin as an Input
 }
+
 void loop() {
-  // Clears the trigPin condition
-  digitalWrite(trigPin, LOW);
+  // Clears the trigPin
+  digitalWrite(trigPin1, LOW);
   delayMicroseconds(2);
-  // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
-  digitalWrite(trigPin, HIGH);
+  // Sets the trigPin on HIGH state for 10 micro seconds
+  digitalWrite(trigPin1, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
+  digitalWrite(trigPin1, LOW);
+  
   // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
-  // Calculating the distance
-  distance1 = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
-
-if (i==0)
-{
-  distance3 = distance1;
-  i=1;
-}
-else if (i==1)
-{
-  distance2 = distance1;
-  i=0;
-}
-  totaldistance= distance3- distance2;
-
+  duration = pulseIn(echoPin1, HIGH);
+  
+  // Calculate the distance
+  distanceCm1 = duration1 * SOUND_SPEED/2;
   
   
-  // Displays the distance on the Serial Monitor
-
- 
+  // Prints the distance in the Serial Monitor
   Serial.print("Distance1: ");
-  Serial.print(distance1);
-  Serial.println(" cm");
+  Serial.println(distanceCm1);
 
-  Serial.print("Distance2: ");
-  Serial.print(distance2);
-  Serial.println(" cm");
-
-  Serial.print("Distance3: ");
-  Serial.print(distance3);
-  Serial.println(" cm");
-
-  if (totaldistance>0)
-  {
-    Serial.print("Change Distance: ");
-    Serial.print(totaldistance);
-    Serial.println(" cm");
-    Serial.println("coming near ");
-  }
   
- else if (totaldistance<0)
-  {
-    Serial.print("Change Distance: ");
-    Serial.print(totaldistance);
-    Serial.println(" cm");
-    Serial.println("going far ");
-  }
-  else 
-  {
-    Serial.println("No Change ");
-  }
- 
-  
-
+  delay(1000);
 }
