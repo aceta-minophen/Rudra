@@ -1,3 +1,4 @@
+from operator import index
 import pandas as pd
 import numpy as np
 from IPython.core.interactiveshell import InteractiveShell
@@ -17,6 +18,9 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://rudra-x-default-rtdb.firebaseio.com/'
 })
 
+# Reading from DB
+ref = db.reference('Meal Suggestion/')
+print(ref.get())
 
 InteractiveShell.ast_node_interactivity = "all"
 
@@ -63,7 +67,10 @@ def get_recommendations(title="", cosine_sim=cosine_sim, idx=-1):
     return food_indices
 
 
-#display(df1.loc[get_recommendations(title="paneer tikka masala")])
+df2 = df1.loc[get_recommendations(title="paneer tikka masala")]
+matrix1 = df2.to_numpy()
+a = matrix1[0][1]
+b = matrix1[1][1]
 
 
 def get_latest_user_orders(user_id, orders, num_orders=3):
@@ -88,7 +95,17 @@ def get_recomms_df(food_indices, df1, columns, comment):
         df.loc[row] = df1[['title', 'canteen_id']].loc[i]
         df.loc[row].comment = comment
         row = row + 1
-    return display(df)
+    matrix2 = df.to_numpy()
+    print("\nBased on your previous orders..\n")
+    c = matrix2[0][0]
+    d = matrix2[1][0]
+    ref.update({
+        'Previous mealds': {
+            'meal1': c,
+            'meal2': d
+        }
+    })
+    return df
 
 
 def personalised_recomms(orders, df1, user_id, columns, comment="based on your past orders"):
@@ -122,16 +139,15 @@ columns = ['title', 'canteen_id', 'comment']
 current_user = 3
 current_canteen = get_user_home_canteen(users, current_user)
 
-#personalised_recomms(orders, df1, current_user, columns)
+personalised_recomms(orders, df1, current_user, columns)
 
-a = df1.loc[get_recommendations(title="paneer tikka masala")]
-print(a.title)
+print(a)
+print(b)
 
-
-# Reading from DB
-ref = db.reference('Meal Suggestion/')
-print(ref.get())
 
 ref.update({
-    'Meal': a.title
+    'Liked meals': {
+        "meal1": a,
+        "meal2": b
+    }
 })
