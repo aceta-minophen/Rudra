@@ -3,8 +3,8 @@ import cv2
 import numpy as np
 
 #TODO
-# DOWNLOAD 1) 'https://drive.google.com/open?id=1kWv0AjxGSN0g31OeJa02eBGM0R_jcjIl'
-#          2) 'https://drive.google.com/open?id=1AW3WduLk1haTVAxHOkVS_BEzel1WXQHP'
+# DOWNLOAD 1) 'https://drive.google.com/open?id=1W_moLzMlGiELyPxWiYQJ9KFaXroQ_NFQ'
+#          2) 'https://drive.google.com/open?id=1kiusFljZc9QfcIYdU2s7xrtWHTraHwmW'
 
 
 
