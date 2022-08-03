@@ -44,9 +44,9 @@ def encode_faces():
 def process_video():
     video_capture = cv2.VideoCapture(0)
     known_face_encodings, known_face_names = encode_faces()
-    f_count = 0
+   
     # Initialize some variables
-    face_names = set()
+
     process_this_frame = True
 
     while video_capture.isOpened():
@@ -61,17 +61,25 @@ def process_video():
              # Find all the faces and face encodings in the current frame of video
             face_locations = face_recognition.face_locations(rgb_small_frame)
             face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
-
+            face_names = []
             for face_encoding in face_encodings:
                 # See if the face is a match for the known face(s)
                 matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
+                name = "Uknown"
+                # if True in matches:
+                #     first_match_index = matches.index(True)
+                #     name = known_face_names[first_match_index]
+                
                 # Or instead, use the known face with the smallest distance to the new face
                 face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
                 best_match_index = np.argmin(face_distances)
                 if matches[best_match_index]:
                     name = known_face_names[best_match_index]
-                    face_names.add(name)
+                   
+                face_names.append(name)
             
+        
+        process_this_frame = not process_this_frame        
             
             # Display the results
         for (top, right, bottom, left), name in zip(face_locations, face_names):
@@ -89,7 +97,7 @@ def process_video():
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(frame, name, (left + 6, bottom - 6), font, 0.6, (255, 255, 255), 1)
                    
-        process_this_frame = not process_this_frame
+        
         # Display the resulting image
         cv2.imshow('Video', frame)
 
