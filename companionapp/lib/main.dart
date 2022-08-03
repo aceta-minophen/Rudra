@@ -1,6 +1,7 @@
 import 'package:companionapp/calendar.dart';
 import 'package:companionapp/constants.dart';
 import 'package:companionapp/custom_icon_icons.dart';
+import 'package:companionapp/remote-control.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -205,7 +206,7 @@ class Health extends StatelessWidget {
                                             color: white, fontSize: 20),
                                       ),
                                       Icon(
-                                        Icons.water_drop,
+                                        Icons.water_rounded,
                                         color: Color(0xFFFE7763),
                                       ),
                                     ],
@@ -279,7 +280,7 @@ class Health extends StatelessWidget {
                               style: TextStyle(color: white, fontSize: 20),
                             ),
                             Icon(
-                              Icons.water_drop,
+                              Icons.water_rounded,
                               color: Color(0xFF50F3F7),
                             ),
                           ],
@@ -330,7 +331,14 @@ class Health extends StatelessWidget {
               ),
               Expanded(
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => RemoteControl(),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     CustomIcon.remote_control_line,
                     size: 25,

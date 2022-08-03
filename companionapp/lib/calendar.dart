@@ -1,6 +1,7 @@
 import 'package:companionapp/constants.dart';
 import 'package:companionapp/custom_icon_icons.dart';
 import 'package:companionapp/main.dart';
+import 'package:companionapp/remote-control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
@@ -72,6 +73,35 @@ class _CalendarState extends State<Calendar> {
               selectedDateTime: _currentDate,
               daysHaveCircularBorder: false,
             ),
+            Container(
+              child: Column(
+                children: [
+                  Text('Daily Tasks', style: TextStyle(color: white, fontSize: 20, fontWeight: FontWeight.bold,),),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        child: Text('10:00', style: TextStyle(color: Colors.grey,),),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          margin: EdgeInsets.all(8),
+                          child: Text('10:00', style: TextStyle(fontSize: 15),),
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -99,7 +129,14 @@ class _CalendarState extends State<Calendar> {
               ),
               Expanded(
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => RemoteControl(),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     CustomIcon.remote_control_line,
                     size: 25,
