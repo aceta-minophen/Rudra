@@ -31,6 +31,8 @@ dependencies:
   remote_ui: ">=0.1.0 <1.0.0"
   remote_ip_camera: ^2.0.0
   web_socket_channel: ^2.2.0
+  syncfusion_flutter_charts: ^20.2.40
+  flutter_calendar_carousel: ^2.4.0
 
   #flutter_mjpeg: ">=2.0.0 <3.0.0"
     #path: '../../../flutter_mjpeg'
