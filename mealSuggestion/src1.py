@@ -1,13 +1,9 @@
-from operator import concat, index
-from turtle import title
-from unicodedata import category
 import pandas as pd
 import numpy as np
 from IPython.core.interactiveshell import InteractiveShell
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from IPython.display import display
-from tabulate import tabulate
 
 InteractiveShell.ast_node_interactivity = "all"
 
@@ -17,33 +13,38 @@ df1.columns = ['food_id', 'title', 'canteen_id', 'num_orders',
 
 
 def avg_rating(user_rating, m=""):
-    row = df1.index[(df1['title'] == m)].tolist()
-    df1["avg_rating"] = df1.loc9(
-        (["avg_rating"]*["num_rating"]+["user_rating"])/["num_rating+1"])[index == row]
-    df1["num_rating"] = df1["num_rating"][index == row]+1
+    idx = df1.index[(df1['title'] == m)].tolist()
+
+    df1.iloc[idx]['num_orders'] = df1.iloc[idx]['num_orders'] + 1
+    df1.iloc[idx]['user_rating'] = user_rating
+    df1.iloc[idx]['avg_rating'] = ((df1.loc[idx]['num_rating'].multiply(
+        df1.loc[idx]['avg_rating']))+user_rating)/df1.loc[idx]['num_rating']+1
+    df1.iloc[idx]['num_rating'] = df1.iloc[idx]['num_rating'] + 1
 
     return "none"
 
 
-def new_row(user_rating, m=""):
+def insert_row(user_rating, category="", title="", df1=df1):
 
-    m = m.lower()
+    #df1= df1[[df1.iloc[:idx, ].append(df_insert).append(df1.iloc[idx:, ]).reset_index(drop = True)]]
+    df1.loc[-1] = [1, title, 1, 1, user_rating,
+                   1, category, 'healthy', user_rating]
+    df1.index = df1.index + 1
+    df1 = df1.sort_index()
 
-    if m not in df1['title'].unique():
-        line = df2({"food_id": 1, "title": m, "canteen_id": 1, "num_orders": 1,
-                   "avg_rating": user_rating, "num_rating": 1, "user_rating": user_rating}, index=[0])
-        df2 = concat([df1.iloc[:], line, df1.iloc[:]]).reset_index(drop=True)
 
+def check_foodname(user_rating, category="", title=""):
+    if title in df1['title'].values:
+        avg_rating(user_rating, title)
     else:
-        avg_rating(user_rating)
-
+        insert_row(user_rating, category, title)
     return "none"
 
 
-new_row(3.5, "matar kulcha")
-
+check_foodname(3.5, "main course", "shahi paneer")
 
 # TODO: clean data
+
 
 def create_soup(x):
     tags = x['tags'].lower().split(', ')
@@ -81,7 +82,7 @@ def get_recommendations(title="", cosine_sim=cosine_sim, idx=-1):
     return food_indices
 
 
-df2 = df1.loc[get_recommendations(title="paneer tikka masala")]
+df2 = df1.loc[get_recommendations(title="beer")]
 matrix1 = df2.to_numpy()
 a = display(matrix1[0][1])
 b = display(matrix1[1][1])
