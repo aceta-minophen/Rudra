@@ -26,7 +26,6 @@ def avg_rating(user_rating, m=""):
 
 def insert_row(user_rating, category="", title="", df1=df1):
 
-    #df1= df1[[df1.iloc[:idx, ].append(df_insert).append(df1.iloc[idx:, ]).reset_index(drop = True)]]
     df1.loc[-1] = [1, title, 1, 1, user_rating,
                    1, category, 'healthy', user_rating]
     df1.index = df1.index + 1
@@ -42,7 +41,7 @@ def check_foodname(user_rating, category="", title=""):
 
 
 check_foodname(3.5, "main course", "shahi paneer")
-
+print(df1.head(10))
 # TODO: clean data
 
 
@@ -82,7 +81,7 @@ def get_recommendations(title="", cosine_sim=cosine_sim, idx=-1):
     return food_indices
 
 
-df2 = df1.loc[get_recommendations(title="beer")]
+df2 = df1.loc[get_recommendations(title="apple butter")]
 matrix1 = df2.to_numpy()
 a = display(matrix1[0][1])
 b = display(matrix1[1][1])
