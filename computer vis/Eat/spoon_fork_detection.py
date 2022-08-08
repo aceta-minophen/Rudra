@@ -39,17 +39,14 @@ def load_graph():
 
     return detection_graph
 
-def select_boxes(boxes, classes, scores, score_threshold=0, target_class=[48,50]):
+def select_boxes(boxes, classes, scores, score_threshold=0, target_class=50):
 
     sq_scores = np.squeeze(scores)
     sq_classes = np.squeeze(classes)
     sq_boxes = np.squeeze(boxes)
 
-    fork = np.logical_and(sq_classes == target_class[0], sq_scores > score_threshold)
-    spoon = np.logical_and(sq_classes == target_class[1], sq_scores > score_threshold)
-    print(fork)
-    print(spoon)
-    sel_id = max(fork,spoon)
+    sel_id = np.logical_and(sq_classes == target_class[0], sq_scores > score_threshold)
+     
     return sq_boxes[sel_id]
 
 class TLClassifier(object):
@@ -80,7 +77,7 @@ class TLClassifier(object):
             feed_dict={self.image_tensor: image_np_expanded})
 
         sel_boxes = select_boxes(boxes=boxes, classes=classes, scores=scores,
-                                 score_threshold=score_threshold)
+                                 score_threshold=score_threshold, target_class=50)
 
         return sel_boxes
 
