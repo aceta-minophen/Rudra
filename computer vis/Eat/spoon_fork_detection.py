@@ -39,22 +39,17 @@ def load_graph():
 
     return detection_graph
 
-def select_boxes(boxes, classes, scores, score_threshold=0, target_class=50):
-    """
-
-    :param boxes:
-    :param classes:
-    :param scores:
-    :param target_class: default traffic light id in COCO dataset is 10
-    :return:
-    """
+def select_boxes(boxes, classes, scores, score_threshold=0, target_class=[48,50]):
 
     sq_scores = np.squeeze(scores)
     sq_classes = np.squeeze(classes)
     sq_boxes = np.squeeze(boxes)
 
-    sel_id = np.logical_and(sq_classes == target_class, sq_scores > score_threshold)
-
+    fork = np.logical_and(sq_classes == target_class[0], sq_scores > score_threshold)
+    spoon = np.logical_and(sq_classes == target_class[1], sq_scores > score_threshold)
+    print(fork)
+    print(spoon)
+    sel_id = max(fork,spoon)
     return sq_boxes[sel_id]
 
 class TLClassifier(object):
@@ -64,42 +59,28 @@ class TLClassifier(object):
         self.extract_graph_components()
         self.sess = tf.compat.v1.Session(graph=self.detection_graph)
 
-        # dummy session
         dummy_image = np.zeros((100, 100, 3))
         self.detect_multi_object(dummy_image,0.1)
         self.traffic_light_box = None
         self.classified_index = 0
 
     def extract_graph_components(self):
-        # Definite input and output Tensors for detection_graph
         self.image_tensor = self.detection_graph.get_tensor_by_name('image_tensor:0')
-        # Each box represents a part of the image where a particular object was detected.
         self.detection_boxes = self.detection_graph.get_tensor_by_name('detection_boxes:0')
-        # Each score represent how level of confidence for each of the objects.
-        # Score is shown on the result image, together with the class label.
+
         self.detection_scores = self.detection_graph.get_tensor_by_name('detection_scores:0')
         self.detection_classes = self.detection_graph.get_tensor_by_name('detection_classes:0')
         self.num_detections = self.detection_graph.get_tensor_by_name('num_detections:0')
     
     def detect_multi_object(self, image_np, score_threshold):
-        """
-        Return detection boxes in a image
 
-        :param image_np:
-        :param score_threshold:
-        :return:
-        """
-
-        # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
         image_np_expanded = np.expand_dims(image_np, axis=0)
-        # Actual detection.
-
         (boxes, scores, classes, num) = self.sess.run(
             [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
             feed_dict={self.image_tensor: image_np_expanded})
 
         sel_boxes = select_boxes(boxes=boxes, classes=classes, scores=scores,
-                                 score_threshold=score_threshold, target_class=50)
+                                 score_threshold=score_threshold)
 
         return sel_boxes
 
@@ -129,8 +110,6 @@ def final_detection(image_np, frame):
         annotations.append(temp_annots)
 
     color_space = [(0,255,0),(255,0,0),(255,0,0)]
-    # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    #print("Found {} annotations:".format(len(annotations)))
     i = 0
     for anno in annotations:
         anno_class = 'spoon'
@@ -144,18 +123,6 @@ def final_detection(image_np, frame):
             color_class = color_space[0]
         cv2.rectangle(frame, (anno_left, anno_top), (anno_right, anno_bot), color_class, 5)
     return frame
-
-#         plt.rcParams['figure.figsize'] = [14, 10]
-#   plt.grid(b=None)
-#   plt.imshow(img)
-#   plt.grid(b=None) 
-#   plt.show()
-
-# test_file = "/content/spoon.jpeg"
-# im = Image.open(test_file)
-# image_np = np.asarray(im)
-# plt.grid(b=None)   
-# final_detection(image_np)
 
 cap = cv2.VideoCapture(0)
 if cap.isOpened():
