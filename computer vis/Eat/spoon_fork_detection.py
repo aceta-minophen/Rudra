@@ -39,18 +39,16 @@ def load_graph():
 
     return detection_graph
 
-def select_boxes(boxes, classes, scores, score_threshold=0, target_class=[48,50]):
-
+def select_boxes(boxes, classes, scores, score_threshold=0, target_class=[44, 47, 48, 50]):
     sq_scores = np.squeeze(scores)
     sq_classes = np.squeeze(classes)
     sq_boxes = np.squeeze(boxes)
-
-    fork = np.logical_and(sq_classes == target_class[0], sq_scores > score_threshold)
-    spoon = np.logical_and(sq_classes == target_class[1], sq_scores > score_threshold)
-    print(fork)
-    print(spoon)
-    sel_id = max(fork,spoon)
-    return sq_boxes[sel_id]
+    sel_ids = []
+    targets = []
+    for target in target_class:
+        sel_ids.append(np.logical_and(sq_classes == target, sq_scores > score_threshold))
+        targets.append(sq_classes[np.logical_and(sq_classes == target, sq_scores > score_threshold)])
+    return [sq_boxes[sel_id] for sel_id in sel_ids], targets
 
 class TLClassifier(object):
     def __init__(self):
@@ -79,10 +77,10 @@ class TLClassifier(object):
             [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
             feed_dict={self.image_tensor: image_np_expanded})
 
-        sel_boxes = select_boxes(boxes=boxes, classes=classes, scores=scores,
+        sel_boxes, targets = select_boxes(boxes=boxes, classes=classes, scores=scores,
                                  score_threshold=score_threshold)
 
-        return sel_boxes
+        return sel_boxes, targets
 
 tlc=TLClassifier()
 
@@ -103,24 +101,28 @@ def crop_roi_image(image_np, sel_box):
     return cropped_image
 
 def final_detection(image_np, frame):
-    boxes = tlc.detect_multi_object(image_np, score_threshold=0.2)
+    boxes, anno_classes = tlc.detect_multi_object(image_np, score_threshold=0.2)
     annotations = []
+    objects = {48 : 'fork', 50 : 'spoon', 44: 'bottle', 47: 'cup'}
     for box in boxes:
-        temp_annots = get_annots(image_np, box)
-        annotations.append(temp_annots)
+        for b in box:
+            temp_annots = get_annots(image_np, b)
+            annotations.append(temp_annots)
 
     color_space = [(0,255,0),(255,0,0),(255,0,0)]
-    i = 0
+
     for anno in annotations:
-        anno_class = 'spoon'
-        i += 1
+        in_frame = ''
         anno_left = int(anno[0])
         anno_top = int(anno[1])
         anno_right = int(anno[2])
         anno_bot = int(anno[3])
-        print("\tClass: '{}' at [{},{},{},{}]".format(anno_class, anno_left, anno_top, anno_right, anno_bot))
-        if anno_class == "spoon":
-            color_class = color_space[0]
+        for x in anno_classes:
+            if len(x) > 0:
+                in_frame = int(x[0])
+                print("\tClass: '{}' at [{},{},{},{}]".format(objects[in_frame], anno_left, anno_top, anno_right, anno_bot))
+
+        color_class = color_space[0]
         cv2.rectangle(frame, (anno_left, anno_top), (anno_right, anno_bot), color_class, 5)
     return frame
 
