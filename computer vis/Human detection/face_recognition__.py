@@ -1,5 +1,6 @@
 import cv2
 import face_recognition
+from fer import FER
 import numpy as np
 import os
 
@@ -44,7 +45,7 @@ def encode_faces():
 def process_video():
     video_capture = cv2.VideoCapture(0)
     known_face_encodings, known_face_names = encode_faces()
-   
+    emo_detector = FER(mtcnn=False)
     # Initialize some variables
 
     process_this_frame = True
@@ -65,7 +66,7 @@ def process_video():
             for face_encoding in face_encodings:
                 # See if the face is a match for the known face(s)
                 matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
-                name = "Uknown"
+                name = "Unknown"
                 # if True in matches:
                 #     first_match_index = matches.index(True)
                 #     name = known_face_names[first_match_index]
@@ -88,15 +89,18 @@ def process_video():
             right *= 4
             bottom *= 4
             left *= 4
-
+            print(name)
             # Draw a box around the face
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-
+            if name != 'Unknown':
+                #captured_emotions = emo_detector.detect_emotions(frame)
+                dominant_emotion, emotion_score = emo_detector.top_emotion(frame)
+                cv2.putText(frame, dominant_emotion, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
             # Draw a label with a name below the face
             cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(frame, name, (left + 6, bottom - 6), font, 0.6, (255, 255, 255), 1)
-                   
+                    
         
         # Display the resulting image
         cv2.imshow('Video', frame)
