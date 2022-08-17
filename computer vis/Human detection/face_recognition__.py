@@ -3,7 +3,21 @@ import face_recognition
 from fer import FER
 import numpy as np
 import os
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
 
+cred = credentials.Certificate(
+    'rudra-x-firebase-adminsdk-e2s77-2a7119b4c9.json')
+
+# Initialize the app with a service account, granting admin privileges
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://rudra-x-default-rtdb.firebaseio.com/'
+})
+
+# Reading from DB
+ref = db.reference('Computer Vision/')
+print(ref.get())
 
 # haar_cascade = cv2.CascadeClassifier('haar_face.xml')
 # capture = cv2.VideoCapture(0)
@@ -89,12 +103,19 @@ def process_video():
             right *= 4
             bottom *= 4
             left *= 4
-            print(name)
+            
             # Draw a box around the face
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
             if name != 'Unknown':
+                ref.update({'Face Recognition/User': {'Name': name, 'Recognized': True}})
                 #captured_emotions = emo_detector.detect_emotions(frame)
                 dominant_emotion, emotion_score = emo_detector.top_emotion(frame)
+                if dominant_emotion == 'happy':
+                    ref.update({'Expression Detection': {'Happy': True, 'Upset': False}})
+                elif dominant_emotion == 'sad' or dominant_emotion == 'angry':
+                    ref.update({'Expression Detection': {'Happy': False, 'Upset': True}})
+                else:
+                    ref.update({'Expression Detection': {'Happy': False, 'Upset': False}})
                 cv2.putText(frame, dominant_emotion, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
             # Draw a label with a name below the face
             cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
