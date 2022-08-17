@@ -84,7 +84,7 @@ class Health extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(
-                                  Icons.do_not_step,
+                                  Icons.directions_walk_outlined,
                                   color: Color(0xFFFE7763),
                                 ),
                                 SizedBox(
@@ -158,7 +158,7 @@ class Health extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(
-                                  Icons.food_bank,
+                                  Icons.lunch_dining,
                                   color: Color(0xFFFE7763),
                                 ),
                                 SizedBox(
@@ -181,127 +181,155 @@ class Health extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsetsDirectional.all(8),
-                        decoration: BoxDecoration(
-                          color: black,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.all(10),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Calories',
-                                        style: TextStyle(
-                                            color: white, fontSize: 20),
-                                      ),
-                                      Icon(
-                                        Icons.water_rounded,
-                                        color: Color(0xFFFE7763),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+              IntrinsicHeight(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            padding: EdgeInsetsDirectional.all(8),
+                            decoration: BoxDecoration(
+                              color: black,
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsetsDirectional.all(8),
-                        decoration: BoxDecoration(
-                          color: black,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.all(10),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Sleep',
-                                        style: TextStyle(
-                                            color: white, fontSize: 20),
-                                      ),
-                                      Icon(
-                                        Icons.nightlight,
-                                        color: Color(0xFFFE7763),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Row(
+                            child: Column(
                               children: [
-                                Text(
-                                  '10 ',
-                                  style: TextStyle(color: white, fontSize: 20),
-                                ),
-                                Text(
-                                  ' hrs/day',
-                                  style: TextStyle(
-                                      color: Color(0xFFABABAB), fontSize: 15),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Calories',
+                                            style: TextStyle(
+                                                color: white, fontSize: 20),
+                                          ),
+                                          new Spacer(),
+                                          Icon(
+                                            Icons.local_fire_department,
+                                            color: Color(0xFFFE7763),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
-                            )
-                          ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            padding: EdgeInsetsDirectional.all(8),
+                            decoration: BoxDecoration(
+                              color: black,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Sleep',
+                                            style: TextStyle(
+                                                color: white, fontSize: 20),
+                                          ),
+                                          new Spacer(),
+                                          Icon(
+                                            Icons.bedtime,
+                                            color: Color(0xFFFFFC700),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '10 ',
+                                        style: TextStyle(
+                                            color: white, fontSize: 20),
+                                      ),
+                                      Text(
+                                        ' hrs/day',
+                                        style: TextStyle(
+                                            color: Color(0xFFABABAB),
+                                            fontSize: 15),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: black,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    'Water',
+                                    style:
+                                        TextStyle(color: white, fontSize: 20),
+                                  ),
+                                  new Spacer(),
+                                  Icon(
+                                    Icons.local_drink,
+                                    color: Color(0xFF50F3F7),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Image.asset(
+                                'assets/images/Wave.png',
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '1.5 ',
+                                    style:
+                                        TextStyle(color: white, fontSize: 20),
+                                  ),
+                                  Text(
+                                    ' lt',
+                                    style: TextStyle(
+                                        color: Color(0xFFABABAB), fontSize: 15),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: black,
-                      borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Water',
-                              style: TextStyle(color: white, fontSize: 20),
-                            ),
-                            Icon(
-                              Icons.water_rounded,
-                              color: Color(0xFF50F3F7),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              '1.5 ',
-                              style: TextStyle(color: white, fontSize: 20),
-                            ),
-                            Text(
-                              ' lt',
-                              style: TextStyle(
-                                  color: Color(0xFFABABAB), fontSize: 15),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

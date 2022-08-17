@@ -26,6 +26,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   syncfusion_flutter_charts: ^19.1.54
   flutter_calendar_carousel:
+  syncfusion_flutter_calendar:
+  intl:
+  google_sign_in: ^4.4.6
+  googleapis_auth: ^0.2.11+1
+  googleapis: ^0.54.0
 
 dev_dependencies:
   flutter_test:
@@ -47,8 +52,8 @@ flutter:
         - asset: assets/fonts/CustomIcon.ttf
 
   # To add assets to your application, add an assets section, like this:
-assets:
-  - assets/images
+  assets:
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
