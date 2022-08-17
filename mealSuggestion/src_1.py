@@ -4,6 +4,21 @@ from IPython.core.interactiveshell import InteractiveShell
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from IPython.display import display
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+
+cred = credentials.Certificate(
+    'rudra-x-firebase-adminsdk-e2s77-2a7119b4c9.json')
+
+# Initialize the app with a service account, granting admin privileges
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://rudra-x-default-rtdb.firebaseio.com/'
+})
+
+# Reading from DB
+ref = db.reference('Meal Suggestion/Food log/meal1/')
+print(ref.get())
 
 InteractiveShell.ast_node_interactivity = "all"
 

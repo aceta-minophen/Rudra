@@ -11,7 +11,7 @@ from firebase_admin import credentials
 from firebase_admin import db
 
 cred = credentials.Certificate(
-    'rudra-x-firebase-adminsdk-e2s77-1f9b912d56.json')
+    'rudra-x-firebase-adminsdk-e2s77-2a7119b4c9.json')
 
 # Initialize the app with a service account, granting admin privileges
 firebase_admin.initialize_app(cred, {
