@@ -33,6 +33,9 @@ dependencies:
   web_socket_channel: ^2.2.0
   syncfusion_flutter_charts: ^20.2.40
   flutter_calendar_carousel: ^2.4.0
+  firebase_core: ^1.21.0
+  flutter_joystick: ^0.0.2
+  firebase_database: ^9.1.2
 
   #flutter_mjpeg: ">=2.0.0 <3.0.0"
     #path: '../../../flutter_mjpeg'

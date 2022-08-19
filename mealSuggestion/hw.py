@@ -1,6 +1,7 @@
 
 from firebase import Firebase
 
+
 config = {
     "apiKey": "AIzaSyA3sxz8LTLgtvdkvBAaLvZO7gBLqzuLM_A",
     "authDomain": "rudra-x.firebaseapp.com",
@@ -14,5 +15,7 @@ db1 = firebase.database()
 
 # Reading from DB
 ref = db1.child('Meal Suggestion/Food log/')
-meal = ref.child("meal1").get()
-print(meal.val())
+meal = ref.child("meal_num_prev").get().val()
+#meala = meal.val()
+meal = meal + 1
+print(meal)
