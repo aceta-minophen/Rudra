@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:companionapp/constants.dart';
 import 'package:companionapp/custom_icon_icons.dart';
 import 'package:companionapp/main.dart';
@@ -9,13 +11,17 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
 
 class Calendar extends StatefulWidget {
   const Calendar({Key? key}) : super(key: key);
-
   @override
   _CalendarState createState() => _CalendarState();
 }
 
 class _CalendarState extends State<Calendar> {
-  var _currentDate, _markedDateMap;
+  var _currentDate = DateTime.now(), _markedDateMap;
+
+  void initState() {
+    super.initState();
+    getCalendarEvents();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +66,10 @@ class _CalendarState extends State<Calendar> {
                 this.setState(() => _currentDate = date);
               },
               weekdayTextStyle: TextStyle(
-                color: Colors.white,
+                color: white,
               ),
               weekendTextStyle: TextStyle(
-                color: Colors.red,
+                color: Color(0xFFFF0000),
               ),
               daysTextStyle: TextStyle(color: white),
               thisMonthDayBorderColor: grey,
@@ -73,32 +79,33 @@ class _CalendarState extends State<Calendar> {
               selectedDateTime: _currentDate,
               daysHaveCircularBorder: false,
             ),
+            SizedBox(
+              height: 15,
+            ),
             Container(
               child: Column(
                 children: [
-                  Text('Daily Tasks', style: TextStyle(color: white, fontSize: 20, fontWeight: FontWeight.bold,),),
+                  Text(
+                    'Daily Tasks',
+                    style: TextStyle(
+                      color: white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   SizedBox(
                     height: 15,
                   ),
-                  Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        child: Text('10:00', style: TextStyle(color: Colors.grey,),),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.all(8),
-                          margin: EdgeInsets.all(8),
-                          child: Text('10:00', style: TextStyle(fontSize: 15),),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                      )
-                    ],
-                  )
+                  Container(
+                    child: Column(
+                      children: List.generate(eventsList.length, (index) {
+                        if (_currentDate == null) {
+                          return buildReminderWidget(index, DateTime.now());
+                        }
+                        return buildReminderWidget(index, _currentDate);
+                      }),
+                    ),
+                  ),
                 ],
               ),
             )
@@ -177,4 +184,48 @@ class _CalendarState extends State<Calendar> {
       ),
     );
   }
+}
+
+Widget buildReminderWidget(var index, var currentDate) {
+  eventObj event = eventsList[index];
+  var eventDate = event.startDate;
+  if (currentDate == null) {
+    return Container(
+      child: Text("NULL"),
+    );
+  } else if (currentDate.year == eventDate.year &&
+      currentDate.month == eventDate.month &&
+      currentDate.day == eventDate.day) {
+    return Row(
+      children: [
+        Container(
+          padding: EdgeInsets.all(8),
+          child: Text(
+            eventDate.hour.toString().padLeft(2, '0') +
+                ':' +
+                eventDate.minute.toString().padLeft(2, '0'),
+            style: TextStyle(
+              color: Colors.grey,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.all(8),
+            margin: EdgeInsets.all(8),
+            child: Text(
+              event.name,
+              style: TextStyle(fontSize: 15),
+            ),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(5),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  return Container();
 }

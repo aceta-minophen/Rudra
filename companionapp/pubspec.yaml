@@ -29,8 +29,9 @@ dependencies:
   syncfusion_flutter_calendar:
   intl:
   google_sign_in: ^4.4.6
-  googleapis_auth: ^0.2.11+1
-  googleapis: ^0.54.0
+  googleapis_auth: ^0.2.12
+  googleapis: ^0.55.0
+  url_launcher: ^5.5.0
 
 dev_dependencies:
   flutter_test:
