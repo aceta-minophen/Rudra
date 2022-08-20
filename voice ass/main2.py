@@ -17,9 +17,9 @@ from playsound import playsound
 from pywikihow import search_wikihow
 import webbrowser as web
 import pytz
-import spotipy
+#import spotipy
 from google_apis import Create_Service
-from spotipy import oauth2
+#from spotipy import oauth2
 import os.path
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -31,9 +31,12 @@ from firebase_admin import credentials
 from firebase_admin import db
 from firebase import Firebase
 
-SCOPES = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events']
-DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
-MONTHS= ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october" ,"november", "december"]
+SCOPES = ['https://www.googleapis.com/auth/calendar',
+          'https://www.googleapis.com/auth/calendar.events']
+DAYS = ["monday", "tuesday", "wednesday",
+        "thursday", "friday", "saturday", "sunday"]
+MONTHS = ["january", "february", "march", "april", "may", "june",
+          "july", "august", "september", "october", "november", "december"]
 DAY_EXTENTIONS = ["rd", "th", "st", "nd"]
 client_file = 'Credentials.json'
 API_NAME = 'calendar'
@@ -54,58 +57,61 @@ config = {
     "databaseURL": "https://rudra-x-default-rtdb.firebaseio.com/",
     "storageBucket": "rudra-x.appspot.com"
 }
-firebase= Firebase(config)
-db1= firebase.database()
+firebase = Firebase(config)
+db1 = firebase.database()
 
 ref = db.reference('Computer Vision/Action Recognition/Drinking Water')
-value= ref.get()
+value = ref.get()
 refEat = db.reference('Computer Vision/Action Recognition/Eating Food')
-valueEat= refEat.get()
+valueEat = refEat.get()
 refExp = db.reference('Computer Vision/Expression Detection')
-valueExp= refExp.get()
-refMealLike = db1.child('Meal Suggestion/Liked meals')
+valueExp = refExp.get()
+refMealLike = db1.child('Meal Suggestion/Liked meals/')
 valueMealLike = refMealLike.get()
 refMealPrev = db.reference('Meal Suggestion/Previous meals')
 valueMealPrev = refMealPrev.get()
 refMealSuggestLog = db.reference('Meal Suggestion/Food log/')
 valueMealLog = refMealSuggestLog.get()
 
+
 def AddEvent():
     service = Create_Service(client_file, API_NAME, API_VERSION, SCOPES)
-    response= service.events().quickAdd(
-                calendarId= 'primary',
-                text = "rudra meeting at 3pm").execute()
+    response = service.events().quickAdd(
+        calendarId='primary',
+        text="rudra meeting at 3pm").execute()
     speak("  event   added  ")
+
 
 def NewsFromBBC():
 
-        query_params = {
-            "source": "bbc-news",
-            "sortBy": "top",
-            "apiKey": "f8fa80f2816f417f8db3ed3b73305f44"
-        }
-        main_url = " https://newsapi.org/v1/articles"
+    query_params = {
+        "source": "bbc-news",
+        "sortBy": "top",
+        "apiKey": "f8fa80f2816f417f8db3ed3b73305f44"
+    }
+    main_url = " https://newsapi.org/v1/articles"
 
-        res = requests.get(main_url, params=query_params)
-        open_bbc_page = res.json()
+    res = requests.get(main_url, params=query_params)
+    open_bbc_page = res.json()
 
-        article = open_bbc_page["articles"]
+    article = open_bbc_page["articles"]
 
-        results = []
+    results = []
 
-        for ar in article:
-            results.append(ar["title"])
+    for ar in article:
+        results.append(ar["title"])
 
-        for i in range(len(results)):
-            print(i + 1, results[i])
+    for i in range(len(results)):
+        print(i + 1, results[i])
 
-        speak(results)
+    speak(results)
+
 
 def authenticate_google():
     creds = None
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-   
+
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
@@ -118,25 +124,26 @@ def authenticate_google():
             token.write(creds.to_json())
 
     service = build('calendar', 'v3', credentials=creds)
-        
+
     return service
+
 
 def get_events(day, service):
 
-    date= datetime.datetime.combine(day, datetime.datetime.min.time())
-    end_date= datetime.datetime.combine(day, datetime.datetime.max.time())
-    utc= pytz.UTC   
+    date = datetime.datetime.combine(day, datetime.datetime.min.time())
+    end_date = datetime.datetime.combine(day, datetime.datetime.max.time())
+    utc = pytz.UTC
     date = date.astimezone(utc)
     end_date = end_date.astimezone(utc)
 
     events_result = service.events().list(calendarId='primary', timeMin=date.isoformat(), timeMax=end_date.isoformat(),
-                                              singleEvents=True,
-                                              orderBy='startTime').execute()
+                                          singleEvents=True,
+                                          orderBy='startTime').execute()
     events = events_result.get('items', [])
 
     if not events:
         speak('No upcoming events found.')
-      
+
     else:
         speak(f"you have {len(events)} events on this day.")
 
@@ -146,13 +153,14 @@ def get_events(day, service):
         print(start, event['summary'])
         start_time = str(start.split("T")[1].split("+")[0])
 
-        if int(start_time.split(":")[0])<12:
+        if int(start_time.split(":")[0]) < 12:
             start_time = start_time + "am"
         else:
             start_time = str(int(start_time.split(":")[0])-12)
             start_time = start_time + "pm"
 
         speak(event["summary"] + " at " + start_time)
+
 
 def get_date(query):
     query = query.lower()
@@ -176,7 +184,7 @@ def get_date(query):
         else:
             for ext in DAY_EXTENTIONS:
                 found = word.find(ext)
-                if found>0:
+                if found > 0:
                     try:
                         day = int(word[:found])
                     except:
@@ -184,21 +192,22 @@ def get_date(query):
 
     if month < today.month and month != -1:
         year = year+1
-    if day <today.day and month == -1 and day != -1:
-        month = today.month +1
+    if day < today.day and month == -1 and day != -1:
+        month = today.month + 1
     if month == -1 and day == -1 and day_of_week != -1:
-        current_day_of_week = today.weekday() #0-6
-        dif = day_of_week - current_day_of_week  
+        current_day_of_week = today.weekday()  # 0-6
+        dif = day_of_week - current_day_of_week
 
-        if dif <0:
-            dif+= 7
-            if query.count("next") >=1:
-                dif+= 7
+        if dif < 0:
+            dif += 7
+            if query.count("next") >= 1:
+                dif += 7
 
         return today + datetime.timedelta(dif)
-    if month == -1 or day==-1:
+    if month == -1 or day == -1:
         return None
-    return datetime.date(month =month, day=day, year=year)
+    return datetime.date(month=month, day=day, year=year)
+
 
 def MusicFromSpotify():
     username = 'hw8sspurqbiei21c3pkx62n2s'
@@ -221,77 +230,84 @@ def MusicFromSpotify():
         # Get the Song Name.
         searchQuery = input("Enter Song Name: ")
         # Search for the Song.
-        searchResults = spotifyObject.search(searchQuery,1, 0,"track")
+        searchResults = spotifyObject.search(searchQuery, 1, 0, "track")
         # Get required data from JSON response.
         tracks_dict = searchResults['tracks']
         tracks_items = tracks_dict['items']
         song = tracks_items[0]['external_urls']['spotify']
         # Open the Song in Web Browser
-        #playsound(song)
+        # playsound(song)
         web.open(song)
         print('Song has opened in your browser.')
 
+
 def Water_Log():
-    count= value["Waterlog"]
+    count = value["Waterlog"]
     speak("Are you drinking water?")
-    reac= takeCommand()
-    if(reac=="yes"):
+    reac = takeCommand()
+    if(reac == "yes"):
         ref.update({'Confirmed': True})
         ref.update({'Waterlog': count+1})
         speak("Great, this will help you stay hydrated")
         ref.update({'Detected': False})
-    
+
+
 def EatingFood():
     speak('nice to have meal')
     hr = int(datetime.datetime.now().hour)
-    if(6<hr<10):
-            refEatBreak = db.reference('Computer Vision/Action Recognition/Eating Food/Food log/Breakfast')
-            speak("Are you having your breakfast?")
-            react= takeCommand()
-            if(react=="yes"):
-                refEat.update({'Confirmed': True})
-                refEatBreak.update({'Done': True})
-                speak("what are you eating?")
-                meal = takeCommand()
-                refEatBreak.update({'Meal': meal})
-                speak("How would you rate it on the scale of 1 to 10")
-                ans= takeCommand()
-                refMealSuggestLog.update({'rating1': ans})
-                count = valueMealLog["meal_num"]
-                refMealSuggestLog.update({'meal_num': count+1})
-                speak("I hope you are having something light in your breakfast, Hope you enjoy it while taking care of yourself")
-                refEat.update({'Detected': False})
-    elif(12<hr<15):
-            refEatLunch = db.reference('Computer Vision/Action Recognition/Eating Food/Food log/Lunch')
-            speak("Are you having your lunch?")
-            react= takeCommand()
-            if(react=="yes"):
-                refEat.update({'Confirmed': True})
-                refEatLunch.update({'Done': True})
-                speak("I hope you are having something light in your lunch, Hope you enjoy it while taking care of yourself")
-                refEat.update({'Detected': False})
-    elif(19<hr<21):
-            refEatDinner = db.reference('Computer Vision/Action Recognition/Eating Food/Food log/Dinner')
-            speak("Are you having your dinner?")
-            react= takeCommand()
-            if(react=="yes"):
-                refEat.update({'Confirmed': True})
-                refEatDinner.update({'Done': True})
-                speak("I hope you are having something light in your dinner, Hope you enjoy it while taking care of yourself")
-                refEat.update({'Detected': False})
+    if(6 < hr < 10):
+        refEatBreak = db.reference(
+            'Computer Vision/Action Recognition/Eating Food/Food log/Breakfast')
+        speak("Are you having your breakfast?")
+        react = takeCommand()
+        if(react == "yes"):
+            refEat.update({'Confirmed': True})
+            refEatBreak.update({'Done': True})
+            speak("what are you eating?")
+            meal = takeCommand()
+            refEatBreak.update({'Meal': meal})
+            speak("How would you rate it on the scale of 1 to 10")
+            ans = takeCommand()
+            refMealSuggestLog.update({'rating1': ans})
+            count = valueMealLog["meal_num"]
+            refMealSuggestLog.update({'meal_num': count+1})
+            speak("I hope you are having something light in your breakfast, Hope you enjoy it while taking care of yourself")
+            refEat.update({'Detected': False})
+    elif(12 < hr < 15):
+        refEatLunch = db.reference(
+            'Computer Vision/Action Recognition/Eating Food/Food log/Lunch')
+        speak("Are you having your lunch?")
+        react = takeCommand()
+        if(react == "yes"):
+            refEat.update({'Confirmed': True})
+            refEatLunch.update({'Done': True})
+            speak("I hope you are having something light in your lunch, Hope you enjoy it while taking care of yourself")
+            refEat.update({'Detected': False})
+    elif(19 < hr < 21):
+        refEatDinner = db.reference(
+            'Computer Vision/Action Recognition/Eating Food/Food log/Dinner')
+        speak("Are you having your dinner?")
+        react = takeCommand()
+        if(react == "yes"):
+            refEat.update({'Confirmed': True})
+            refEatDinner.update({'Done': True})
+            speak("I hope you are having something light in your dinner, Hope you enjoy it while taking care of yourself")
+            refEat.update({'Detected': False})
     else:
         speak("Good, you should not keep your stomach empty. haha")
 
+
 def ExpressionRecogHappy():
 
-        speak("You seem happy, is there anything speacial?")
-        react= takeCommand()
-        if(react== "yes"):
-            speak("Great")
-            refExp.update({'Happy': False})
-        elif(react=="no"):
-            speak("It's good to be happy")
-            refExp.update({'Happy': False})
+    speak("You seem happy, is there anything speacial?")
+    react = takeCommand()
+    if(react == "yes"):
+        speak("Great")
+        refExp.update({'Happy': False})
+    elif(react == "no"):
+        speak("It's good to be happy")
+        refExp.update({'Happy': False})
+
 
 def ExpressionRecogSad():
 
@@ -300,11 +316,13 @@ def ExpressionRecogSad():
     if(react == "yes"):
         speak("It's ok, everything will be fine")
         refExp.update({'Happy': False})
-    elif(react=="no"):
+    elif(react == "no"):
         speak("Nice, if there is anyything, you can share it with me")
         refExp.update({'Happy': False})
 
 # TODO
+
+
 def MealSuggestLike():
     sort = query.replace("food like", "")
     speak(f"you want to eat something like {sort}?")
@@ -312,8 +330,8 @@ def MealSuggestLike():
     # react = takeCommand()
     # if(react == "yes"):
     speak("okay let me see")
-    result1= refMealLike.child("meala").get()
-    result=result1.val()
+    result = refMealLike.child("meal1").get().val()
+    # result=result1.val()
     print(result)
 
 
@@ -325,9 +343,10 @@ def MealSuggestLike():
 
 
 def speak(audio):
-  
+
     engine.say(audio)
     engine.runAndWait()
+
 
 def wishMe():
     hour = int(datetime.datetime.now().hour)
@@ -350,6 +369,7 @@ def wishMe():
     else:
         speak("hey")
 
+
 def My_Location():
     ip_add = requests.get('https://api.ifify.org').text
     url = 'https://get.geojs.io/v1/ip/geo/' + ip_add + '.json'
@@ -359,6 +379,7 @@ def My_Location():
     country = geo_d(['country'])
     region = geo_d(['region'])
     speak(f"you are now in {state, country, region}")
+
 
 def takeCommand():
     r = sr.Microphone()
@@ -386,7 +407,7 @@ def takeCommand():
 if __name__ == "__main__":
     wishMe()
     while True:
-       
+
         query = takeCommand().lower()
 
         if 'wikipedia' in query:
@@ -440,12 +461,12 @@ if __name__ == "__main__":
             AddEvent()
 
         elif "did I tell you to remember something for me" in query or "what do i have" in query or "what am i doing" in query or "do i have something scheduled" in query or "schedule" in query:
-             SERVICE = authenticate_google()
-             date = get_date(query)
-             if date:
-                    get_events(date, SERVICE)
-             else:
-                    speak("I didn't quite get that")  
+            SERVICE = authenticate_google()
+            date = get_date(query)
+            if date:
+                get_events(date, SERVICE)
+            else:
+                speak("I didn't quite get that")
 
         elif "alarm" in query:
             speak("at what time you want to set the alarm")
@@ -535,16 +556,16 @@ if __name__ == "__main__":
         elif "add to my liked meals" in query:
             speak(f"updated your liked meals")
 
-        elif(value["Detected"]==True):
+        elif(value["Detected"] == True):
             Water_Log()
 
-        elif(valueEat["Detected"]==True):
+        elif(valueEat["Detected"] == True):
             EatingFood()
 
-        elif(valueExp["Happy"]==True):
+        elif(valueExp["Happy"] == True):
             ExpressionRecogHappy()
 
-        elif(valueExp["Upset"]== True):
+        elif(valueExp["Upset"] == True):
             ExpressionRecogSad()
 
         elif "food like" in query or "something to eat like" in query:

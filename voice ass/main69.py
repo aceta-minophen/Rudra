@@ -16,11 +16,11 @@ from playsound import playsound
 from pywikihow import search_wikihow
 import webbrowser as web
 import pytz
-import spotify
-from spotify import OAuth2
-import spotipy
+#import spotify
+#from spotify import OAuth2
+#import spotipy
 from google_apis import Create_Service
-from spotipy import oauth2
+#from spotipy import oauth2
 import os.path
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -29,9 +29,12 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 
-SCOPES = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events']
-DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
-MONTHS= ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october" ,"november", "december"]
+SCOPES = ['https://www.googleapis.com/auth/calendar',
+          'https://www.googleapis.com/auth/calendar.events']
+DAYS = ["monday", "tuesday", "wednesday",
+        "thursday", "friday", "saturday", "sunday"]
+MONTHS = ["january", "february", "march", "april", "may", "june",
+          "july", "august", "september", "october", "november", "december"]
 DAY_EXTENTIONS = ["rd", "th", "st", "nd"]
 client_file = 'Credentials.json'
 API_NAME = 'calendar'
@@ -41,42 +44,45 @@ API_VERSION = 'v3'
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 
+
 def AddEvent():
     service = Create_Service(client_file, API_NAME, API_VERSION, SCOPES)
-    response= service.events().quickAdd(
-                calendarId= 'primary',
-                text = "rudra meeting at 3pm").execute()
+    response = service.events().quickAdd(
+        calendarId='primary',
+        text="rudra meeting at 3pm").execute()
     speak("  event   added  ")
+
 
 def NewsFromBBC():
 
-        query_params = {
-            "source": "bbc-news",
-            "sortBy": "top",
-            "apiKey": "f8fa80f2816f417f8db3ed3b73305f44"
-        }
-        main_url = " https://newsapi.org/v1/articles"
+    query_params = {
+        "source": "bbc-news",
+        "sortBy": "top",
+        "apiKey": "f8fa80f2816f417f8db3ed3b73305f44"
+    }
+    main_url = " https://newsapi.org/v1/articles"
 
-        res = requests.get(main_url, params=query_params)
-        open_bbc_page = res.json()
+    res = requests.get(main_url, params=query_params)
+    open_bbc_page = res.json()
 
-        article = open_bbc_page["articles"]
+    article = open_bbc_page["articles"]
 
-        results = []
+    results = []
 
-        for ar in article:
-            results.append(ar["title"])
+    for ar in article:
+        results.append(ar["title"])
 
-        for i in range(len(results)):
-            print(i + 1, results[i])
+    for i in range(len(results)):
+        print(i + 1, results[i])
 
-        speak(results + "   ")
+    speak(results + "   ")
+
 
 def authenticate_google():
     creds = None
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-   
+
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
@@ -89,25 +95,26 @@ def authenticate_google():
             token.write(creds.to_json())
 
     service = build('calendar', 'v3', credentials=creds)
-        
+
     return service
+
 
 def get_events(day, service):
 
-    date= datetime.datetime.combine(day, datetime.datetime.min.time())
-    end_date= datetime.datetime.combine(day, datetime.datetime.max.time())
-    utc= pytz.UTC   
+    date = datetime.datetime.combine(day, datetime.datetime.min.time())
+    end_date = datetime.datetime.combine(day, datetime.datetime.max.time())
+    utc = pytz.UTC
     date = date.astimezone(utc)
     end_date = end_date.astimezone(utc)
 
     events_result = service.events().list(calendarId='primary', timeMin=date.isoformat(), timeMax=end_date.isoformat(),
-                                              singleEvents=True,
-                                              orderBy='startTime').execute()
+                                          singleEvents=True,
+                                          orderBy='startTime').execute()
     events = events_result.get('items', [])
 
     if not events:
         speak('No upcoming events found.')
-      
+
     else:
         speak(f"you have {len(events)} events on this day.")
 
@@ -117,13 +124,14 @@ def get_events(day, service):
         print(start, event['summary'])
         start_time = str(start.split("T")[1].split("+")[0])
 
-        if int(start_time.split(":")[0])<12:
+        if int(start_time.split(":")[0]) < 12:
             start_time = start_time + "am"
         else:
             start_time = str(int(start_time.split(":")[0])-12)
             start_time = start_time + "pm"
 
         speak(event["summary"] + " at " + start_time)
+
 
 def get_date(query):
     query = query.lower()
@@ -147,7 +155,7 @@ def get_date(query):
         else:
             for ext in DAY_EXTENTIONS:
                 found = word.find(ext)
-                if found>0:
+                if found > 0:
                     try:
                         day = int(word[:found])
                     except:
@@ -155,23 +163,24 @@ def get_date(query):
 
     if month < today.month and month != -1:
         year = year+1
-    if day <today.day and month == -1 and day != -1:
-        month = today.month +1
+    if day < today.day and month == -1 and day != -1:
+        month = today.month + 1
     if month == -1 and day == -1 and day_of_week != -1:
-        current_day_of_week = today.weekday() #0-6
-        dif = day_of_week - current_day_of_week  
+        current_day_of_week = today.weekday()  # 0-6
+        dif = day_of_week - current_day_of_week
 
-        if dif <0:
-            dif+= 7
-            if query.count("next") >=1:
-                dif+= 7
+        if dif < 0:
+            dif += 7
+            if query.count("next") >= 1:
+                dif += 7
 
         return today + datetime.timedelta(dif)
-    if month == -1 or day==-1:
+    if month == -1 or day == -1:
         return None
-    return datetime.date(month =month, day=day, year=year)
+    return datetime.date(month=month, day=day, year=year)
 
-def MusicFromSpotify():
+
+""" def MusicFromSpotify():
     username = 'hw8sspurqbiei21c3pkx62n2s'
     clientID = '1d5fc82690934924867ee9617bee42a5'
     clientSecret = '46c70ba6cb924692b5710fb1d73d345c'
@@ -192,20 +201,22 @@ def MusicFromSpotify():
         # Get the Song Name.
         searchQuery = input("Enter Song Name: ")
         # Search for the Song.
-        searchResults = spotifyObject.search(searchQuery,1, 0,"track")
+        searchResults = spotifyObject.search(searchQuery, 1, 0, "track")
         # Get required data from JSON response.
         tracks_dict = searchResults['tracks']
         tracks_items = tracks_dict['items']
         song = tracks_items[0]['external_urls']['spotify']
         # Open the Song in Web Browser
-        #playsound(song)
+        # playsound(song)
         web.open(song)
-        print('Song has opened in your browser.')
+        print('Song has opened in your browser.') """
+
 
 def speak(audio):
-  
+
     engine.say(audio)
     engine.runAndWait()
+
 
 def wishMe():
     hour = int(datetime.datetime.now().hour)
@@ -228,6 +239,7 @@ def wishMe():
     else:
         speak("hey")
 
+
 def My_Location():
     ip_add = requests.get('https://api.ifify.org').text
     url = 'https://get.geojs.io/v1/ip/geo/' + ip_add + '.json'
@@ -237,6 +249,7 @@ def My_Location():
     country = geo_d(['country'])
     region = geo_d(['region'])
     speak(f"you are now in {state, country, region}")
+
 
 def takeCommand():
     r = sr.Microphone()
@@ -263,7 +276,7 @@ def takeCommand():
 if __name__ == "__main__":
     wishMe()
     while True:
-       
+
         query = takeCommand().lower()
 
         if 'wikipedia' in query:
@@ -290,8 +303,8 @@ if __name__ == "__main__":
         elif 'not so good' in query or 'it was okay' in query:
             speak('not an issue..., hope you enjoy it next time')
 
-        elif 'music' in query or "song" in query:
-            MusicFromSpotify()
+        # elif 'music' in query or "song" in query:
+         #   MusicFromSpotify()
 
         elif 'stop' in query:
             speak("ok, will stop")
@@ -317,12 +330,12 @@ if __name__ == "__main__":
             AddEvent()
 
         elif "did I tell you to remember something for me" in query or "what do i have" in query or "what am i doing" in query or "do i have something scheduled" in query or "schedule" in query:
-             SERVICE = authenticate_google()
-             date = get_date(query)
-             if date:
-                    get_events(date, SERVICE)
-             else:
-                    speak("I didn't quite get that")  
+            SERVICE = authenticate_google()
+            date = get_date(query)
+            if date:
+                get_events(date, SERVICE)
+            else:
+                speak("I didn't quite get that")
 
         elif "alarm" in query:
             speak("at what time you want to set the alarm")
