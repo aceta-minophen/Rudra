@@ -16,15 +16,11 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  var _currentDate = DateTime.now(), _markedDateMap;
-
-  void initState() {
-    super.initState();
-    getCalendarEvents();
-  }
+  var _currentDate, _markedDateMap;
 
   @override
   Widget build(BuildContext context) {
+    _currentDate = DateTime.now();
     return Scaffold(
       backgroundColor: grey,
       appBar: AppBar(
@@ -99,9 +95,6 @@ class _CalendarState extends State<Calendar> {
                   Container(
                     child: Column(
                       children: List.generate(eventsList.length, (index) {
-                        if (_currentDate == null) {
-                          return buildReminderWidget(index, DateTime.now());
-                        }
                         return buildReminderWidget(index, _currentDate);
                       }),
                     ),
@@ -189,11 +182,7 @@ class _CalendarState extends State<Calendar> {
 Widget buildReminderWidget(var index, var currentDate) {
   eventObj event = eventsList[index];
   var eventDate = event.startDate;
-  if (currentDate == null) {
-    return Container(
-      child: Text("NULL"),
-    );
-  } else if (currentDate.year == eventDate.year &&
+  if (currentDate.year == eventDate.year &&
       currentDate.month == eventDate.month &&
       currentDate.day == eventDate.day) {
     return Row(

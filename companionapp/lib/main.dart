@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:companionapp/calendar.dart';
 import 'package:companionapp/constants.dart';
 import 'package:companionapp/custom_icon_icons.dart';
@@ -6,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 void main() {
+  getCalendarEvents();
   runApp(MaterialApp(
     home: Health(),
   ));
