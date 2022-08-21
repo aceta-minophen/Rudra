@@ -20,7 +20,6 @@ class _CalendarState extends State<Calendar> {
 
   @override
   Widget build(BuildContext context) {
-    _currentDate = DateTime.now();
     return Scaffold(
       backgroundColor: grey,
       appBar: AppBar(
@@ -95,6 +94,9 @@ class _CalendarState extends State<Calendar> {
                   Container(
                     child: Column(
                       children: List.generate(eventsList.length, (index) {
+                        if (_currentDate == null) {
+                          _currentDate = DateTime.now();
+                        }
                         return buildReminderWidget(index, _currentDate);
                       }),
                     ),
