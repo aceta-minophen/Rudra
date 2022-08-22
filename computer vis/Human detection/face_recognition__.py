@@ -106,7 +106,7 @@ def process_video():
             
             # Draw a box around the face
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-            if name != 'Unknown':
+            if known_face_names[0] in face_names and name != "Unknown":
                 ref.update({'Face Recognition/User': {'Name': name, 'Recognized': True}})
                 #captured_emotions = emo_detector.detect_emotions(frame)
                 dominant_emotion, emotion_score = emo_detector.top_emotion(frame)
@@ -117,11 +117,15 @@ def process_video():
                 else:
                     ref.update({'Expression Detection': {'Happy': False, 'Upset': False}})
                 cv2.putText(frame, dominant_emotion, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+            else:
+                ref.update({'Face Recognition/User': {'Name': name, 'Recognized': True}})
+                ref.update({'Expression Detection': {'Happy': False, 'Upset': False}})
+
             # Draw a label with a name below the face
             cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(frame, name, (left + 6, bottom - 6), font, 0.6, (255, 255, 255), 1)
-                    
+               
         
         # Display the resulting image
         cv2.imshow('Video', frame)
