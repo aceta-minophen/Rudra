@@ -1,4 +1,5 @@
 import cv2
+import base64
 import face_recognition
 from fer import FER
 import numpy as np
@@ -6,9 +7,11 @@ import os
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
+import websockets
+import asyncio
 
 cred = credentials.Certificate(
-    '/rudra-x-firebase-adminsdk-e2s77-2a7119b4c9.json')
+    'C:/Computer/Git Repositories/Rudra/computer vis/final/rudra-x-firebase-adminsdk-e2s77-2a7119b4c9.json')
 
 # Initialize the app with a service account, granting admin privileges
 firebase_admin.initialize_app(cred, {
@@ -33,7 +36,8 @@ print(ref.get())
 # capture.release()
 # cv2.destroyAllWindows
 # cv2.waitKey(0)
-KNOWN_FACES_DIR = os.path.join(os.getcwd(), 'faces')
+KNOWN_FACES_DIR = os.path.join(
+    os.getcwd(), 'C:/Computer/Git Repositories/Rudra/computer vis/final/faces')
 MAX_FRAMES = 60
 
 
@@ -146,3 +150,45 @@ def process_video():
 
 
 process_video()
+
+
+port = 5000
+print("Started server on port:", port)
+
+pipeline = "devide=/dev/video0 ! video/x-raw, format=BGRx, width=1280, height=960, framerate=25/1 ! videoconvert ! appsink drop=1"
+
+
+async def transmit(websocket, path):
+    print("Client connected!")
+    try:
+        cap = cv2.VideoCapture(0)
+
+        #cv2.imshow("Transmission", frame)
+
+        # if cv2.waitKey(1) & 0xFF == ord('q'):
+        #       break
+
+        while cap.isOpened():
+            _, frame = cap.read()
+            encoded = cv2.imencode('.jpg', frame)[1]
+            data = str(base64.b64encode(encoded))
+            data = data[2:len(data)-1]
+            await websocket.send(data)
+            cv2.imshow("Transmission", frame)
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+        cap.release()
+    except websockets.connection.ConnectionClosed as e:
+        print("Client Disconnected!")
+        cap.release()
+    # except:
+        #print("Something went wrong")
+
+start_server = websockets.serve(transmit, port=port)
+
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_forever()
+
+# cap.release()
