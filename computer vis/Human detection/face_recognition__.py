@@ -6,6 +6,7 @@ import os
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
+import spoon_fork_detection
 
 cred = credentials.Certificate(
     'rudra-x-firebase-adminsdk-e2s77-2a7119b4c9.json')
@@ -68,6 +69,16 @@ def process_video():
         # Grab a single frame of video
         ret, frame = video_capture.read()
         if process_this_frame:
+            image_np = np.asarray(frame)  
+            frame, action = spoon_fork_detection.final_detection(image_np, frame)
+            if action == 'eat':
+                ref.update({'Action Recognition/Eating Food': {'Detected': True}})
+            elif action == 'drink':
+                ref.update({'Action Recognition/Drinking Water': {'Detected': True}})
+            else:
+                ref.update({'Action Recognition/Drinking Water': {'Detected': False}})
+                ref.update({'Action Recognition/Eating Food': {'Detected': False}})
+
             # Resize frame of video to 1/4 size for faster face recognition processing
             small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
             # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
