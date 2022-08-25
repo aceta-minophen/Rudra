@@ -1,7 +1,7 @@
 import 'package:companionapp/calendar.dart';
 import 'package:companionapp/constants.dart';
 import 'package:companionapp/custom_icon_icons.dart';
-import 'package:companionapp/main.dart';
+import 'package:companionapp/health.dart';
 import 'package:flutter/material.dart';
 
 class RemoteControl extends StatelessWidget {

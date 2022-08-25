@@ -1,8 +1,6 @@
-import 'dart:io';
-
 import 'package:companionapp/constants.dart';
 import 'package:companionapp/custom_icon_icons.dart';
-import 'package:companionapp/main.dart';
+import 'package:companionapp/health.dart';
 import 'package:companionapp/remote-control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
