@@ -4,6 +4,7 @@ import 'package:companionapp/custom_icon_icons.dart';
 import 'package:companionapp/remote-control.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 void main() {
   runApp(MaterialApp(
