@@ -16,26 +16,75 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   var _currentDate, _markedDateMap;
 
+  Widget buildReminderWidget(var index, var currentDate) {
+    eventObj event = eventsList[index];
+    var eventDate = event.startDate;
+    if (currentDate.year == eventDate.year &&
+        currentDate.month == eventDate.month &&
+        currentDate.day == eventDate.day) {
+      return Row(
+        children: [
+          Container(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              eventDate.hour.toString().padLeft(2, '0') +
+                  ':' +
+                  eventDate.minute.toString().padLeft(2, '0'),
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(8),
+              margin: EdgeInsets.all(8),
+              child: Text(
+                event.name,
+                style: TextStyle(fontSize: 15),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          )
+        ],
+      );
+    }
+
+    return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: grey,
       appBar: AppBar(
         backgroundColor: black,
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.arrow_back,
-            color: white,
+        leading: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          child: Image.network(
+            'https://static.remove.bg/remove-bg-web/5c20d2ecc9ddb1b6c85540a333ec65e2c616dbbd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg',
           ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        title: Column(
+          children: [
+            Text(
+              'Good Morning, Emilie!',
+              style: TextStyle(fontSize: 15, color: white),
+            ),
+            Text('30 April, 2022', style: TextStyle(fontSize: 10, color: white))
+          ],
         ),
         actions: [
           PopupMenuButton<String>(
             color: black,
             onSelected: menuClick,
-            icon: Icon(
-              Icons.menu,
-            ),
+            icon: Icon(Icons.menu, color: white),
             itemBuilder: (BuildContext context) {
               return {'Notification', 'Privacy', 'Security', 'Account'}
                   .map((String choice) {
@@ -68,13 +117,13 @@ class _CalendarState extends State<Calendar> {
               thisMonthDayBorderColor: grey,
               weekFormat: false,
               markedDatesMap: _markedDateMap,
-              height: 420.0,
+              height: 370.0,
               selectedDateTime: _currentDate,
               daysHaveCircularBorder: false,
             ),
-            SizedBox(
-              height: 15,
-            ),
+            // SizedBox(
+            //   height: 15,
+            // ),
             Container(
               child: Column(
                 children: [
@@ -177,44 +226,4 @@ class _CalendarState extends State<Calendar> {
       ),
     );
   }
-}
-
-Widget buildReminderWidget(var index, var currentDate) {
-  eventObj event = eventsList[index];
-  var eventDate = event.startDate;
-  if (currentDate.year == eventDate.year &&
-      currentDate.month == eventDate.month &&
-      currentDate.day == eventDate.day) {
-    return Row(
-      children: [
-        Container(
-          padding: EdgeInsets.all(8),
-          child: Text(
-            eventDate.hour.toString().padLeft(2, '0') +
-                ':' +
-                eventDate.minute.toString().padLeft(2, '0'),
-            style: TextStyle(
-              color: Colors.grey,
-            ),
-          ),
-        ),
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.all(8),
-            margin: EdgeInsets.all(8),
-            child: Text(
-              event.name,
-              style: TextStyle(fontSize: 15),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(5),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
-  return Container();
 }

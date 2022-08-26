@@ -64,18 +64,16 @@ class _HealthState extends State<Health> {
           children: [
             Text(
               'Good Morning, Emilie!',
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 15, color: white),
             ),
-            Text('30 April, 2022', style: TextStyle(fontSize: 10))
+            Text('30 April, 2022', style: TextStyle(fontSize: 10, color: white))
           ],
         ),
         actions: [
           PopupMenuButton<String>(
             color: black,
             onSelected: menuClick,
-            icon: Icon(
-              Icons.menu,
-            ),
+            icon: Icon(Icons.menu, color: white),
             itemBuilder: (BuildContext context) {
               return {'Notification', 'Privacy', 'Security', 'Account'}
                   .map((String choice) {
@@ -95,78 +93,78 @@ class _HealthState extends State<Health> {
         child: Container(
           child: Column(
             children: [
-              Container(
-                margin: EdgeInsets.all(10),
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: black,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.directions_walk_outlined,
-                                  color: Color(0xFFFE7763),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Steps',
-                                  style: TextStyle(color: white, fontSize: 20),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 200,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          SfCircularChart(
-                            series: <CircularSeries>[
-                              DoughnutSeries<ChartData, String>(
-                                dataSource: chartData,
-                                pointColorMapper: (ChartData data, _) =>
-                                    data.color,
-                                xValueMapper: (ChartData data, _) => data.x,
-                                yValueMapper: (ChartData data, _) => data.y,
-                                innerRadius: '80%',
-                              ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '850',
-                                style: TextStyle(color: white, fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                'Steps',
-                                style: TextStyle(color: white, fontSize: 20),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.all(10),
+              //   padding: EdgeInsets.all(8),
+              //   decoration: BoxDecoration(
+              //     color: black,
+              //     borderRadius: BorderRadius.circular(20),
+              //   ),
+              //   child: Column(
+              //     children: [
+              //       Container(
+              //         margin: EdgeInsets.all(10),
+              //         child: Row(
+              //           children: [
+              //             Expanded(
+              //               child: Row(
+              //                 children: [
+              //                   Icon(
+              //                     Icons.directions_walk_outlined,
+              //                     color: Color(0xFFFE7763),
+              //                   ),
+              //                   SizedBox(
+              //                     width: 10,
+              //                   ),
+              //                   Text(
+              //                     'Steps',
+              //                     style: TextStyle(color: white, fontSize: 20),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //       Container(
+              //         height: 200,
+              //         child: Stack(
+              //           alignment: Alignment.center,
+              //           children: [
+              //             SfCircularChart(
+              //               series: <CircularSeries>[
+              //                 DoughnutSeries<ChartData, String>(
+              //                   dataSource: chartData,
+              //                   pointColorMapper: (ChartData data, _) =>
+              //                       data.color,
+              //                   xValueMapper: (ChartData data, _) => data.x,
+              //                   yValueMapper: (ChartData data, _) => data.y,
+              //                   innerRadius: '80%',
+              //                 ),
+              //               ],
+              //             ),
+              //             Column(
+              //               crossAxisAlignment: CrossAxisAlignment.center,
+              //               mainAxisAlignment: MainAxisAlignment.center,
+              //               children: [
+              //                 Text(
+              //                   '850',
+              //                   style: TextStyle(color: white, fontSize: 25),
+              //                   textAlign: TextAlign.center,
+              //                 ),
+              //                 Text(
+              //                   'Steps',
+              //                   style: TextStyle(color: white, fontSize: 20),
+              //                   textAlign: TextAlign.center,
+              //                 ),
+              //               ],
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               Container(
                 margin: EdgeInsets.all(10),
                 padding: EdgeInsetsDirectional.all(8),

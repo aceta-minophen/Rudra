@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Splash Screen',
+      title: 'Rudra',
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
@@ -32,7 +32,7 @@ class Splash2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
       backgroundColor: Color(0xFF000000),
-      seconds: 3,
+      seconds: 6,
       navigateAfterSeconds: new Health(),
       title: new Text(
         'RUDRA',
