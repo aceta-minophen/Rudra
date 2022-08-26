@@ -90,6 +90,7 @@ def crop_roi_image(image_np, sel_box):
 def final_detection(image_np, frame):
     boxes, anno_classes = tlc.detect_multi_object(image_np, score_threshold=0.2)
     annotations = []
+    action = ''
     objects = {48 : 'fork', 50 : 'spoon', 44: 'bottle', 47: 'cup'}
     for box in boxes:
         for b in box:
@@ -100,6 +101,7 @@ def final_detection(image_np, frame):
 
     for anno in annotations:
         in_frame = ''
+        
         anno_left = int(anno[0])
         anno_top = int(anno[1])
         anno_right = int(anno[2])
@@ -108,10 +110,13 @@ def final_detection(image_np, frame):
             if len(x) > 0:
                 in_frame = int(x[0])
                 print("\tClass: '{}' at [{},{},{},{}]".format(objects[in_frame], anno_left, anno_top, anno_right, anno_bot))
-
+                if objects[in_frame].lower() == 'spoon' or objects[in_frame].lower() == 'fork':
+                    action = "eat"
+                elif objects[in_frame].lower() == 'cup' or objects[in_frame].lower() == 'bottle':
+                    action = 'drink'
         color_class = color_space[0]
         cv2.rectangle(frame, (anno_left, anno_top), (anno_right, anno_bot), color_class, 5)
-    return frame
+    return frame, action
 
 # cap = cv2.VideoCapture(0)
 # if cap.isOpened():

@@ -124,16 +124,19 @@ def process_video():
                 #captured_emotions = emo_detector.detect_emotions(frame)
                 dominant_emotion, emotion_score = emo_detector.top_emotion(frame)
                 if dominant_emotion == 'happy':
-                    ref.update({'Expression Detection': {'Happy': True, 'Upset': False}})
+                    ref.update({'Expression Detection': {'Happy': True, 'Upset': False, 'Anxiety': False}})
                 elif dominant_emotion == 'sad' or dominant_emotion == 'angry':
-                    ref.update({'Expression Detection': {'Happy': False, 'Upset': True}})
+                    ref.update({'Expression Detection': {'Happy': False, 'Upset': True, 'Anxiety': False}})
+
+                elif dominant_emotion == 'fear':
+                    ref.update({'Expression Detection': {'Happy': False, 'Upset': False, 'Anxiety': True}})
                 else:
-                    ref.update({'Expression Detection': {'Happy': False, 'Upset': False}})
+                    ref.update({'Expression Detection': {'Happy': False, 'Upset': False, 'Anxiety': False}})
                 cv2.putText(frame, dominant_emotion, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
         
             else:
                 ref.update({'Face Recognition/User': {'Name': 'Tom Holland', 'Recognized': False}})
-                ref.update({'Expression Detection': {'Happy': False, 'Upset': False}})
+                ref.update({'Expression Detection': {'Happy': False, 'Upset': False, 'Anxiety': False}})
 
             # Draw a label with a name below the face
             cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
