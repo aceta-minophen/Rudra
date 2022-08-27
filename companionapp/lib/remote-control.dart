@@ -27,6 +27,9 @@ const step = 30.0;
 class _RemoteControlState extends State<RemoteControl> {
   var ipAdd = "ws://192.168.29.47:5000";
   WebSocket _socket = WebSocket("ws://192.168.29.47:5000");
+  DatabaseReference ref =
+      FirebaseDatabase.instance.reference().child('joystick');
+
   bool _isConnected = false;
   void connect(BuildContext context) async {
     _socket.connect();
@@ -35,8 +38,9 @@ class _RemoteControlState extends State<RemoteControl> {
     });
   }
 
-  void disconnect() {
+  Future<void> disconnect() async {
     _socket.disconnect();
+    await ref.set({"x": 0, "y": 0});
     setState(() {
       _isConnected = false;
     });
@@ -61,12 +65,12 @@ class _RemoteControlState extends State<RemoteControl> {
   late double x_val, y_val;
 
   Future<void> writeData() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    // await Firebase.initializeApp(
+    //   options: DefaultFirebaseOptions.currentPlatform,
+    // );
 
-    DatabaseReference ref =
-        FirebaseDatabase.instance.reference().child('joystick');
+    // DatabaseReference ref =
+    //     FirebaseDatabase.instance.reference().child('joystick');
 
     await ref.set({"x": x_val, "y": y_val});
   }
@@ -153,7 +157,7 @@ class _RemoteControlState extends State<RemoteControl> {
               Container(
                 padding: EdgeInsets.all(25),
                 child: Text(
-                  'Current IP Address: ' + ipAdd,
+                  'Current WebSocket Address: ' + ipAdd,
                   style: TextStyle(color: white),
                 ),
               ),
@@ -176,7 +180,7 @@ class _RemoteControlState extends State<RemoteControl> {
                 ],
               ),
               const SizedBox(
-                height: 100.0,
+                height: 50.0,
               ),
               _isConnected
                   ? StreamBuilder(
