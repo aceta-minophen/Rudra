@@ -1,9 +1,45 @@
+
+#include <Arduino.h>
+#if defined(ESP32)
+  #include <WiFi.h>
+#elif defined(ESP8266)
+  #include <ESP8266WiFi.h>
+#endif
+#include <Firebase_ESP_Client.h>
+
+//Provide the token generation process info.
+#include "addons/TokenHelper.h"
+//Provide the RTDB payload printing info and other helper functions.
+#include "addons/RTDBHelper.h"
+
+// Insert your network credentials
+#define WIFI_SSID "Galaxy M219B55"
+#define WIFI_PASSWORD "ussr1512"
+
+// Insert Firebase project API Key
+#define API_KEY "AIzaSyA3sxz8LTLgtvdkvBAaLvZO7gBLqzuLM_A"
+
+// Insert RTDB URLefine the RTDB URL */
+#define DATABASE_URL "https://rudra-x-default-rtdb.firebaseio.com/" 
+
+//Define Firebase Data object
+FirebaseData fbdo;
+
+FirebaseAuth auth;
+FirebaseConfig config;
+
+unsigned long sendDataPrevMillis = 0;
+int intValue;
+float floatValue;
+float x, y;
+bool signupOK = false;
+
 // Motor A -- RIGHT
 int motor1Pin1 = 27;
 int motor1Pin2 = 26;
 int enable1Pin = 14;
 
-int x, y;
+float X, Y;
 
 // Motor B -- LEFT
 int motor2Pin1 = 25;
@@ -17,34 +53,46 @@ const int pwmChannelR = 0;
 const int resolution = 8;
 int dutyCycle = 230;
 
-#include <WiFi.h>
-const char *ssid = "Galaxy M219B55";
-const char *password = "ussr1512";
-
 WiFiServer server(80); // Port 80
 
 #define LED2 2 // LED2 is a Built-in LED.
 String estado = "";
 int wait30 = 30000; // time to reconnect when connection is lost.
 
-void setup()
-{
+void setup() {
   Serial.begin(115200);
-  pinMode(LED2, OUTPUT);
-
-  // Connect WiFi net.
-  Serial.println();
-  Serial.print("Connecting with ");
-  Serial.println(ssid);
-
-  WiFi.begin(ssid, password);
-
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  Serial.print("Connecting to Wi-Fi");
+  while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
+    delay(300);
   }
-  Serial.println("Connected with WiFi.");
+  Serial.println();
+  Serial.print("Connected with IP: ");
+  Serial.println(WiFi.localIP());
+  Serial.println();
+
+  /* Assign the api key (required) */
+  config.api_key = API_KEY;
+
+  /* Assign the RTDB URL (required) */
+  config.database_url = DATABASE_URL;
+
+  /* Sign up */
+  if (Firebase.signUp(&config, &auth, "", "")) {
+    Serial.println("ok");
+    signupOK = true;
+  }
+  else {
+    Serial.printf("%s\n", config.signer.signupError.message.c_str());
+  }
+
+  /* Assign the callback function for the long running token generation task */
+  config.token_status_callback = tokenStatusCallback; //see addons/TokenHelper.h
+
+  Firebase.begin(&config, &auth);
+  Firebase.reconnectWiFi(true);
+  
 
   // Start Web Server.
   server.begin();
@@ -70,93 +118,37 @@ void setup()
   // attach the channel to the GPIO to be controlled
   ledcAttachPin(enable1Pin, pwmChannelR);
   ledcAttachPin(enable2Pin, pwmChannelL);
+  
 }
 
-void loop()
-{
-  // If disconnected, try to reconnect every 30 seconds.
-  if ((WiFi.status() != WL_CONNECTED) && (millis() > wait30))
-  {
-    Serial.println("Trying to reconnect WiFi...");
-    WiFi.disconnect();
-    WiFi.begin(ssid, password);
-    wait30 = millis() + 30000;
-  }
-  // Check if a client has connected..
-  WiFiClient client = server.available();
-  if (!client)
-  {
-    return;
-  }
-
-  /* Serial.print("New client: ");
-  Serial.println(client.remoteIP()); */
-
-  // Espera hasta que el cliente envíe datos.
-  // while(!client.available()){ delay(1); }
-
-  /////////////////////////////////////////////////////
-  // Read the information sent by the client.
-  String req = client.readStringUntil('\r');
-  /* Serial.println(req); */
-
-  /* // Make the client's request.
-       if (req.indexOf("gpio/1") != -1) {digitalWrite(LED2, HIGH); estado = "ON";}
-       if (req.indexOf("gpio/0") != -1){digitalWrite(LED2, LOW); estado = "OFF";}
-     if (req.indexOf("consulta") != -1){
-         if (digitalRead(LED2)){estado = "LED2 now is ON";}
-         else {estado = "LED2 now is OFF";}
-          }
-
-  //////////////////////////////////////////////
-  //  WEB PAGE. ////////////////////////////
-  client.println("HTTP/1.1 200 OK");
-  client.println("Content-Type: text/html");
-  client.println(""); //  Important.
-  client.println("<!DOCTYPE HTML>");
-  client.println("<html>");
-  client.println("<head><meta charset=utf-8></head>");
-  client.println("<body><center><font face='Arial'>");
-  client.println("<h1>Servidor web con ESP32.</h1>");
-  client.println("<h2><font color='#009900'>KIO4.COM - Juan A. Villalpando</font></h2>");
-  client.println("<h3>Página web.</h3>");
-  client.println("<br><br>");
-  client.println("<a href='gpio/0'><button>Click to ON LED2</button></a>");
-  client.println("<a href='gpio/1'><button>Click to OFF LED2</button></a>");
-  client.println("<a href='consulta'><button>Consult status LED2</button></a>");
-  client.println("<br><br>");
-  client.println(estado);
-  client.println("</font></center></body></html>");
-
-  Serial.print("Client disconnected: ");
-  Serial.println(client.remoteIP());
-  client.flush();
-  client.stop(); */
-
-  req.replace("+", " ");        // Spaces without +
-  req.replace(" HTTP/1.1", ""); // this delete HTTP/1.1
-  req.replace("GET /", "");
-  int val = req.toInt();
-
-  byte buffer[10];
-  buffer[0] = lowByte(val);
-  buffer[1] = highByte(val);
-
-  //Serial.println(val);
-
-  
-
-  if (val <= 200)
-  {
-    x = 100 - val;
+void loop() {
+  if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 10 || sendDataPrevMillis == 0)) {
+    sendDataPrevMillis = millis();
+    if (Firebase.RTDB.getInt(&fbdo, "/joystick/x")) {
+      if (fbdo.dataType() == "float" || fbdo.dataType() == "int") {
+        X = fbdo.floatData();
+        //Serial.println(x);
+      }
+    }
+    else {
+      Serial.println(fbdo.errorReason());
+    }
+    
+    if (Firebase.RTDB.getFloat(&fbdo, "/joystick/y")) {
+      if (fbdo.dataType() == "float" || fbdo.dataType() == "int") {
+        Y = fbdo.floatData();
+        //Serial.println(y);
+      }
+    }
+    else {
+      Serial.println(fbdo.errorReason());
+    }
   }
 
-  if (val > 200 && val <= 400)
-  {
-    y = val - 300;
-  }
+  x=X*100;
+  y=Y*100;
 
-    Serial.print("x: ");
+  Serial.print("x: ");
   Serial.print(x);
   Serial.print(",y: ");
   Serial.println(y); 
@@ -194,7 +186,7 @@ void loop()
   Wire.write(buffer, 2);
   Wire.endTransmission(); */
 
-  client.flush();
+  //client.flush();
 }
 
 void stopMoving()
