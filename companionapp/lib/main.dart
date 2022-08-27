@@ -1,11 +1,17 @@
 import 'dart:async';
 import 'package:companionapp/constants.dart';
+import 'package:companionapp/firebase_options.dart';
 import 'package:companionapp/health.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 // import 'package:companionapp/constants.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   readMealData();
   readWaterLogData();
   getCalendarEvents();

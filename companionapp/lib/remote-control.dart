@@ -13,6 +13,7 @@ import 'package:flutter_joystick/flutter_joystick.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:http/http.dart' as http;
 
 class RemoteControl extends StatefulWidget {
   const RemoteControl({Key? key}) : super(key: key);
@@ -38,9 +39,8 @@ class _RemoteControlState extends State<RemoteControl> {
     });
   }
 
-  Future<void> disconnect() async {
+  void disconnect() async {
     _socket.disconnect();
-    await ref.set({"x": 0, "y": 0});
     setState(() {
       _isConnected = false;
     });
@@ -64,15 +64,10 @@ class _RemoteControlState extends State<RemoteControl> {
 
   late double x_val, y_val;
 
-  Future<void> writeData() async {
-    // await Firebase.initializeApp(
-    //   options: DefaultFirebaseOptions.currentPlatform,
-    // );
-
-    // DatabaseReference ref =
-    //     FirebaseDatabase.instance.reference().child('joystick');
-
-    await ref.set({"x": x_val, "y": y_val});
+  void writeData() async {
+    DatabaseReference ref =
+        FirebaseDatabase.instance.reference().child('joystick');
+    await ref.update({"x": x_val, "y": y_val});
   }
 
   @override
