@@ -18,7 +18,7 @@ firebase_admin.initialize_app(cred, {
 
 # Reading from DB
 ref = db.reference('Computer Vision/')
-print(ref.get())
+#print(ref.get())
 
 # haar_cascade = cv2.CascadeClassifier('haar_face.xml')
 # capture = cv2.VideoCapture(0)
@@ -71,13 +71,23 @@ def process_video():
         if process_this_frame:
             image_np = np.asarray(frame)  
             frame, action = spoon_fork_detection.final_detection(image_np, frame)
+            act_recog = db.reference('Computer Vision/Action Recognition')
             if action == 'eat':
-                ref.update({'Action Recognition/Eating Food': {'Detected': True}})
+                for key, value in act_recog.get().items():
+                    if key == "Eating Food"                 :
+                        if(value["Detected"] == False):
+                            act_recog.child(key).update({"Detected": True})
             elif action == 'drink':
-                ref.update({'Action Recognition/Drinking Water': {'Detected': True}})
+               for key, value in act_recog.get().items():  
+                if key == "Drinking Water" :                  
+                    if(value["Detected"] == False):
+                        act_recog.child(key).update({"Detected": True})
             else:
-                ref.update({'Action Recognition/Drinking Water': {'Detected': False}})
-                ref.update({'Action Recognition/Eating Food': {'Detected': False}})
+                for key, value in act_recog.get().items():                    
+                    if(value["Detected"] == True):
+                        act_recog.child(key).update({"Detected": False})
+
+           
 
             # Resize frame of video to 1/4 size for faster face recognition processing
             small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
