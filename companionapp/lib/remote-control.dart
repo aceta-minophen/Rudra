@@ -19,16 +19,14 @@ class RemoteControl extends StatefulWidget {
 
   @override
   _RemoteControlState createState() => _RemoteControlState();
-/*Widget build(BuildContext context) {
-    return Container();
-  }*/
 }
 
 const ballSize = 30.0;
 const step = 30.0;
 
 class _RemoteControlState extends State<RemoteControl> {
-  final WebSocket _socket = WebSocket("ws://192.168.29.47:5000");
+  var ipAdd = "ws://192.168.29.47:5000";
+  WebSocket _socket = WebSocket("ws://192.168.29.47:5000");
   bool _isConnected = false;
   void connect(BuildContext context) async {
     _socket.connect();
@@ -117,122 +115,166 @@ class _RemoteControlState extends State<RemoteControl> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () => connect(context),
-                  //style: buttonStyle,
-                  child: const Text("Connect"),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                width: 200,
+                decoration: BoxDecoration(
+                  color: white,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                ElevatedButton(
-                  onPressed: disconnect,
-                  //style: buttonStyle,
-                  child: const Text("Disconnect"),
+                child: TextField(
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    hintText: 'Enter IP Address',
+                  ),
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    ipAdd = value;
+                  },
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 100.0,
-            ),
-            _isConnected
-                ? StreamBuilder(
-                    stream: _socket.stream,
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return const CircularProgressIndicator();
-                      }
-
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return const Center(
-                          child: Text("Connection Closed !"),
-                        );
-                      }
-                      //? Working for single frames
-                      return Image.memory(
-                        Uint8List.fromList(
-                          base64Decode(
-                            (snapshot.data.toString()),
-                          ),
-                        ),
-                        gaplessPlayback: true,
-                        excludeFromSemantics: true,
-                      );
-                    },
-                  )
-                : const Text("Initiate Connection to rpi"),
-
-            /*SizedBox(
-              width: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _socket = WebSocket(ipAdd);
+                  });
+                  disconnect();
+                },
+                //style: buttonStyle,
+                child: const Text("Change IP Address"),
+              ),
+              Container(
+                padding: EdgeInsets.all(25),
+                child: Text(
+                  'Current IP Address: ' + ipAdd,
+                  style: TextStyle(color: white),
+                ),
+              ),
+              // SizedBox(
+              //   height: 50,
+              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const JoystickExample()),
-                      );
-                    },
-                    child: const Text('Joystick'),
+                    onPressed: () => connect(context),
+                    //style: buttonStyle,
+                    child: const Text("Connect"),
+                  ),
+                  ElevatedButton(
+                    onPressed: disconnect,
+                    //style: buttonStyle,
+                    child: const Text("Disconnect"),
                   ),
                 ],
               ),
-            ),*/
+              const SizedBox(
+                height: 100.0,
+              ),
+              _isConnected
+                  ? StreamBuilder(
+                      stream: _socket.stream,
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const CircularProgressIndicator();
+                        }
 
-            SafeArea(
-              child: Stack(
-                children: [
-                  Container(
-                    color: Colors.grey,
-                    child: Text('x:$c, y:$d'),
-                  ),
-                  Ball(p, q),
-                  Align(
-                    alignment: const Alignment(0, 10),
-                    child: Joystick(
-                      mode: JoystickMode.all,
-                      listener: (details) {
-                        setState(() {
-                          p = p + step * details.x;
-                          q = q + step * details.y;
-                          _x = 300 + step * details.x;
-                          _y = 300 + step * details.y;
-                          Future.delayed(const Duration(milliseconds: 300), () {
-                            a = 300 + step * details.x;
-                            b = 300 + step * details.y;
-                            if (a != _x && b != _y) {
-                              c = (a - 300) / step;
-                              d = (b - 300) / step;
-                              if (c != 0 && d != 0) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return const Center(
+                            child: Text("Connection Closed !"),
+                          );
+                        }
+                        //? Working for single frames
+                        return Image.memory(
+                          Uint8List.fromList(
+                            base64Decode(
+                              (snapshot.data.toString()),
+                            ),
+                          ),
+                          gaplessPlayback: true,
+                          excludeFromSemantics: true,
+                        );
+                      },
+                    )
+                  : const Text("Initiate Connection to rpi"),
+
+              /*SizedBox(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const JoystickExample()),
+                        );
+                      },
+                      child: const Text('Joystick'),
+                    ),
+                  ],
+                ),
+              ),*/
+
+              SafeArea(
+                child: Stack(
+                  children: [
+                    Container(
+                      color: Colors.grey,
+                      child: Text('x:$c, y:$d'),
+                    ),
+                    Ball(p, q),
+                    Align(
+                      alignment: const Alignment(0, 10),
+                      child: Joystick(
+                        mode: JoystickMode.all,
+                        listener: (details) {
+                          setState(() {
+                            p = p + step * details.x;
+                            q = q + step * details.y;
+                            _x = 300 + step * details.x;
+                            _y = 300 + step * details.y;
+                            Future.delayed(const Duration(milliseconds: 300),
+                                () {
+                              a = 300 + step * details.x;
+                              b = 300 + step * details.y;
+                              if (a != _x && b != _y) {
+                                c = (a - 300) / step;
+                                d = (b - 300) / step;
+                                if (c != 0 && d != 0) {
+                                  print('c:$c, d:$d');
+                                  x_val = c;
+                                  y_val = d;
+                                  writeData();
+                                }
+                              } else if (a == _x && b == _y) {
+                                c = 0;
+                                d = 0;
+                                _x = 300;
+                                _y = 300;
                                 print('c:$c, d:$d');
                                 x_val = c;
                                 y_val = d;
                                 writeData();
                               }
-                            } else if (a == _x && b == _y) {
-                              c = 0;
-                              d = 0;
-                              _x = 300;
-                              _y = 300;
-                              print('c:$c, d:$d');
-                              x_val = c;
-                              y_val = d;
-                              writeData();
-                            }
+                            });
                           });
-                        });
-                      },
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
