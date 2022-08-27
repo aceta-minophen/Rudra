@@ -12,15 +12,32 @@ import 'dart:convert';
 
 FirebaseDatabase databaseRef = FirebaseDatabase.instance;
 // List<String> meals = [];
-var response, extractedData, likedMeals;
+var response, extractedData, likedMeals, waterLog;
 
-void readData() async {
+void readMealData() async {
   var url =
       "https://rudra-x-default-rtdb.firebaseio.com/" + "Meal Suggestion.json";
   try {
     response = await http.get(Uri.parse(url));
     extractedData = json.decode(response.body) as Map<String, dynamic>;
     likedMeals = Map<String, dynamic>.from(extractedData['Liked meals']);
+    // meals.add(likedMeals['meal1']);
+    // meals.add(likedMeals['meal2']);
+  } catch (error) {
+    print(error);
+    throw error;
+  }
+}
+
+void readWaterLogData() async {
+  var url =
+      "https://rudra-x-default-rtdb.firebaseio.com/" + "Computer Vision.json";
+  try {
+    response = await http.get(Uri.parse(url));
+    extractedData = json.decode(response.body);
+    waterLog = Map<String, dynamic>.from(
+        extractedData['Action Recognition']['Drinking Water']);
+    // print(waterLog['Waterlog']);
     // meals.add(likedMeals['meal1']);
     // meals.add(likedMeals['meal2']);
   } catch (error) {
@@ -346,7 +363,7 @@ class _HealthState extends State<Health> {
                               Row(
                                 children: [
                                   Text(
-                                    '1.5 ',
+                                    waterLog['Waterlog'].toString() + ' ',
                                     style:
                                         TextStyle(color: white, fontSize: 20),
                                   ),

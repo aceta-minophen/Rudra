@@ -6,7 +6,8 @@ import 'package:splashscreen/splashscreen.dart';
 // import 'package:companionapp/constants.dart';
 
 void main() {
-  readData();
+  readMealData();
+  readWaterLogData();
   getCalendarEvents();
   runApp(MaterialApp(
     home: MyApp(),
