@@ -113,8 +113,9 @@ def process_video():
                     name = known_face_names[best_match_index]
                    
                 face_names.append(name)
-            if len(face_encodings) == 0:
-                name = ""
+            if 'Tom Holland' not in face_names:
+                ref.update({'Face Recognition/User': {'Name': 'Tom Holland', 'Recognized': False}})
+                ref.update({'Expression Detection': {'Happy': False, 'Upset': False, 'Anxiety': False}})
         
         process_this_frame = not process_this_frame        
             
