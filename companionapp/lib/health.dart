@@ -12,7 +12,7 @@ import 'dart:convert';
 
 FirebaseDatabase databaseRef = FirebaseDatabase.instance;
 // List<String> meals = [];
-var response, extractedData, likedMeals, waterLog;
+var response, extractedData, likedMeals, waterLog, previousMeals;
 
 void readMealData() async {
   var url =
@@ -21,8 +21,7 @@ void readMealData() async {
     response = await http.get(Uri.parse(url));
     extractedData = json.decode(response.body) as Map<String, dynamic>;
     likedMeals = Map<String, dynamic>.from(extractedData['Liked meals']);
-    // meals.add(likedMeals['meal1']);
-    // meals.add(likedMeals['meal2']);
+    previousMeals = Map<String, dynamic>.from(extractedData['Previous mealds']);
   } catch (error) {
     print(error);
     throw error;
@@ -37,9 +36,6 @@ void readWaterLogData() async {
     extractedData = json.decode(response.body);
     waterLog = Map<String, dynamic>.from(
         extractedData['Action Recognition']['Drinking Water']);
-    // print(waterLog['Waterlog']);
-    // meals.add(likedMeals['meal1']);
-    // meals.add(likedMeals['meal2']);
   } catch (error) {
     print(error);
     throw error;
@@ -253,11 +249,9 @@ class _HealthState extends State<Health> {
                                     children: [
                                       Row(
                                         children: [
-                                          Text(
-                                            'Calories',
-                                            style: TextStyle(
-                                                color: white, fontSize: 20),
-                                          ),
+                                          Text('Past Meal',
+                                              style: TextStyle(
+                                                  color: white, fontSize: 20)),
                                           new Spacer(),
                                           Icon(
                                             Icons.local_fire_department,
@@ -265,6 +259,21 @@ class _HealthState extends State<Health> {
                                           ),
                                         ],
                                       ),
+                                      Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Column(
+                                          children: List.generate(2, (index) {
+                                            String s = previousMeals['meal' +
+                                                (index + 1).toString()];
+                                            return Text(s.toUpperCase(),
+                                                style: TextStyle(
+                                                    color: white,
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold));
+                                          }),
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -336,6 +345,8 @@ class _HealthState extends State<Health> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Row(
                                 children: [
@@ -368,7 +379,7 @@ class _HealthState extends State<Health> {
                                         TextStyle(color: white, fontSize: 20),
                                   ),
                                   Text(
-                                    ' lt',
+                                    ' glass',
                                     style: TextStyle(
                                         color: Color(0xFFABABAB), fontSize: 15),
                                   ),
