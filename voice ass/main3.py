@@ -1,4 +1,5 @@
-from __future__ import print_function
+from google.oauth2 import service_account
+from random import Random
 import datetime
 from heapq import merge
 from sqlite3 import Time
@@ -14,12 +15,12 @@ import json
 import datetime
 import time
 from playsound import playsound
-from pywikihow import search_wikihow
+#from pywikihow import search_wikihow
 import webbrowser as web
 import pytz
-import spotipy
+#import spotipy
 from google_apis import Create_Service
-from spotipy import oauth2
+#from spotipy import oauth2
 import os.path
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -30,6 +31,12 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 from firebase import Firebase
+import os
+import argparse
+import uuid
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "C:/Users/Utkarsha 1/Downloads/rudra-ugsu-22bc367fc295.json"
+
 
 SCOPES = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events']
 DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
@@ -69,6 +76,43 @@ refMealPrev = db1.child('Meal Suggestion/Previous mealds')
 valueMealPrev = refMealPrev.get()
 refMealSuggestLog = db.reference('Meal Suggestion/Food log/')
 valueMealLog = refMealSuggestLog.get()
+
+# [START dialogflow_es_detect_intent_text]
+def detect_intent_texts(texts, session_id=123, language_code='en', project_id='rudra-ugsu'):
+    """Returns the result of detect intent with texts as inputs.
+
+    Using the same `session_id` between requests allows continuation
+    of the conversation."""
+    from google.cloud import dialogflow
+
+    session_client = dialogflow.SessionsClient()
+
+    session = session_client.session_path(project_id, session_id)
+    print("Session path: {}\n".format(session))
+
+    
+    text_input = dialogflow.TextInput(text=texts, language_code=language_code)
+
+    query_input = dialogflow.QueryInput(text=text_input)
+
+    response = session_client.detect_intent(
+        request={"session": session, "query_input": query_input}
+    )
+
+    print("=" * 20)
+    print("Query text: {}".format(response.query_result.query_text))
+    print(
+        "Detected intent: {} (confidence: {})\n".format(
+            response.query_result.intent.display_name,
+            response.query_result.intent_detection_confidence,
+        )
+    )
+    speak("Fulfillment text: {}\n".format(response.query_result.fulfillment_text))
+
+
+# [END dialogflow_es_detect_intent_text]
+
+
 
 def AddEvent():
     service = Create_Service(client_file, API_NAME, API_VERSION, SCOPES)
@@ -200,36 +244,6 @@ def get_date(query):
         return None
     return datetime.date(month =month, day=day, year=year)
 
-def MusicFromSpotify():
-    username = 'hw8sspurqbiei21c3pkx62n2s'
-    clientID = '1d5fc82690934924867ee9617bee42a5'
-    clientSecret = '46c70ba6cb924692b5710fb1d73d345c'
-    redirectURI = 'https://open.spotify.com/'
-    oauth_object = oauth2.SpotifyOAuth(clientID, clientSecret, redirectURI)
-    token_dict = oauth_object.get_access_token()
-    token = token_dict['access_token']
-    spotifyObject = spotipy.Spotify(auth=token)
-    user = spotifyObject.current_user()
-    print(json.dumps(user, sort_keys=True, indent=4))
-    while True:
-        # print("Welcome, "+ user['display_name'])
-        # print("0 - Exit")
-        # print("1 - Search for a Song")
-        speak("What song will you like to listen?")
-        #searchQuery = takeCommand()
-        # if choice == 1:
-        # Get the Song Name.
-        searchQuery = input("Enter Song Name: ")
-        # Search for the Song.
-        searchResults = spotifyObject.search(searchQuery,1, 0,"track")
-        # Get required data from JSON response.
-        tracks_dict = searchResults['tracks']
-        tracks_items = tracks_dict['items']
-        song = tracks_items[0]['external_urls']['spotify']
-        # Open the Song in Web Browser
-        #playsound(song)
-        web.open(song)
-        print('Song has opened in your browser.')
 
 def Water_Log():
     count= value["Waterlog"]
@@ -313,13 +327,15 @@ def ExpressionRecogHappy():
 
 def ExpressionRecogSad():
 
-    speak("Is there something bothering you?")
+    setReplies = ["Is there something bothering you?","You look a little sad, are you okay?", "Want to share with me if something is bothering you?"]
+    speak(Random.choice(setReplies))
+    #speak("Is there something bothering you?")
     react = takeCommand()
     if(react == "yes"):
         speak("It's ok, everything will be fine")
         refExp.update({'Happy': False})
     elif(react=="no"):
-        speak("Nice, if there is anyything, you can share it with me")
+        speak("Nice, if there is anything, you can share it with me")
         refExp.update({'Happy': False})
 
 
@@ -409,7 +425,23 @@ if __name__ == "__main__":
     while True:
        
         query = takeCommand().lower()
+        query="set an alarm"
+        parser = argparse.ArgumentParser(
+            description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+        )
+    
+        parser.add_argument(
+            "--session-id",
+            help="Identifier of the DetectIntent session. " "Defaults to a random UUID.",
+            default=str(uuid.uuid4()),
+        )
+        
+        args = parser.parse_args()
 
+        detect_intent_texts(
+            texts=query, session_id=args.session_id
+        )        
+        
         if 'wikipedia' in query:
             speak('Searching Wikipedia...')
             query = query.replace("wikipedia", "")
@@ -435,7 +467,8 @@ if __name__ == "__main__":
             speak('not an issue..., hope you enjoy it next time')
 
         elif 'music' in query or "song" in query or 'play' in query:
-            MusicFromSpotify()
+            #MusicFromSpotify()
+            speak('here is some music for you')
 
         elif 'stop' in query:
             speak("ok, will stop")
@@ -533,7 +566,7 @@ if __name__ == "__main__":
             speak("let me see")
             op = query.replace("rudra", "")
             max_result = 1
-            how_to_func = search_wikihow(op, max_result)
+            how_to_func = 1 #search_wikihow(op, max_result)
             assert len(how_to_func) == 1
             # how_to_func[0].print()
             speak(how_to_func[0].summary)
@@ -573,3 +606,10 @@ if __name__ == "__main__":
 
         elif "suggest i should eat" in query or "suggest i shoud have today" in query or "have today" in query:
             MealSuggestPrevious()
+
+
+
+
+
+
+    
