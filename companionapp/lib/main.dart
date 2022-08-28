@@ -363,7 +363,7 @@ class Health extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (BuildContext context) => RemoteControl(),
+                        builder: (BuildContext context) => VideoStream(),
                       ),
                     );
                   },
@@ -374,7 +374,7 @@ class Health extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
+              /*Expanded(
                 child: IconButton(
                   onPressed: () {
                     Navigator.pushReplacement(
@@ -390,7 +390,7 @@ class Health extends StatelessWidget {
                     color: white,
                   ),
                 ),
-              ),
+              ),*/
               // Expanded(
               //   child: IconButton(
               //     onPressed: (){},
