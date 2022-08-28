@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="728c71e3-b49f-460d-969d-c0c423ceb2c7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/images/drop-20-filled.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/fire-filled.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/footsteps-sharp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/sleep.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/steps.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +90,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
