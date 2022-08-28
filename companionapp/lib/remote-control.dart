@@ -27,7 +27,7 @@ const step = 30.0;
 
 class _RemoteControlState extends State<RemoteControl> {
   // var ipAdd = "ws://192.168.29.47:5000";
-  WebSocket _socket = WebSocket("ws://192.168.29.47:5000");
+  WebSocket _socket = WebSocket("ws://10.5.32.13:8000");
   DatabaseReference ref =
       FirebaseDatabase.instance.reference().child('joystick');
 
