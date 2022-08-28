@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rudra-ugsu",
+  "private_key_id": "22bc367fc29574dccc91c51fa5883f4c030f01f3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDM9oL/iHFvkSjs\nYxgGgpnmkrAgevgmvtT7KBSsKD7PKqVQfp4JARTCZ47d9/s2fI15w4unoQfFooAA\nIy7n+nVXXtiz+bXBoUcr1otoLWaHGpvaD5L9uOiDk6uaioeorsQz5J/4fTyV/vH0\namroiWkwacblq6ALmQV+onZ8/enTtEQbfc+KrD+npqw5RTpzhud/pvd+51rgMMD1\nRypp45lS5L5dMhITcGSkEz+q82WP2kIyiHR0DzAuidaXZgGCDiKTVmbiB1vEHiCU\n0FMFKDTARSB/doZ20LBhpTRfqoO1VlW7YhicCF5HnsO0cfNg7Ot5i6pgFRX1OFGJ\n4orjIxznAgMBAAECggEAJBJmb66FuErl1uSBv/OQPmImmTDLJ5aCSUl+ieXzV+Z7\nfbUq/w6vpp8vJ6WTEr3M8FcX5wKSKZg1ytBmWvFbYWsR3GrgMBnAOtjhZA5JcxGd\nyDzhc8HtOertUp96zJcldLSR6tuvo/5getGXyyET4C9dj+Iqop/ltanGDK1rT5Sj\nm2IRVKAYU96ynvAkifc4qSnDiDyFdu4cP40uFP0ji3wXxS/DN0gteavLkQC48Qtx\nH938Kl2p2aRBzV7iZZ52zsPDycmCS+Oxnt4hmh7Jy2EmNkThudL/wBTllBIurphs\nU3zTeJAkxtUOqH3tv9TPz5se5l6FtPHgXfqnfsjhAQKBgQDpbrZ/8Iq90dRPLY7x\nZtZ3pA6D1cNvigokhSPgc668PdU+pgTbsWm2nEwuRYUgQb8UrJDCQ/usfQD9Bm98\n2veZPfXc7vKPz6KAX/qdPrCHLoPfG5sDo4jgbaZR1EioYFRUB2yUzCW1Mh27xf0p\nUEBOQ8pFKDMfjfxS7wSQ+scLQQKBgQDgxzK4WSfsMhY5w21oYwi3OquoTs3xB9r8\n5/XitKi2ATndLGwa1m5yrwNHRMC/31fmeC6P3bxTok5mYZVDhUmqMxhNof7SUPLT\nPjTq0Pq4fFZ2AXa+peW4AK1NgQtpaKX29mLT0TnE8IfKJmANuLloELaNiUNl4S8u\nU/PqsbTmJwKBgGCMHAt6j8fG24sMCs0pfZbqUd6RMU4Wx+8m6hnRfvn4kRRiUiwT\niueuaYvR0SfwSXnhjdXrjFJhOWFtofsADdxh1ijU45o7hLiX+e3Dmfuvb3d90XWF\n0/0PHPVHWe3aOcavc2dvsEDrQ4UAdJ77xD0aqLRF1i886JncpgTY1C6BAoGBAN8E\nxU4jJ3kyONsXC3aGzB8AF1Dm325GXQCRJWXJ2Zq7nK3VZW07VFp1Sstra9LzxkLk\n+03CsxhH8YGjUHWtyWkVSQe9sxb5OfRdxCM3NYvV0fNDgI2oDESEZ25+mtP7ALAH\nxgZjkO3VuOTZLnRu04ZtDrNffX+X7TgKE/jIWLQBAoGAGVVrGci5BGHRDwyn0XsG\n8ogxdwEAPWFAWaZqIRWuiKubt4vVnQB1/rjaultB8UWbZMFlkYQdsHqDbE9cZnp4\n3YfIkW+3O5NrS7fOIJUdjysZk+TDHrtIRnU2O90Efxc3mO544j8+WE/TtYp8EXoy\nD5vHKB5KAVmK9KXx8ON0XhI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "first-304@rudra-ugsu.iam.gserviceaccount.com",
+  "client_id": "100098799962351727341",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/first-304%40rudra-ugsu.iam.gserviceaccount.com"
+}
