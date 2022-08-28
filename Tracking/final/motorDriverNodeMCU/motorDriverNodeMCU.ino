@@ -53,15 +53,9 @@ float x, y;
 bool signupOK = false;
 
 
-
-#include <Wire.h>
-#include <QMC5883L.h>
-
-QMC5883L compass;
-
-// Insert your network credentials
+/*// Insert your network credentials
 #define WIFI_SSID "Galaxy M219B55"
-#define WIFI_PASSWORD "ussr1512"
+#define WIFI_PASSWORD "ussr1512"*/
 
 
 
@@ -78,7 +72,7 @@ long duration1;
 float distanceCm1;
 float distanceInch;
 
-int recog;
+String recog;
 
 
 int X_save = 100000;
@@ -132,10 +126,10 @@ void setup(){
 void loop() {
   if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 5 || sendDataPrevMillis == 0)) {
     sendDataPrevMillis = millis();
-    if (Firebase.RTDB.getInt(&fbdo, "/Computer Vision/Face Recognition/User/Recognized")) {
+    if (Firebase.RTDB.getInt(&fbdo, "/following/turnLeft")) {
       if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
-        recog = fbdo.intData();
-        Serial.println(recog);
+        turnLeft = fbdo.intData();
+        Serial.println(turnLeft);
       }
     }
     else {
@@ -143,52 +137,16 @@ void loop() {
     }
 
     
-    /*if (Firebase.RTDB.getFloat(&fbdo, "/joystick/y")) {
-      if (fbdo.dataType() == "float" || fbdo.dataType() == "int") {
-        Y = fbdo.floatData();
-        //Serial.println(y);
+    if (Firebase.RTDB.getFloat(&fbdo, "/following/turnRight")) {
+      if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
+        turnRight = fbdo.intData();
+        Serial.println(turnRight);
       }
     }
     else {
       Serial.println(fbdo.errorReason());
-    }*/
+    }
   }
-  int x,y,z;
-  compass.read(&x,&y,&z);
-
- // Calculate heading when the magnetometer is level, then correct for signs of axis.
-  // Atan2() automatically check the correct formula taking care of the quadrant you are in
-  float heading = atan2(y, x);
-
-  float declinationAngle = 0.0404;
-  heading += declinationAngle;
-  // Find yours here: http://www.magnetic-declination.com/
-
-   // Correct for when signs are reversed.
-  if(heading < 0)
-    heading += 2*PI;
-
-  // Check for wrap due to addition of declination.
-  if(heading > 2*PI)
-    heading -= 2*PI;
-
-  // Convert radians to degrees for readability.
-  float headingDegrees = heading * 180/M_PI; 
-
-
-  Serial.print("x: ");
-  Serial.print(x);
-  Serial.print("    y: ");
-  Serial.print(y);
-  Serial.print("    z: ");
-  Serial.print(z);
-  Serial.print("    heading: ");
-  Serial.print(heading);
-  Serial.print("    Radius: ");
-  Serial.print(headingDegrees);
-  Serial.println();
-  Serial.print("Fec rec: ");
-  Serial.println(recog);
 
   /*if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 100 || sendDataPrevMillis == 0)){
     sendDataPrevMillis = millis();
@@ -205,68 +163,112 @@ void loop() {
   }*/
   //delay(100);
 
-  if(recog==1){
-    X_save = x;
-    Y_save = y;
+
+  if(turnLeft==0 && turnRight ==0){
+    
   }
 
-  Serial.println(X_save);
-  Serial.println(Y_save);
+  
+}
 
-  if(y>=60000 && y<=100000){
-    if(x>X_save+20){
-      turnLeft = 1;
-      turnRight = 0;
-    }
-    else if (x<X_save-20){
-      turnLeft = 0;
-      turnRight = 1;
-    }
-    else{
-      turnLeft = 0;
-      turnRight = 0;
-    }
-  }
-  else if(y<60000){
-    if(x>X_save+20){
-      turnLeft = 0;
-      turnRight = 1;
-    }
-    else if (x<X_save-20){
-      turnLeft = 1;
-      turnRight = 0;
-    }
-    else{
-      turnLeft = 0;
-      turnRight = 0;
-    }
-  }
+void stopMoving()
+{
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, LOW);
+  digitalWrite(motor2Pin1, LOW);
+  digitalWrite(motor2Pin2, LOW);
 
-  if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 10 || sendDataPrevMillis == 0)){
-    sendDataPrevMillis = millis();
-    // Write an Int number on the database path test/int
-    if (Firebase.RTDB.setInt(&fbdo, "following/turnLeft", turnLeft)){
-      Serial.println("PASSED");
-      //Serial.println("PATH: " + fbdo.dataPath());
-      //Serial.println("TYPE: " + fbdo.dataType());
-    }
-    else {
-      Serial.println("FAILED");
-      Serial.println("REASON: " + fbdo.errorReason());
-    }
-  }
+  Serial.println("stop");
+}
 
-  if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 10 || sendDataPrevMillis == 0)){
-    sendDataPrevMillis = millis();
-    // Write an Int number on the database path test/int
-    if (Firebase.RTDB.setInt(&fbdo, "following/turnRight", turnRight)){
-      Serial.println("PASSED");
-      //Serial.println("PATH: " + fbdo.dataPath());
-      //Serial.println("TYPE: " + fbdo.dataType());
-    }
-    else {
-      Serial.println("FAILED");
-      Serial.println("REASON: " + fbdo.errorReason());
-    }
-  }
+void goForward(int y)
+{
+  digitalWrite(motor1Pin1, HIGH);
+  digitalWrite(motor1Pin2, LOW);
+  digitalWrite(motor2Pin1, HIGH);
+  digitalWrite(motor2Pin2, LOW);
+
+  float speedL = 0.85 * y + 145;
+  float speedR = 0.80 * y + 140;
+
+  ledcWrite(pwmChannelL, speedL);
+  ledcWrite(pwmChannelR, speedR);
+
+  Serial.println("Moving forward");
+}
+
+void goBack(int y)
+{
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, HIGH);
+  digitalWrite(motor2Pin1, LOW);
+  digitalWrite(motor2Pin2, HIGH);
+
+  float speedR = (-y) + 145;
+  float speedL = 0.80 * (-y) + 140;
+
+  ledcWrite(pwmChannelL, speedL);
+  ledcWrite(pwmChannelR, speedR);
+
+  Serial.println("Moving backward");
+}
+
+void clockwiseFor()
+{
+  // left motor on, right off
+
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, LOW);
+  digitalWrite(motor2Pin1, HIGH);
+  digitalWrite(motor2Pin2, LOW);
+
+  ledcWrite(pwmChannelL, 200);
+  ledcWrite(pwmChannelR, 200);
+
+  Serial.println("Clockwise forward");
+}
+
+void antiClockwiseFor()
+{
+  // left off, right on
+
+  digitalWrite(motor1Pin1, HIGH);
+  digitalWrite(motor1Pin2, LOW);
+  digitalWrite(motor2Pin1, LOW);
+  digitalWrite(motor2Pin2, LOW);
+
+  ledcWrite(pwmChannelL, 200);
+  ledcWrite(pwmChannelR, 200);
+
+  Serial.println("Anti Clockwise forward");
+}
+
+void clockwiseBack()
+{
+  // left off, right on
+
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, HIGH);
+  digitalWrite(motor2Pin1, LOW);
+  digitalWrite(motor2Pin2, LOW);
+
+  ledcWrite(pwmChannelL, 200);
+  ledcWrite(pwmChannelR, 200);
+
+  Serial.println("Clockwise backward");
+}
+
+void antiClockwiseBack()
+{
+  // left on, right off
+
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, LOW);
+  digitalWrite(motor2Pin1, LOW);
+  digitalWrite(motor2Pin2, HIGH);
+
+  ledcWrite(pwmChannelL, 200);
+  ledcWrite(pwmChannelR, 230);
+
+  Serial.println("Anti Clockwise backward");
 }
