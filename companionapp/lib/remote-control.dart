@@ -26,7 +26,7 @@ const ballSize = 30.0;
 const step = 30.0;
 
 class _RemoteControlState extends State<RemoteControl> {
-  var ipAdd = "ws://192.168.29.47:5000";
+  // var ipAdd = "ws://192.168.29.47:5000";
   WebSocket _socket = WebSocket("ws://192.168.29.47:5000");
   DatabaseReference ref =
       FirebaseDatabase.instance.reference().child('joystick');
@@ -114,52 +114,11 @@ class _RemoteControlState extends State<RemoteControl> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                width: 200,
-                decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    hintText: 'Enter IP Address',
-                  ),
-                  textAlign: TextAlign.center,
-                  onChanged: (value) {
-                    ipAdd = value;
-                  },
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _socket = WebSocket(ipAdd);
-                  });
-                  disconnect();
-                },
-                //style: buttonStyle,
-                child: const Text("Change IP Address"),
-              ),
-              Container(
-                padding: EdgeInsets.all(25),
-                child: Text(
-                  'Current WebSocket Address: ' + ipAdd,
-                  style: TextStyle(color: white),
-                ),
-              ),
-              // SizedBox(
-              //   height: 50,
-              // ),
-              Row(
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
@@ -174,10 +133,12 @@ class _RemoteControlState extends State<RemoteControl> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 50.0,
-              ),
-              _isConnected
+            ),
+            // const SizedBox(
+            //   height: 50.0,
+            // ),
+            Expanded(
+              child: _isConnected
                   ? StreamBuilder(
                       stream: _socket.stream,
                       builder: (context, snapshot) {
@@ -187,7 +148,10 @@ class _RemoteControlState extends State<RemoteControl> {
 
                         if (snapshot.connectionState == ConnectionState.done) {
                           return const Center(
-                            child: Text("Connection Closed !"),
+                            child: Text(
+                              "Connection Closed !",
+                              style: TextStyle(color: white),
+                            ),
                           );
                         }
                         //? Working for single frames
@@ -202,78 +166,78 @@ class _RemoteControlState extends State<RemoteControl> {
                         );
                       },
                     )
-                  : const Text("Initiate Connection to rpi"),
+                  : const Text("Initiate Connection to rpi",
+                      style: TextStyle(color: white)),
+            ),
 
-              /*SizedBox(
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const JoystickExample()),
-                        );
-                      },
-                      child: const Text('Joystick'),
-                    ),
-                  ],
-                ),
-              ),*/
+            /*SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const JoystickExample()),
+                      );
+                    },
+                    child: const Text('Joystick'),
+                  ),
+                ],
+              ),
+            ),*/
 
-              SafeArea(
-                child: Stack(
-                  children: [
-                    Container(
-                      color: Colors.grey,
-                      child: Text('x:$c, y:$d'),
-                    ),
-                    Ball(p, q),
-                    Align(
-                      alignment: const Alignment(0, 10),
-                      child: Joystick(
-                        mode: JoystickMode.all,
-                        listener: (details) {
-                          setState(() {
-                            p = p + step * details.x;
-                            q = q + step * details.y;
-                            _x = 300 + step * details.x;
-                            _y = 300 + step * details.y;
-                            Future.delayed(const Duration(milliseconds: 300),
-                                () {
-                              a = 300 + step * details.x;
-                              b = 300 + step * details.y;
-                              if (a != _x && b != _y) {
-                                c = (a - 300) / step;
-                                d = (b - 300) / step;
-                                if (c != 0 && d != 0) {
-                                  print('c:$c, d:$d');
-                                  x_val = c;
-                                  y_val = d;
-                                  writeData();
-                                }
-                              } else if (a == _x && b == _y) {
-                                c = 0;
-                                d = 0;
-                                _x = 300;
-                                _y = 300;
+            SafeArea(
+              child: Stack(
+                children: [
+                  Container(
+                    color: Colors.grey,
+                    child: Text('x:$c, y:$d'),
+                  ),
+                  Ball(p, q),
+                  Align(
+                    alignment: const Alignment(0, 10),
+                    child: Joystick(
+                      mode: JoystickMode.all,
+                      listener: (details) {
+                        setState(() {
+                          p = p + step * details.x;
+                          q = q + step * details.y;
+                          _x = 300 + step * details.x;
+                          _y = 300 + step * details.y;
+                          Future.delayed(const Duration(milliseconds: 300), () {
+                            a = 300 + step * details.x;
+                            b = 300 + step * details.y;
+                            if (a != _x && b != _y) {
+                              c = (a - 300) / step;
+                              d = (b - 300) / step;
+                              if (c != 0 && d != 0) {
                                 print('c:$c, d:$d');
                                 x_val = c;
                                 y_val = d;
                                 writeData();
                               }
-                            });
+                            } else if (a == _x && b == _y) {
+                              c = 0;
+                              d = 0;
+                              _x = 300;
+                              _y = 300;
+                              print('c:$c, d:$d');
+                              x_val = c;
+                              y_val = d;
+                              writeData();
+                            }
                           });
-                        },
-                      ),
+                        });
+                      },
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: Container(
