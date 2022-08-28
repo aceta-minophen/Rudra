@@ -30,7 +30,7 @@ const step = 30.0;
 
 class _RemoteControlState extends State<RemoteControl>{
 
-  final WebSocket _socket = WebSocket("ws://192.168.29.47:5000");
+  final WebSocket _socket = WebSocket("ws://10.5.32.13:8000");
   bool _isConnected = false;
   void connect(BuildContext context) async {
     _socket.connect();
@@ -147,7 +147,7 @@ class _RemoteControlState extends State<RemoteControl>{
                 ],
               ),
               const SizedBox(
-                height: 200.0,
+                height: 20.0,
               ),
               _isConnected
                   ? StreamBuilder(
@@ -206,7 +206,7 @@ class _RemoteControlState extends State<RemoteControl>{
                     ),
                     Ball(p, q),
                     Align(
-                      alignment: const Alignment(0, 10),
+                      alignment: const Alignment(0, 0),
                       child: Joystick(
                         mode: JoystickMode.all,
                         listener: (details) {
