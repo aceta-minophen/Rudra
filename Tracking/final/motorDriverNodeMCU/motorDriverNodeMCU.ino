@@ -12,7 +12,7 @@
 */
 
 #include <WiFiClient.h>
-
+#include <Wire.h>
 #include <Arduino.h>
 #if defined(ESP32)
   #include <WiFi.h>
@@ -36,13 +36,13 @@
 
 // Insert RTDB URLefine the RTDB URL */
 #define DATABASE_URL "https://rudra-x-default-rtdb.firebaseio.com/" 
-
+WiFiServer server(80);
 //Define Firebase Data object
 FirebaseData fbdo;
 
 FirebaseAuth auth;
 FirebaseConfig config;
-WiFiServer server(80);
+
 unsigned long sendDataPrevMillis = 0;
 int intValue;
 float floatValue;
@@ -55,7 +55,7 @@ bool signupOK = false;
 #define WIFI_SSID "Galaxy M219B55"
 #define WIFI_PASSWORD "ussr1512"*/
 
-#include <Wire.h>
+
 
 
 int turnLeft;
@@ -67,6 +67,7 @@ void setup(){
   Serial.begin(115200);
   //pinMode(trigPin1, OUTPUT); // Sets the trigPin as an Output
   //pinMode(echoPin1, INPUT); // Sets the echoPin as an Input
+  
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting to Wi-Fi");
   while (WiFi.status() != WL_CONNECTED){
@@ -99,12 +100,16 @@ void setup(){
   Firebase.begin(&config, &auth);
   Firebase.reconnectWiFi(true);
 
-  Wire.begin();
+  Wire.begin(D1,D2);
+
+
+   server.begin(); 
+  Serial.println("Server started");
 }
 
 
 void loop() {
-  if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 5 || sendDataPrevMillis == 0)) {
+  /*if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 5 || sendDataPrevMillis == 0)) {
     sendDataPrevMillis = millis();
     if (Firebase.RTDB.getInt(&fbdo, "/following/turnLeft")) {
       if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
@@ -127,7 +132,7 @@ void loop() {
       Serial.println(fbdo.errorReason());
     }
 
-    if (Firebase.RTDB.getFloat(&fbdo, "/following/start")) {
+    if (Firebase.RTDB.getFloat(&fbdo, "/following/start1")) {
       if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
         start1 = fbdo.intData();
         //Serial.println(start1);
@@ -137,16 +142,21 @@ void loop() {
       Serial.println(fbdo.errorReason());
     }
 
-    if (Firebase.RTDB.getFloat(&fbdo, "/following/stop")) {
+    if (Firebase.RTDB.getFloat(&fbdo, "/following/stop1")) {
       if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
         stop1 = fbdo.intData();
+
         //Serial.println(stop1);
+
+        Serial.println(stop1);
+
       }
     }
     else {
       Serial.println(fbdo.errorReason());
-    }
+    }*/
 
+//
 //    if (Firebase.RTDB.getFloat(&fbdo, "/joystick/x")) {
 //      if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
 //        x = fbdo.floatData();
@@ -157,7 +167,7 @@ void loop() {
 //    else {
 //      Serial.println(fbdo.errorReason());
 //    }
-//
+
 //    if (Firebase.RTDB.getFloat(&fbdo, "/joystick/y")) {
 //      if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
 //        y = fbdo.floatData();
@@ -171,7 +181,10 @@ void loop() {
 
     
   }
+
+  
   int val;
+ 
   WiFiClient client = server.available();
   if(!client){
     return;
@@ -205,20 +218,20 @@ void loop() {
   
 
 
-  if(turnLeft==0 && turnRight ==0){
-    val = 1000;
+    if(turnLeft==0 && turnRight ==0){
+      val = 1000;
   }
-  if(turnLeft==1 && turnRight == 0){
-    val = 1001;
+    if(turnLeft==1 && turnRight == 0){
+      val = 1001;
   }
-  if(turnLeft==0 && turnRight == 1){
-    val = 1002;
+    if(turnLeft==0 && turnRight == 1){
+      val = 1002;
   }
-  if(stop1 == 0 && start1 == 1){
-    val = 3000;
+    if(stop1 == 0 && start1 == 1){
+      val = 3000;
   }
-  if(stop1 ==1 && start1 == 0){
-    val = 3001;
+    if(stop1 == 1 && start1 == 0){
+      val = 3001;
   }
   
   
@@ -227,7 +240,10 @@ void loop() {
   buffer[0] = lowByte(val);
   buffer[1] = highByte(val);
 
+
   //Serial.println(val);
+  Serial.println(val);
+  Serial.println(start1);
   Wire.beginTransmission(8);
   Wire.write(buffer, 2);
   Wire.endTransmission();
