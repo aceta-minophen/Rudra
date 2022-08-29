@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="728c71e3-b49f-460d-969d-c0c423ceb2c7" name="Changes" comment="" />
+    <list default="true" id="728c71e3-b49f-460d-969d-c0c423ceb2c7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Tracking/final/firebaseRC/firebaseRC.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Tracking/final/firebaseRC/firebaseRC.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tracking/final/motorDriverNodeMCU/motorDriverNodeMCU.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Tracking/final/motorDriverNodeMCU/motorDriverNodeMCU.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

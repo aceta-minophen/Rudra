@@ -32,14 +32,15 @@ unsigned long sendDataPrevMillis = 0;
 int intValue;
 float floatValue;
 float x, y;
+float X, Y;
 bool signupOK = false;
 
-// Motor A -- RIGHT
+/*// Motor A -- RIGHT
 int motor1Pin1 = 27;
 int motor1Pin2 = 26;
 int enable1Pin = 14;
 
-float X, Y;
+
 
 // Motor B -- LEFT
 int motor2Pin1 = 25;
@@ -51,13 +52,17 @@ const int freq = 30000;
 const int pwmChannelL = 0;
 const int pwmChannelR = 0;
 const int resolution = 8;
-int dutyCycle = 230;
+int dutyCycle = 230;*/
 
 WiFiServer server(80); // Port 80
 
 #define LED2 2 // LED2 is a Built-in LED.
 String estado = "";
 int wait30 = 30000; // time to reconnect when connection is lost.
+
+
+
+
 
 void setup() {
   Serial.begin(115200);
@@ -104,7 +109,7 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   // sets the pins as outputs:
-  pinMode(motor1Pin1, OUTPUT);
+  /*pinMode(motor1Pin1, OUTPUT);
   pinMode(motor1Pin2, OUTPUT);
   pinMode(enable1Pin, OUTPUT);
   pinMode(motor2Pin1, OUTPUT);
@@ -117,17 +122,17 @@ void setup() {
 
   // attach the channel to the GPIO to be controlled
   ledcAttachPin(enable1Pin, pwmChannelR);
-  ledcAttachPin(enable2Pin, pwmChannelL);
+  ledcAttachPin(enable2Pin, pwmChannelL);*/
   
 }
 
 void loop() {
   if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 10 || sendDataPrevMillis == 0)) {
     sendDataPrevMillis = millis();
-    if (Firebase.RTDB.getInt(&fbdo, "/joystick/x")) {
+    if (Firebase.RTDB.getFloat(&fbdo, "/joystick/x")) {
       if (fbdo.dataType() == "float" || fbdo.dataType() == "int") {
         X = fbdo.floatData();
-        //Serial.println(x);
+        Serial.println(X);
       }
     }
     else {
@@ -137,7 +142,7 @@ void loop() {
     if (Firebase.RTDB.getFloat(&fbdo, "/joystick/y")) {
       if (fbdo.dataType() == "float" || fbdo.dataType() == "int") {
         Y = fbdo.floatData();
-        //Serial.println(y);
+        Serial.println(Y);
       }
     }
     else {
@@ -153,7 +158,7 @@ void loop() {
   Serial.print(",y: ");
   Serial.println(y); 
 
-  if(y>=-10 && y<=10){
+  /*if(y>=-10 && y<=10){
     stopMoving();
   }
 
@@ -180,7 +185,7 @@ void loop() {
 
   if(y<-10 && x>=-30 && x<=30){
     goBack(y);
-  }
+  }*/
 
   /* Wire.beginTransmission(8);
   Wire.write(buffer, 2);
@@ -189,7 +194,7 @@ void loop() {
   //client.flush();
 }
 
-void stopMoving()
+/*void stopMoving()
 {
   digitalWrite(motor1Pin1, LOW);
   digitalWrite(motor1Pin2, LOW);
@@ -289,4 +294,4 @@ void antiClockwiseBack()
   ledcWrite(pwmChannelR, 230);
 
   Serial.println("Anti Clockwise backward");
-}
+}*/

@@ -11,7 +11,7 @@
 
 */
 
-
+#include <WiFiClient.h>
 
 #include <Arduino.h>
 #if defined(ESP32)
@@ -20,19 +20,16 @@
   #include <ESP8266WiFi.h>
 #endif
 #include <Firebase_ESP_Client.h>
-
+#include <Wire.h>
 //Provide the token generation process info.
 #include "addons/TokenHelper.h"
 //Provide the RTDB payload printing info and other helper functions.
 #include "addons/RTDBHelper.h"
 
 // Insert your network credentials
-/*#define WIFI_SSID "Galaxy M219B55"
-#define WIFI_PASSWORD "ussr1512"*/
+#define WIFI_SSID "Galaxy M219B55"
+#define WIFI_PASSWORD "ussr1512"
 
-
-#define WIFI_SSID "Suk"
-#define WIFI_PASSWORD "suk@study789"
 
 // Insert Firebase project API Key
 #define API_KEY "AIzaSyA3sxz8LTLgtvdkvBAaLvZO7gBLqzuLM_A"
@@ -45,7 +42,7 @@ FirebaseData fbdo;
 
 FirebaseAuth auth;
 FirebaseConfig config;
-
+WiFiServer server(80);
 unsigned long sendDataPrevMillis = 0;
 int intValue;
 float floatValue;
@@ -53,39 +50,23 @@ float x, y;
 bool signupOK = false;
 
 
+
 /*// Insert your network credentials
 #define WIFI_SSID "Galaxy M219B55"
 #define WIFI_PASSWORD "ussr1512"*/
 
+#include <Wire.h>
 
 
-
-const int trigPin1 = 15;
-const int echoPin1 = 2;
-
-
-//define sound speed in cm/uS
-#define SOUND_SPEED 0.034
-#define CM_TO_INCH 0.393701
-
-long duration1;
-float distanceCm1;
-float distanceInch;
-
-String recog;
-
-
-int X_save = 100000;
-int Y_save = 100000;
-
-int turnLeft = 0;
-int turnRight = 0;
+int turnLeft;
+int turnRight;
+int stop1, start1;
 
 
 void setup(){
   Serial.begin(115200);
-  pinMode(trigPin1, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin1, INPUT); // Sets the echoPin as an Input
+  //pinMode(trigPin1, OUTPUT); // Sets the trigPin as an Output
+  //pinMode(echoPin1, INPUT); // Sets the echoPin as an Input
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting to Wi-Fi");
   while (WiFi.status() != WL_CONNECTED){
@@ -119,7 +100,6 @@ void setup(){
   Firebase.reconnectWiFi(true);
 
   Wire.begin();
-  compass.init();
 }
 
 
@@ -129,7 +109,7 @@ void loop() {
     if (Firebase.RTDB.getInt(&fbdo, "/following/turnLeft")) {
       if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
         turnLeft = fbdo.intData();
-        Serial.println(turnLeft);
+        //Serial.println(turnLeft);
       }
     }
     else {
@@ -140,15 +120,74 @@ void loop() {
     if (Firebase.RTDB.getFloat(&fbdo, "/following/turnRight")) {
       if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
         turnRight = fbdo.intData();
-        Serial.println(turnRight);
+        //Serial.println(turnRight);
       }
     }
     else {
       Serial.println(fbdo.errorReason());
     }
+
+    if (Firebase.RTDB.getFloat(&fbdo, "/following/start")) {
+      if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
+        start1 = fbdo.intData();
+        //Serial.println(start1);
+      }
+    }
+    else {
+      Serial.println(fbdo.errorReason());
+    }
+
+    if (Firebase.RTDB.getFloat(&fbdo, "/following/stop")) {
+      if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
+        stop1 = fbdo.intData();
+        //Serial.println(stop1);
+      }
+    }
+    else {
+      Serial.println(fbdo.errorReason());
+    }
+
+//    if (Firebase.RTDB.getFloat(&fbdo, "/joystick/x")) {
+//      if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
+//        x = fbdo.floatData();
+//        Serial.print("x: ");
+//        Serial.println(x);
+//      }
+//    }
+//    else {
+//      Serial.println(fbdo.errorReason());
+//    }
+//
+//    if (Firebase.RTDB.getFloat(&fbdo, "/joystick/y")) {
+//      if (fbdo.dataType() == "float" || fbdo.dataType() == "int" || fbdo.dataType() == "bool" || fbdo.dataType() == "string") {
+//        y = fbdo.floatData();
+//        Serial.print("y: ");
+//        Serial.println(y);
+//      }
+//    }
+//    else {
+//      Serial.println(fbdo.errorReason());
+//    }
+
+    
+  }
+  int val;
+  WiFiClient client = server.available();
+  if(!client){
+    return;
   }
 
-  /*if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 100 || sendDataPrevMillis == 0)){
+  Serial.println("New Client");
+  while(!client.available()){
+    delay(1);
+  }
+
+  String req = client.readStringUntil('\r');
+  req.replace("+", " ");          // Spaces without +
+  req.replace(" HTTP/1.1", "");   // this delete HTTP/1.1
+  req.replace("GET /", "");   
+  val = req.toInt();
+ /*if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 100 || sendDataPrevMillis == 0)){
     sendDataPrevMillis = millis();
     // Write an Int number on the database path test/int
     if (Firebase.RTDB.setInt(&fbdo, "magnet/dir", headingDegrees)){
@@ -162,113 +201,36 @@ void loop() {
     }
   }*/
   //delay(100);
+  
+  
 
 
   if(turnLeft==0 && turnRight ==0){
-    
+    val = 1000;
   }
+  if(turnLeft==1 && turnRight == 0){
+    val = 1001;
+  }
+  if(turnLeft==0 && turnRight == 1){
+    val = 1002;
+  }
+  if(stop1 == 0 && start1 == 1){
+    val = 3000;
+  }
+  if(stop1 ==1 && start1 == 0){
+    val = 3001;
+  }
+  
+  
+
+  byte buffer[10];
+  buffer[0] = lowByte(val);
+  buffer[1] = highByte(val);
+
+  //Serial.println(val);
+  Wire.beginTransmission(8);
+  Wire.write(buffer, 2);
+  Wire.endTransmission();
 
   
-}
-
-void stopMoving()
-{
-  digitalWrite(motor1Pin1, LOW);
-  digitalWrite(motor1Pin2, LOW);
-  digitalWrite(motor2Pin1, LOW);
-  digitalWrite(motor2Pin2, LOW);
-
-  Serial.println("stop");
-}
-
-void goForward(int y)
-{
-  digitalWrite(motor1Pin1, HIGH);
-  digitalWrite(motor1Pin2, LOW);
-  digitalWrite(motor2Pin1, HIGH);
-  digitalWrite(motor2Pin2, LOW);
-
-  float speedL = 0.85 * y + 145;
-  float speedR = 0.80 * y + 140;
-
-  ledcWrite(pwmChannelL, speedL);
-  ledcWrite(pwmChannelR, speedR);
-
-  Serial.println("Moving forward");
-}
-
-void goBack(int y)
-{
-  digitalWrite(motor1Pin1, LOW);
-  digitalWrite(motor1Pin2, HIGH);
-  digitalWrite(motor2Pin1, LOW);
-  digitalWrite(motor2Pin2, HIGH);
-
-  float speedR = (-y) + 145;
-  float speedL = 0.80 * (-y) + 140;
-
-  ledcWrite(pwmChannelL, speedL);
-  ledcWrite(pwmChannelR, speedR);
-
-  Serial.println("Moving backward");
-}
-
-void clockwiseFor()
-{
-  // left motor on, right off
-
-  digitalWrite(motor1Pin1, LOW);
-  digitalWrite(motor1Pin2, LOW);
-  digitalWrite(motor2Pin1, HIGH);
-  digitalWrite(motor2Pin2, LOW);
-
-  ledcWrite(pwmChannelL, 200);
-  ledcWrite(pwmChannelR, 200);
-
-  Serial.println("Clockwise forward");
-}
-
-void antiClockwiseFor()
-{
-  // left off, right on
-
-  digitalWrite(motor1Pin1, HIGH);
-  digitalWrite(motor1Pin2, LOW);
-  digitalWrite(motor2Pin1, LOW);
-  digitalWrite(motor2Pin2, LOW);
-
-  ledcWrite(pwmChannelL, 200);
-  ledcWrite(pwmChannelR, 200);
-
-  Serial.println("Anti Clockwise forward");
-}
-
-void clockwiseBack()
-{
-  // left off, right on
-
-  digitalWrite(motor1Pin1, LOW);
-  digitalWrite(motor1Pin2, HIGH);
-  digitalWrite(motor2Pin1, LOW);
-  digitalWrite(motor2Pin2, LOW);
-
-  ledcWrite(pwmChannelL, 200);
-  ledcWrite(pwmChannelR, 200);
-
-  Serial.println("Clockwise backward");
-}
-
-void antiClockwiseBack()
-{
-  // left on, right off
-
-  digitalWrite(motor1Pin1, LOW);
-  digitalWrite(motor1Pin2, LOW);
-  digitalWrite(motor2Pin1, LOW);
-  digitalWrite(motor2Pin2, HIGH);
-
-  ledcWrite(pwmChannelL, 200);
-  ledcWrite(pwmChannelR, 230);
-
-  Serial.println("Anti Clockwise backward");
 }
