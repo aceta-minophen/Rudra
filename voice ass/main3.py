@@ -76,6 +76,11 @@ refMealPrev = db1.child('Meal Suggestion/Previous mealds')
 valueMealPrev = refMealPrev.get()
 refMealSuggestLog = db.reference('Meal Suggestion/Food log/')
 valueMealLog = refMealSuggestLog.get()
+refStart = db.reference('following')
+valueStart = refStart.get()
+refStop = db.reference('following')
+valueStop = refStop.get()
+
 
 # [START dialogflow_es_detect_intent_text]
 def detect_intent_texts(texts, session_id=123, language_code='en', project_id='rudra-ugsu'):
@@ -108,11 +113,18 @@ def detect_intent_texts(texts, session_id=123, language_code='en', project_id='r
         )
     )
     speak("Fulfillment text: {}\n".format(response.query_result.fulfillment_text))
-
+    return response.query_result.intent.display_name
 
 # [END dialogflow_es_detect_intent_text]
 
 
+def stop():
+    valueStop["stop"]=1
+    valueStart["start"]=0
+
+def start():
+    valueStop["stop"]=0
+    valueStart["start"]=1
 
 def AddEvent():
     service = Create_Service(client_file, API_NAME, API_VERSION, SCOPES)
@@ -425,7 +437,7 @@ if __name__ == "__main__":
     while True:
        
         query = takeCommand().lower()
-        query="set an alarm"
+        
         parser = argparse.ArgumentParser(
             description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
         )
@@ -442,6 +454,10 @@ if __name__ == "__main__":
             texts=query, session_id=args.session_id
         )        
         
+        intent=detect_intent_texts(
+            texts=query, session_id=args.session_id
+        )
+
         if 'wikipedia' in query:
             speak('Searching Wikipedia...')
             query = query.replace("wikipedia", "")
@@ -453,31 +469,12 @@ if __name__ == "__main__":
             speak("here's a joke")
             speak(pyjokes.get_joke())
 
-        elif 'how are you' in query:
-            speak("I am fine, Thank you")
-            speak("How are you?")
-
-        elif 'i am fine' in query or "i am good" in query:
-            speak("It's good to know that you are doing fine")
-
-        elif 'it was good' in query:
-            speak('great')
-
-        elif 'not so good' in query or 'it was okay' in query:
-            speak('not an issue..., hope you enjoy it next time')
-
         elif 'music' in query or "song" in query or 'play' in query:
             #MusicFromSpotify()
             speak('here is some music for you')
 
-        elif 'stop' in query:
-            speak("ok, will stop")
-
         elif 'read' in query:
             speak("what kind of book will you prefer")
-
-        elif 'thank you' in query:
-            speak("Not a problem, I am here if you need me")
 
         elif 'what should i have in breakfast' in query:
             speak("according to your last meal i would suggest")
@@ -607,20 +604,8 @@ if __name__ == "__main__":
         elif "suggest i should eat" in query or "suggest i shoud have today" in query or "have today" in query:
             MealSuggestPrevious()
 
+        elif intent == 'Stop':
+            stop()
 
-'''
-{
-  "type": "service_account",
-  "project_id": "rudra-ugsu",
-  "private_key_id": "22bc367fc29574dccc91c51fa5883f4c030f01f3",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDM9oL/iHFvkSjs\nYxgGgpnmkrAgevgmvtT7KBSsKD7PKqVQfp4JARTCZ47d9/s2fI15w4unoQfFooAA\nIy7n+nVXXtiz+bXBoUcr1otoLWaHGpvaD5L9uOiDk6uaioeorsQz5J/4fTyV/vH0\namroiWkwacblq6ALmQV+onZ8/enTtEQbfc+KrD+npqw5RTpzhud/pvd+51rgMMD1\nRypp45lS5L5dMhITcGSkEz+q82WP2kIyiHR0DzAuidaXZgGCDiKTVmbiB1vEHiCU\n0FMFKDTARSB/doZ20LBhpTRfqoO1VlW7YhicCF5HnsO0cfNg7Ot5i6pgFRX1OFGJ\n4orjIxznAgMBAAECggEAJBJmb66FuErl1uSBv/OQPmImmTDLJ5aCSUl+ieXzV+Z7\nfbUq/w6vpp8vJ6WTEr3M8FcX5wKSKZg1ytBmWvFbYWsR3GrgMBnAOtjhZA5JcxGd\nyDzhc8HtOertUp96zJcldLSR6tuvo/5getGXyyET4C9dj+Iqop/ltanGDK1rT5Sj\nm2IRVKAYU96ynvAkifc4qSnDiDyFdu4cP40uFP0ji3wXxS/DN0gteavLkQC48Qtx\nH938Kl2p2aRBzV7iZZ52zsPDycmCS+Oxnt4hmh7Jy2EmNkThudL/wBTllBIurphs\nU3zTeJAkxtUOqH3tv9TPz5se5l6FtPHgXfqnfsjhAQKBgQDpbrZ/8Iq90dRPLY7x\nZtZ3pA6D1cNvigokhSPgc668PdU+pgTbsWm2nEwuRYUgQb8UrJDCQ/usfQD9Bm98\n2veZPfXc7vKPz6KAX/qdPrCHLoPfG5sDo4jgbaZR1EioYFRUB2yUzCW1Mh27xf0p\nUEBOQ8pFKDMfjfxS7wSQ+scLQQKBgQDgxzK4WSfsMhY5w21oYwi3OquoTs3xB9r8\n5/XitKi2ATndLGwa1m5yrwNHRMC/31fmeC6P3bxTok5mYZVDhUmqMxhNof7SUPLT\nPjTq0Pq4fFZ2AXa+peW4AK1NgQtpaKX29mLT0TnE8IfKJmANuLloELaNiUNl4S8u\nU/PqsbTmJwKBgGCMHAt6j8fG24sMCs0pfZbqUd6RMU4Wx+8m6hnRfvn4kRRiUiwT\niueuaYvR0SfwSXnhjdXrjFJhOWFtofsADdxh1ijU45o7hLiX+e3Dmfuvb3d90XWF\n0/0PHPVHWe3aOcavc2dvsEDrQ4UAdJ77xD0aqLRF1i886JncpgTY1C6BAoGBAN8E\nxU4jJ3kyONsXC3aGzB8AF1Dm325GXQCRJWXJ2Zq7nK3VZW07VFp1Sstra9LzxkLk\n+03CsxhH8YGjUHWtyWkVSQe9sxb5OfRdxCM3NYvV0fNDgI2oDESEZ25+mtP7ALAH\nxgZjkO3VuOTZLnRu04ZtDrNffX+X7TgKE/jIWLQBAoGAGVVrGci5BGHRDwyn0XsG\n8ogxdwEAPWFAWaZqIRWuiKubt4vVnQB1/rjaultB8UWbZMFlkYQdsHqDbE9cZnp4\n3YfIkW+3O5NrS7fOIJUdjysZk+TDHrtIRnU2O90Efxc3mO544j8+WE/TtYp8EXoy\nD5vHKB5KAVmK9KXx8ON0XhI=\n-----END PRIVATE KEY-----\n",
-  "client_email": "first-304@rudra-ugsu.iam.gserviceaccount.com",
-  "client_id": "100098799962351727341",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/first-304%40rudra-ugsu.iam.gserviceaccount.com"
-}
-
-
-    '''
+        elif intent == 'FindMe':
+            start()
