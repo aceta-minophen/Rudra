@@ -91,7 +91,7 @@ class _RemoteControlState extends State<RemoteControl> {
           children: [
             Text(
               'Good Morning, Emilie!',
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 15, color: white),
             ),
             Text('30 April, 2022', style: TextStyle(fontSize: 10))
           ],
