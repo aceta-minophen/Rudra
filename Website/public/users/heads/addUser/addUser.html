@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=udr">
+    <link rel="shortcut icon" href="../../../RudraLogo.svg" type="image/x-icon" sizes="64x64">
+    <title>Rudra - Add User</title>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase.js"></script>
+</head>
+
+<body>
+    <h1>Add New Member to Rudra</h1>
+    <form id="newUserForm" action="">
+        <label for="name">Name:</label>
+        <input type="text" id="name"><br><br>
+        Role: <select name="subject" id="role">
+            <option value="" selected="selected">Select Role</option>
+        </select>
+        <br><br>
+        Tasks: <select name="topic" id="tasks">
+            <option value="" selected="selected">Select Tasks</option>
+        </select>
+        <br><br>
+        <p hidden>Subtask:</p><select name="chapter" id="subtasks" hidden>
+            <option value="" selected="selected">Select Subtasks</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Create User" onclick="createUser()">
+    </form>
+    <script src="../../../firebase.js"></script>
+    <script src="addUser.js"></script>
+</body>
+
+</html>
