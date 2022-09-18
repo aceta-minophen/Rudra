@@ -9,6 +9,9 @@ Known_distance = 76.2
 # centimeter
 Known_width = 14.3
 
+move = 0
+
+
 # Colors
 GREEN = (0, 255, 0)
 RED = (0, 0, 255)
@@ -112,6 +115,16 @@ while True:
         Distance = Distance_finder(
             Focal_length_found, Known_width, face_width_in_frame)
 
+        # print(Distance)
+
+        if(Distance > 150):
+            move = 1
+            #print("start moving")
+
+        else:
+            move = 0
+            # print("stop")
+
         # draw line as background of text
         cv2.line(frame, (30, 30), (230, 30), RED, 32)
         cv2.line(frame, (30, 30), (230, 30), BLACK, 28)
@@ -120,6 +133,12 @@ while True:
         cv2.putText(
             frame, f"Distance: {round(Distance,2)} CM", (30, 35),
             fonts, 0.6, GREEN, 2)
+
+    if(move == 1):
+        print("start moving")
+
+    else:
+        print("stop")
 
     # show the frame on the screen
     cv2.imshow("frame", frame)
