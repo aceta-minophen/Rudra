@@ -3,10 +3,11 @@
 # Rudra
 A smart healthcare assistant robot intended for home and hospital use.
 
-## 🔍 How to navigate this repository
-The implementation of each feature has been explained in the [Features](https://github.com/aceta-minophen/Rudra/edit/main/README.md#feet-features) section below along with the link to the respective folders of code files provided, explaining the contents in them. 
-
-Further, there are separate README files in each directory to elaborate on the purpose of the subfiles, etc.
+> 🔍 **How to navigate this repository?**
+> 
+> The implementation of each feature has been explained in the [Features](https://github.com/aceta-minophen/Rudra/edit/main/README.md#feet-features) section below along with the link to the respective folders of code files provided, explaining the contents in them. 
+>
+>Further, there are separate README files in each directory to elaborate on the purpose of the subfiles, etc.
 
 ## :feet: Features
 ### 1. Voice Assistant 
