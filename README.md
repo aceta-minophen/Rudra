@@ -17,14 +17,30 @@ Rudra's main goal is to interact with the elderly and keep them engaged. This wi
 
 #### 1.1. Implementation
 
-Rudra is a fully voice-operated, hands-free system for the elderly, so all they have to do is talk to Rudra to get a job done.
+Rudra is a fully voice-operated, completely hands-free system for the elderly, so all they have to do is talk to Rudra to get a job done.
 
 The voice assistant has been specially curated according to the needs of the elderly. It performs timely check ups on them, allows them to create reminders for themselves, listen to stories, call up any family members, and have a sympathic discussion on any topic they desire with the robot.
 
 All this is accomplished by employing the following:
-1. **NLP**: 
-2. Expression-wise response
-3. Query response
+1. **NLP**: Natural language processing helps in discerning the tone and context of any spoken sentence, allowing Rudra to have more sympathetic reactions to it. **DialogFlow** has been used for this purpose.
+2. **Expression-wise response**: Rudra continuously monitors the elderly's expressions to further improve the user's experience. This also helps in monitoring their mental health regularly.
+3. **Query response**: Several API's have been used for providing the best one-shop-stop solution for any miscellanious queries the user might have. The API's are:
+    1. Dialogflow
+    2. Firebase Realtime Database
+    3. Google Calendar
+    4. [News](https://newsapi.org/)
+    5. [Weather](https://openweathermap.org/api)
+4. **Meal suggestion and reminders**: Physical wellbeing is equally as important as mental health, therefore, Rudra is designed to timely remind the elderly to drink water, have food and take any medicines if needed.
+5. **Action Recognition**: Computer vision is used to make sure that the elderly has drunk water, had food and slept properly. The data is only updated in the backend once Rudra detects the above stated actions and then confirms them with the user to avoid misinterpretation.
+
+#### 1.2. Working
+- The code for the voice assistant is hosted on the Raspberry Pi.
+- The voice input and output is taken and given through bluetooth headset connected to the Raspberry Pi. This helps eliminate any background noise. If multiple people are talking at once, Rudra will only hear the designated elderly speak.
+- Every time that the elderly wants to initiate a conversation, they can do so by simply using the wakeword: "Hey, Rudra".
+- The voice output can also be given using speakers connect to the Raspberry Pi, if the user wishes it so.
+
+#### 1.3. Backend
+Since Rudra works with a lot of different modules where data needs to be collected from different sensors and devices, **Firebase Realtime Database** is used to integrate all these separate nodes. Any data of food, water or medicine intake is committed to the database, along with important information regarding the elserly's current mood and other statements for future reference to further optimize the assistant's replies.
 
 ### 2. Human Following
 ### 3. Remote Control and Monitoring
