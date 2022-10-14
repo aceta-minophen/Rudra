@@ -7,10 +7,19 @@ A smart healthcare assistant robot intended for home and hospital use.
 > 
 > The implementation of each feature has been explained in the [features](https://github.com/aceta-minophen/Rudra/edit/main/README.md#feet-features) section below along with the link to the respective folders of code files provided, explaining the contents in them. 
 >
->Further, there are separate README files in each directory to elaborate on the purpose of the subfiles, etc.
+> Further, there are separate README files in each directory to elaborate on the purpose of the subfiles, etc.
 
-## :feet: Features
+## 🪶 Features
 ### 1. Voice Assistant 
+> Often, the elderly are socially isolated, and many exist within the confines of a nursing home or an institution, where their main social links are only with other inmates and equally alienated old people. <sup>[[1]](https://github.com/aceta-minophen/Rudra/edit/main/README.md#-references)</sup>
+
+Rudra's main goal is to interact with the elderly and keep them engaged. This will vastly help uplift their mental health, allow them to keep up with the times while also having someone to reminisce about the olden days with. Besides that, the family members won't feel burdened with their already busy lives, and can rest knowing the elderly are being well taken care of.
+
+#### 1.1. Implementation
+1. NLP
+2. Expression-wise response
+3. Query response
+
 ### 2. Human Following
 ### 3. Remote Control and Monitoring
 ### 4. Computer Vision
@@ -70,3 +79,7 @@ A smart healthcare assistant robot intended for home and hospital use.
 - **Role:** Team Member
 - **Contributions:**
 - **Contact Me:** 
+
+
+## 📕 References
+1. Parkar SR. Elderly mental health: needs. Mens Sana Monogr. 2015 Jan-Dec;13(1):91-9. doi: 10.4103/0973-1229.153311. PMID: 25838727; PMCID: PMC4381326.
