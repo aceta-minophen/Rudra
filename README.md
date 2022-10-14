@@ -5,7 +5,7 @@ A smart healthcare assistant robot intended for home and hospital use.
 
 > 🔍 **How to navigate this repository?**
 > 
-> The implementation of each feature has been explained in the [Features](https://github.com/aceta-minophen/Rudra/edit/main/README.md#feet-features) section below along with the link to the respective folders of code files provided, explaining the contents in them. 
+> The implementation of each feature has been explained in the [features](https://github.com/aceta-minophen/Rudra/edit/main/README.md#feet-features) section below along with the link to the respective folders of code files provided, explaining the contents in them. 
 >
 >Further, there are separate README files in each directory to elaborate on the purpose of the subfiles, etc.
 
@@ -13,6 +13,16 @@ A smart healthcare assistant robot intended for home and hospital use.
 ### 1. Voice Assistant 
 ### 2. Human Following
 ### 3. Remote Control and Monitoring
+### 4. Computer Vision
+
+## 🧩 About Us
+1. 🍃 Srishti Agrawal
+2. 🩹 Sukritee Sharma
+3. 🌂 Manasvvi Aggarwal
+4. 🫐 Utkarsha Kumari
+5. 🌮 Chandana Kunatala
+6. 🛰️ Sristi
+7. 🔖 Manvika Gupta
 
 
 
