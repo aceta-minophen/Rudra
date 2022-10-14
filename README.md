@@ -3,7 +3,24 @@
 # Rudra
 A smart healthcare assistant robot intended for home and hospital use.
 
-## 🖲️ Human Following and Tracking
+## 🔍 How to navigate this repository
+The implementation of each feature has been explained in the [Features](https://github.com/aceta-minophen/Rudra/edit/main/README.md#feet-features) section below along with the link to the respective folders of code files provided, explaining the contents in them. 
+
+Further, there are separate README files in each directory to elaborate on the purpose of the subfiles, etc.
+
+## :feet: Features
+### 1. Voice Assistant 
+### 2. Human Following
+### 3. Remote Control and Monitoring
+
+
+
+
+
+
+
+
+## 🖲  Human Following and Tracking
 > Rudra is intended to follow the designated human around in-toe to take care of them and always be en garde for obstacles that the human might run into. This also gives Rudra the ability to assist the visually impaired and helps them navigate their surroundings safely without the need for anyone else. 
 
 Following the human is one of the key features of Rudra and requires implementation of **Indoor Positioning System (IPS)**. While **GPS** is a sound option when walking outside, it is not possible to utilize it in the house or a hospital floor.
