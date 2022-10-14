@@ -16,7 +16,13 @@ A smart healthcare assistant robot intended for home and hospital use.
 Rudra's main goal is to interact with the elderly and keep them engaged. This will vastly help uplift their mental health, allow them to keep up with the times while also having someone to reminisce about the olden days with. Besides that, the family members won't feel burdened with their already busy lives, and can rest knowing the elderly are being well taken care of.
 
 #### 1.1. Implementation
-1. NLP
+
+Rudra is a fully voice-operated, hands-free system for the elderly, so all they have to do is talk to Rudra to get a job done.
+
+The voice assistant has been specially curated according to the needs of the elderly. It performs timely check ups on them, allows them to create reminders for themselves, listen to stories, call up any family members, and have a sympathic discussion on any topic they desire with the robot.
+
+All this is accomplished by employing the following:
+1. **NLP**: 
 2. Expression-wise response
 3. Query response
 
