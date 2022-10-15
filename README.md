@@ -98,31 +98,31 @@ Since a single Raspberry Pi cannot handle running multiple heavy programmes at t
 ## 🧩 About Us
 ### 1. 🍃 Srishti Agrawal
 - **Role:** Team Leader
-- **Contributions:**
-- **Contact Me:** 
+- **Contributions:** Designing (CAD/CAM), Voice assistant (Python)
+- **Contact Me:** [LinkedIn](https://www.linkedin.com/in/srishti-agrawal-7974871bb)
 ### 2. 🩹 Sukritee Sharma
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** Hardware, Integration (Raspberry Pi, ROS)
 - **Contact Me:** 
 ### 3. 🌂 Manasvvi Aggarwal
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** Mobile Application (Flutter)
 - **Contact Me:** 
 ### 4. 🫐 Utkarsha Kumari
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** Voice Assistant (DialogFlow), Meal Suggestion (Python)
 - **Contact Me:** 
 ### 5. 🌮 Chandana Kunatala
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** Computer Vision (Python)
 - **Contact Me:** 
 ### 6. 🛰️ Sristi
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** Computer Vision (Python)
 - **Contact Me:** 
 ### 7. 🔖 Manvika Gupta
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** UI/UX for App (Figma)
 - **Contact Me:** 
 
 
