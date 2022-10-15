@@ -56,6 +56,18 @@ Using **Rudra's Companion App**, family members or other caretakers can continue
 - **Reminders and calendar**: Users can view the elderly's reminders and cross off any checklist items the elderly requires like groceries or medicines. 
 
 ### 4. Computer Vision
+
+Computer vision is an integral part of almost all the other modules. The following applications have been used:
+- **Action Recognition**: Used to see if the user is awake, sleeping, drinking water, having food, etc. 
+- **Emotion Recognition**: Sympathetic respones and mood log.
+- **Face Recognition**: Following the elderly and differentiating between different people.
+- **Fall Detection**: Emergency system
+- **Live video feed**: Remote monitoring and control
+
+A usb camera is attached to the Raspberry Pi. 
+
+Since a single Raspberry Pi cannot handle running multiple heavy programmes at the same time, these algorithms are hosted on **AWS EC2 instance**. Therefore, the live feed is securely transmitted to the virtual machine server, and images are processed there, then updated in the **Firebase Realtime Database**. Raspberry Pi reads the changes in the database and acts accordingly.
+
 ### 5. Physical Design
 #### 5.1. Components
 | Component  | Amount  | Utility |
