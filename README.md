@@ -43,6 +43,14 @@ All this is accomplished by employing the following:
 Since Rudra works with a lot of different modules where data needs to be collected from different sensors and devices, **Firebase Realtime Database** is used to integrate all these separate nodes. Any data of food, water or medicine intake is committed to the database, along with important information regarding the elserly's current mood and other statements for future reference to further optimize the assistant's replies.
 
 ### 2. Human Following
+In order to be able to monitor the elderly at all times, Rudra follows them around the house. It can be ordered when to start and stop following using voice commands as per the user's wishes. A key advantage of this feature is that it will always keep the elderly in view and will be able to send out notifications on the app for the family members in case any emergency arises. This also allows Rudra to be always present with the elderly if they want something or simply need to have a chat.
+
+The following is accomplished by using computer vision. 
+
+In case of an emergency, by using SVM algorithm, Rudra can send the location of the exact room they are in for immediate action. 
+
+
+
 ### 3. Remote Control and Monitoring
 ### 4. Computer Vision
 ### 5. Physical Design
