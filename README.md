@@ -45,13 +45,16 @@ Since Rudra works with a lot of different modules where data needs to be collect
 ### 2. Human Following
 In order to be able to monitor the elderly at all times, Rudra follows them around the house. It can be ordered when to start and stop following using voice commands as per the user's wishes. A key advantage of this feature is that it will always keep the elderly in view and will be able to send out notifications on the app for the family members in case any emergency arises. This also allows Rudra to be always present with the elderly if they want something or simply need to have a chat.
 
-The following is accomplished by using computer vision. 
+The following is accomplished by using **computer vision**. The algorithm works such that when the user's face is spotted, Rudra can move forward or backward based on the distance, and it can move left or right based on the position of the face with respect to the centre.
 
-In case of an emergency, by using SVM algorithm, Rudra can send the location of the exact room they are in for immediate action. 
-
-
+In case of an emergency, by using **SVM algorithm**, Rudra can send the location of the exact room they are in for immediate action. Here, the algorithm is trained with Wi-Fi RSSI values measured beforehand for each room. Each class is labelled with the room name, and Rudra can then figure out which room it is currently in by comparing the present RSSI values with the recorded ones.
 
 ### 3. Remote Control and Monitoring
+Using **Rudra's Companion App**, family members or other caretakers can continue to remotely monitor the elderly using the following aspects of the app:
+- **Water log, food log, sleep log**: The home page of Rudra gives all this information, along with suggesting the next meals based on the user's preference and required calorie intake.
+- **Remote control and live video feed**: The users with access can remotely control the robot if they need to, and simultaneously they can check out the live feed from Rudra's camera. Using this, they can also recieve calls from the elderly on the app itself and talk to them via the robot. 
+- **Reminders and calendar**: Users can view the elderly's reminders and cross off any checklist items the elderly requires like groceries or medicines. 
+
 ### 4. Computer Vision
 ### 5. Physical Design
 #### 5.1. Components
