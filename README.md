@@ -15,6 +15,8 @@ A smart healthcare assistant robot intended for home and hospital use.
 
 Rudra's main goal is to interact with the elderly and keep them engaged. This will vastly help uplift their mental health, allow them to keep up with the times while also having someone to reminisce about the olden days with. Besides that, the family members won't feel burdened with their already busy lives, and can rest knowing the elderly are being well taken care of.
 
+[Here](https://github.com/aceta-minophen/Rudra/tree/main/Voice%20Assistant) are the codes for the voice assistant.
+
 #### 1.1. Implementation
 
 Rudra is a fully voice-operated, completely hands-free system for the elderly, so all they have to do is talk to Rudra to get a job done.
@@ -49,11 +51,15 @@ The following is accomplished by using **computer vision**. The algorithm works 
 
 In case of an emergency, by using **SVM algorithm**, Rudra can send the location of the exact room they are in for immediate action. Here, the algorithm is trained with Wi-Fi RSSI values measured beforehand for each room. Each class is labelled with the room name, and Rudra can then figure out which room it is currently in by comparing the present RSSI values with the recorded ones.
 
+The following and moving ROS codes are given [here](https://github.com/aceta-minophen/Rudra/tree/main/Raspberry%20Pi).
+
 ### 3. Remote Control and Monitoring
 Using **Rudra's Companion App**, family members or other caretakers can continue to remotely monitor the elderly using the following aspects of the app:
 - **Water log, food log, sleep log**: The home page of Rudra gives all this information, along with suggesting the next meals based on the user's preference and required calorie intake.
 - **Remote control and live video feed**: The users with access can remotely control the robot if they need to, and simultaneously they can check out the live feed from Rudra's camera. Using this, they can also recieve calls from the elderly on the app itself and talk to them via the robot. 
 - **Reminders and calendar**: Users can view the elderly's reminders and cross off any checklist items the elderly requires like groceries or medicines. 
+
+[Here](https://github.com/aceta-minophen/Rudra/tree/main/Companion%20App) is the flutter project for the Companion App. 
 
 ### 4. Computer Vision
 
@@ -68,25 +74,49 @@ A usb camera is attached to the Raspberry Pi.
 
 Since a single Raspberry Pi cannot handle running multiple heavy programmes at the same time, these algorithms are hosted on **AWS EC2 instance**. Therefore, the live feed is securely transmitted to the virtual machine server, and images are processed there, then updated in the **Firebase Realtime Database**. Raspberry Pi reads the changes in the database and acts accordingly.
 
+[Here](https://github.com/aceta-minophen/Rudra/tree/main/Computer%20Vision) are the algorithm codes. 
+
 ### 5. Physical Design
+
+https://user-images.githubusercontent.com/87569188/195973140-44c706d8-7938-4dba-8507-98b4f1c1792f.mov
+
+![image](https://user-images.githubusercontent.com/87569188/195972576-4f60f204-2173-4464-b1ee-838c218bdda0.png)
+
+
 #### 5.1. Components
 | Component  | Amount  | Utility |
 |---| :-: |---|
 | Raspberry Pi 4B | x1 | Microprocessor: running ROS and other code files |
 | Motor Driver | x1 | Controlling the motors |
 | BO Motors + wheels | x2 | Moving the robot |
+| 11.1V 3S 2200mAh LiPo Battery| x1 | Powering the robot |
+| USB Camera | x1 | Computer Vision |
+| Micro Servos | x2 | Positioning Camera Angle |
+| Ultrasonic Poximity Sensors | x4 | Avoiding collision with obstacles |
+
 
 #### 5.2. Design Specs
 - Height: 285mm
 - Weight: 2kg
-- Speed:
 
 ## 📑Important Documents
 ### 1. Architecture / Flow Chart
-### 2. App Wireframe
+![image](https://user-images.githubusercontent.com/87569188/195973214-d5526039-0cc8-46b0-97ad-c22b7a203f7c.png)
+![image](https://user-images.githubusercontent.com/87569188/195973233-a7ae61eb-2526-4d2c-b69f-9f808d49eba0.png)
+
+### 2. [App Wireframe](https://www.figma.com/file/ZvJIbCrDRH8H0hNnAknnMW/Rudra?node-id=0%3A1)
+![wireframe1](https://user-images.githubusercontent.com/87569188/195973363-56a0e08c-111e-42ac-8817-d3be134677b5.png)
+![wireframe2](https://user-images.githubusercontent.com/87569188/195973375-e44bf53f-152e-438f-8b67-3499ee33be82.png)
+
+
 ### 3. Cost Report
+![cost report](https://user-images.githubusercontent.com/87569188/195973416-190be3ee-64f4-4d3f-b604-965774e6cc75.png)
+
 ### 4. Business Plan
+Find our business plan [here](https://docs.google.com/spreadsheets/d/1qbQ1wLDbFxEJeeWEKIlc0VgweS9Bt2IlzhrCd5S9l34/edit?usp=sharing).
+
 ### 5. Demo Video
+https://youtu.be/hV3XIzMf3dc
 
 ## 🔭 Features Under Construction
 ### 1. Guidance
@@ -103,7 +133,7 @@ Since a single Raspberry Pi cannot handle running multiple heavy programmes at t
 ### 2. 🩹 Sukritee Sharma
 - **Role:** Team Member
 - **Contributions:** Hardware, Integration (Raspberry Pi, ROS)
-- **Contact Me:** 
+- **Contact Me:** [LinkedIn](https://www.linkedin.com/in/sukritee-sharma)
 ### 3. 🌂 Manasvvi Aggarwal
 - **Role:** Team Member
 - **Contributions:** Mobile Application (Flutter)
