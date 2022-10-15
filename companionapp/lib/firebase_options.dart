@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,6 +46,16 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyA3sxz8LTLgtvdkvBAaLvZO7gBLqzuLM_A',
+    appId: '1:825213372220:web:8f22d587cfc44237848039',
+    messagingSenderId: '825213372220',
+    projectId: 'rudra-x',
+    authDomain: 'rudra-x.firebaseapp.com',
+    databaseURL: 'https://rudra-x-default-rtdb.firebaseio.com',
+    storageBucket: 'rudra-x.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBV9xOK_EVmbGvPthGtRQo4189Y2lO0aQ4',
     appId: '1:825213372220:android:ec1e455e46eb5d10848039',
@@ -65,6 +72,7 @@ class DefaultFirebaseOptions {
     projectId: 'rudra-x',
     databaseURL: 'https://rudra-x-default-rtdb.firebaseio.com',
     storageBucket: 'rudra-x.appspot.com',
+    androidClientId: '825213372220-6dcghfdm0htghbutlbkb98urgv5tpfbl.apps.googleusercontent.com',
     iosClientId: '825213372220-hq4rmuj9184uqheemh6k74dks0bd1c1u.apps.googleusercontent.com',
     iosBundleId: 'com.example.companionapp',
   );
