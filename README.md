@@ -86,31 +86,31 @@ Using **Rudra's Companion App**, family members or other caretakers can continue
 ## 🧩 About Us
 ### 1. 🍃 Srishti Agrawal
 - **Role:** Team Leader
-- **Contributions:**
+- **Contributions:** Designing (CAD/CAM), Voice Assistant (Python)
 - **Contact Me:** 
 ### 2. 🩹 Sukritee Sharma
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** Hardware, Integration (Raspberry Pi, Motors(ROS))
 - **Contact Me:** 
 ### 3. 🌂 Manasvvi Aggarwal
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** Mobile Application (Flutter)
 - **Contact Me:** 
 ### 4. 🫐 Utkarsha Kumari
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** Voice Assistant (DialogFlow), Meal Suggestion
 - **Contact Me:** 
 ### 5. 🌮 Chandana Kunatala
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** Computer Vision (Python)
 - **Contact Me:** 
 ### 6. 🛰️ Sristi
-- **Role:** Team Member
-- **Contributions:**
+- **Role:** Team Member 
+- **Contributions:** Computer Vision (Python)
 - **Contact Me:** 
 ### 7. 🔖 Manvika Gupta
 - **Role:** Team Member
-- **Contributions:**
+- **Contributions:** UI/UX of app (Figma)
 - **Contact Me:** 
 
 
