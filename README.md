@@ -77,8 +77,8 @@ Since a single Raspberry Pi cannot handle running multiple heavy programmes at t
 | BO Motors + wheels | x2 | Moving the robot |
 
 #### 5.2. Design Specs
-- Height:
-- Weight:
+- Height: 285mm
+- Weight: 2kg
 - Speed:
 
 ## 📑Important Documents
