@@ -186,7 +186,6 @@ class _RemoteControlState extends State<RemoteControl> {
                   ],
                 ),
               ),*/
-
               SafeArea(
                 child: Stack(
                   children: [
@@ -371,7 +370,6 @@ class _JoystickExampleState extends State<JoystickExample> {
   }*/
 
   //FirebaseDatabase database = FirebaseDatabase.instance;
-
   @override
   void didChangeDependencies() {
     _x = MediaQuery.of(context).size.width / 2 - ballSize / 2;
@@ -446,7 +444,6 @@ class _JoystickExampleState extends State<JoystickExample> {
     );
   }
 }
-
 class JoystickModeDropdown extends StatelessWidget {
   final JoystickMode mode;
   final ValueChanged<JoystickMode> onChanged;
