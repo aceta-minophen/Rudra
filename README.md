@@ -2,7 +2,7 @@
 
 # Rudra
 A smart healthcare assistant robot intended for home and hospital use.
-[Google doc](https://docs.google.com/document/d/1sSsNZGG3caGjzYHC1WKflk_jpUB2C0aiDkON1CE__lk/edit?usp=sharing) with objective, scope and methodology
+> [Google doc](https://docs.google.com/document/d/1sSsNZGG3caGjzYHC1WKflk_jpUB2C0aiDkON1CE__lk/edit?usp=sharing) with objective, scope and methodology
 
 > 🔍 **How to navigate this repository?**
 > 
