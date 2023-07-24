@@ -4,7 +4,9 @@ import speech_recognition as sr
 import pyttsx3
 import datetime
 import webrtcvad
-
+import requests
+import pytz
+from newsapi import NewsApiClient
 
 # Set up the API key (either by setting the environment variable or using the 'api_key' parameter)
 # os.environ["OPENAI_API_KEY"] = "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"
@@ -47,6 +49,45 @@ def is_speech(audio_data, sample_rate):
     frames = [audio_data[i:i + 320] for i in range(0, len(audio_data), 320)]  # 320 bytes per frame (10 ms at 32 kHz)
     return any(vad.is_speech(frame, sample_rate) for frame in frames)
 
+# def NewsFromBBC():
+#         query_params = {
+#             "source": "bbc-news",
+#             "sortBy": "top",
+#             "apiKey": "42319a606ae24be6b4e1edcb3f935e7f"
+#         }
+#         main_url = " https://newsapi.org/v1/articles"
+
+#         res = requests.get(main_url, params=query_params)
+#         open_bbc_page = res.json()
+
+#         article = open_bbc_page["articles"]
+
+#         results = []
+
+#         for ar in article:
+#             results.append(ar["title"])
+
+#         for i in range(len(results)):
+#             print(i + 1, results[i])
+
+#         speak(results + "   ")
+def get_top_headlines(sources, language, max_results=5):
+    newsapi = NewsApiClient(api_key="42319a606ae24be6b4e1edcb3f935e7f")
+
+    top_headlines = newsapi.get_top_headlines(
+       
+        sources=sources,
+        language=language,
+        
+    )
+    
+    articles = top_headlines['articles'][:max_results]
+    return articles
+    
+
+
+
+
 # Virtual Assistant conversation loop
 speak(get_greeting())
 speak("How can I assist you?")
@@ -77,6 +118,19 @@ while True:
     if user_prompt == "exit, bye":
         speak("Take Care....Goodbye!")
         break
+    
+    elif 'news' in user_prompt:
+        api_response = get_top_headlines( sources='bbc-news,the-verge', language='en', max_results=5)
+        if len(api_response) > 0:
+            print("Articles:")
+            for idx, article in enumerate(api_response, 1):
+                title = article['title']
+                description = article['description']
+
+                print(f"{idx}. Title: {title}")
+                print(f"   Description: {description}")
+                print()
+            
 
     # Append user's prompt to the ongoing conversation with the VA
     conversation = f"You: {user_prompt}\nVirtual Assistant: "
