@@ -120,20 +120,23 @@ while True:
         break
     
     elif 'news' in user_prompt:
-        api_response = get_top_headlines( sources='bbc-news,the-verge', language='en', max_results=5)
-        if len(api_response) > 0:
+        result = get_top_headlines( sources='bbc-news,the-verge', language='en', max_results=5)
+        if len(result) > 0:
             print("Articles:")
-            for idx, article in enumerate(api_response, 1):
+            for idx, article in enumerate(result, 1):
                 title = article['title']
                 description = article['description']
 
                 print(f"{idx}. Title: {title}")
                 print(f"   Description: {description}")
                 print()
-            
+                
+    instruction = "You are an assistant that interacts with elders. Your goal is to make them happy, avoid making them feel alone, and provide responses that include past incidents they might enjoy reminiscing about."
+        
+        # Combine user input with the instruction as the prompt
+    Instructed_prompt = f"{instruction}\nUser: {user_prompt}\n"
 
-    # Append user's prompt to the ongoing conversation with the VA
-    conversation = f"You: {user_prompt}\nVirtual Assistant: "
+    conversation = f"You: { Instructed_prompt}\nVirtual Assistant:"
 
     # Get the VA's response based on the conversation
     va_response = talk_to_va(conversation)
